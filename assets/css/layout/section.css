@@ -1,0 +1,123 @@
+/* ==========================================================================
+   Section Layout ? ?? Container ?Header ?Spacing
+   ========================================================================== */
+
+.about__inner,
+.islands__inner,
+.travel__inner,
+.theme__inner,
+.festival__inner {
+  padding-block: var(--fluid-section-padding-y);
+}
+
+/* --------------------------------------------------------------------------
+   Section Header ? title / desc / actions ?? X? ??
+   -------------------------------------------------------------------------- */
+
+.islands__header,
+.theme__header,
+.festival__header {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  column-gap: var(--fluid-ui-gap-xl);
+  row-gap: var(--fluid-ui-gap-sm);
+  align-items: center;
+  margin-bottom: var(--fluid-ui-gap-xl);
+  container-type: inline-size;
+}
+
+.islands__heading,
+.theme__heading,
+.festival__heading {
+  display: contents;
+}
+
+.about__title,
+.islands__title,
+.theme__title,
+.festival__title,
+.travel__title,
+.transport__title {
+  font-size: var(--fluid-section-title-size);
+  line-height: var(--fluid-section-title-lh);
+  letter-spacing: var(--fluid-section-title-ls);
+  font-weight: var(--font-weight-bold);
+  text-wrap: balance;
+}
+
+.islands__desc,
+.theme__desc,
+.festival__desc,
+.travel__desc {
+  grid-column: 1;
+  grid-row: 2;
+  margin-top: 0;
+  font-size: var(--fluid-section-desc-size);
+  line-height: var(--fluid-section-desc-lh);
+  letter-spacing: var(--fluid-section-desc-ls);
+  font-weight: var(--font-weight-medium);
+  color: var(--color-neutral-700);
+}
+
+.islands__nav,
+.theme__nav {
+  display: flex;
+  grid-column: 2;
+  grid-row: 2;
+  gap: var(--fluid-ui-gap-sm);
+  align-self: center;
+  justify-self: end;
+}
+
+.islands__title,
+.theme__title,
+.festival__title,
+.travel__title {
+  grid-column: 1;
+  grid-row: 1;
+  color: var(--color-neutral-900);
+}
+
+.festival__header > .button--cta {
+  grid-column: 2;
+  grid-row: 2;
+  align-self: center;
+  justify-self: end;
+}
+
+/* --------------------------------------------------------------------------
+   Sliders ? container content width ?? ??
+   -------------------------------------------------------------------------- */
+
+.islands__slider,
+.theme__slider,
+.travel__slider,
+.festival__slider {
+  width: 100%;
+}
+
+.islands__slider,
+.theme__slider,
+.travel__slider {
+  overflow: hidden;
+}
+
+.travel__slider {
+  min-width: 0;
+}
+
+.islands__slider .swiper-wrapper,
+.theme__slider .swiper-wrapper,
+.travel__slider .swiper-wrapper {
+  align-items: stretch;
+}
+
+.islands__slider .swiper-slide,
+.travel__slider .swiper-slide {
+  height: auto;
+}
+
+.theme__slider .swiper-slide {
+  display: flex;
+  height: auto;
+}

@@ -1,0 +1,269 @@
+/* ==========================================================================
+   Design Tokens
+   1rem = 16px
+   ========================================================================== */
+
+:root {
+  /* Breakpoints */
+  --breakpoint-tablet: 48rem;
+  --breakpoint-desktop: 75rem;
+
+  /* Layout */
+  --container-max-width: 90rem;
+  --container-padding: clamp(1rem, calc(1rem + 1 * (100vw - 24.375rem) / 50.625), 2rem);
+  --grid-columns: 4;
+  --grid-gutter: 1rem;
+
+  /* Neutral */
+  --color-neutral-900: #122948;
+  --color-neutral-800: #474747;
+  --color-neutral-700: #838383;
+  --color-neutral-500: #afafaf;
+  --color-neutral-400: #dbdbdb;
+  --color-neutral-300: #e7e8ed;
+  --color-neutral-200: #eff0f4;
+  --color-neutral-50: #ffffff;
+
+  /* Primary */
+  --color-primary-800: #00315b;
+  --color-primary-700: #43acff;
+  --color-primary-600: #61b9ff;
+  --color-primary-500: #80c6ff;
+  --color-primary-400: #c0e3ff;
+  --color-primary-300: #d4ebfe;
+  --color-primary-200: #e2f2ff;
+  --color-primary-50: #f0f8ff;
+
+  /* Danger */
+  --color-danger-600: #e02b1d;
+  --color-danger-50: #fff1f0;
+
+  /* Semantic */
+  --color-text-primary: var(--color-neutral-900);
+  --color-text-body: var(--color-neutral-800);
+  --color-text-secondary: var(--color-neutral-700);
+  --color-text-disabled: var(--color-neutral-500);
+  --color-text-inverse: var(--color-neutral-50);
+  --color-text-link: var(--color-primary-700);
+  --color-text-error: var(--color-danger-600);
+
+  --color-bg-default: var(--color-neutral-50);
+  --color-bg-subtle: var(--color-neutral-200);
+  --color-bg-brand: var(--color-primary-50);
+  --color-bg-brand-strong: var(--color-primary-800);
+
+  --color-border-default: var(--color-neutral-400);
+  --color-border-light: var(--color-neutral-300);
+
+  --color-btn-primary-bg: var(--color-primary-800);
+  --color-btn-primary-hover: var(--color-primary-700);
+  --color-btn-secondary-bg: var(--color-primary-200);
+
+  /* Opacity */
+  --opacity-dim: 0.7;
+  --opacity-overlay: 0.4;
+  --opacity-subtle: 0.1;
+  --color-dim: rgba(0, 49, 91, var(--opacity-dim));
+  --color-overlay: rgba(0, 49, 91, var(--opacity-overlay));
+
+  /* Shape ??fluid aliases defined below */
+  --radius-full: 9999px;
+
+  /* --------------------------------------------------------------------------
+     Fluid UI Scale ? Mobile(390px) ~ Desktop(1200px)
+     Typography? ?? viewport ???? UI ??? ?? ??
+     -------------------------------------------------------------------------- */
+  --fluid-vp-min: 24.375rem;
+  --fluid-vp-range: 50.625rem;
+  --fluid-ui-scale-min: 0.5385;
+
+  --fluid-icon-xs: clamp(0.5385rem, calc(0.5385rem + 0.4615 * (100vw - 24.375rem) / 50.625), 1rem);
+  --fluid-icon-sm: clamp(0.6058rem, calc(0.6058rem + 0.5192 * (100vw - 24.375rem) / 50.625), 1.125rem);
+  --fluid-icon-md: clamp(0.6731rem, calc(0.6731rem + 0.5769 * (100vw - 24.375rem) / 50.625), 1.25rem);
+
+  --fluid-ui-gap-xs: clamp(0.202rem, calc(0.202rem + 0.173 * (100vw - 24.375rem) / 50.625), 0.375rem);
+  --fluid-ui-gap-sm: clamp(0.2693rem, calc(0.2693rem + 0.2307 * (100vw - 24.375rem) / 50.625), 0.5rem);
+  --fluid-ui-gap-md: clamp(0.4038rem, calc(0.4038rem + 0.3462 * (100vw - 24.375rem) / 50.625), 0.75rem);
+  --fluid-ui-gap-lg: clamp(0.5385rem, calc(0.5385rem + 0.4615 * (100vw - 24.375rem) / 50.625), 1rem);
+  --fluid-ui-gap-xl: clamp(0.8077rem, calc(0.8077rem + 0.6923 * (100vw - 24.375rem) / 50.625), 1.5rem);
+
+  --fluid-radius-sm: clamp(0.1346rem, calc(0.1346rem + 0.1154 * (100vw - 24.375rem) / 50.625), 0.25rem);
+  --fluid-radius-md: clamp(0.2693rem, calc(0.2693rem + 0.2307 * (100vw - 24.375rem) / 50.625), 0.5rem);
+  --fluid-radius-lg: clamp(0.4038rem, calc(0.4038rem + 0.3462 * (100vw - 24.375rem) / 50.625), 0.75rem);
+  --fluid-radius-xl: clamp(0.5385rem, calc(0.5385rem + 0.4615 * (100vw - 24.375rem) / 50.625), 1rem);
+  --fluid-radius-card: clamp(0.5385rem, calc(0.5385rem + 0.4615 * (100vw - 24.375rem) / 50.625), 1rem);
+  --fluid-radius-card-lg: clamp(0.8077rem, calc(0.8077rem + 0.6923 * (100vw - 24.375rem) / 50.625), 1.5rem);
+
+  --fluid-section-padding-y: clamp(3.3656rem, calc(3.3656rem + 2.8844 * (100vw - 24.375rem) / 50.625), 6.25rem);
+  --fluid-section-gap: clamp(0.8077rem, calc(0.8077rem + 0.6923 * (100vw - 24.375rem) / 50.625), 1.5rem);
+
+  --fluid-button-height-01: clamp(1.4819rem, calc(1.4819rem + 1.2681 * (100vw - 24.375rem) / 50.625), 2.75rem);
+  --fluid-button-height-02: clamp(1.6155rem, calc(1.6155rem + 1.3845 * (100vw - 24.375rem) / 50.625), 3rem);
+  --fluid-button-height-02-sm: clamp(1.3462rem, calc(1.3462rem + 0.9038 * (100vw - 24.375rem) / 50.625), 2.25rem);
+  --fluid-button-padding-x-01: clamp(0.8078rem, calc(0.8078rem + 0.6922 * (100vw - 24.375rem) / 50.625), 1.5rem);
+  --fluid-button-padding-x-02: clamp(1.3463rem, calc(1.3463rem + 1.1537 * (100vw - 24.375rem) / 50.625), 2.5rem);
+  --fluid-button-padding-x-02-sm: clamp(0.6731rem, calc(0.6731rem + 0.5769 * (100vw - 24.375rem) / 50.625), 1.25rem);
+  --fluid-button-font-size-02-sm: clamp(
+    0.6875rem,
+    calc(0.6875rem + 0.1875 * (100vw - 24.375rem) / 50.625),
+    0.875rem
+  );
+
+  --fluid-tag-height: clamp(0.9424rem, calc(0.9424rem + 0.8076 * (100vw - 24.375rem) / 50.625), 1.75rem);
+  --fluid-tag-padding-x: clamp(0.4712rem, calc(0.4712rem + 0.4038 * (100vw - 24.375rem) / 50.625), 0.875rem);
+  --fluid-tag-padding-y: clamp(0.2019rem, calc(0.2019rem + 0.1731 * (100vw - 24.375rem) / 50.625), 0.375rem);
+  --fluid-tag-font-size: clamp(
+    0.625rem,
+    calc(0.625rem + 0.125 * (100vw - 24.375rem) / 50.625),
+    0.75rem
+  );
+  --fluid-tag-font-lh: 1.3;
+  --fluid-course-title-size: clamp(0.8125rem, calc(0.8125rem + 0.4375 * (100vw - 24.375rem) / 50.625), 1.25rem);
+  --fluid-course-title-lh: 1.5;
+  --fluid-course-desc-size: clamp(0.75rem, calc(0.75rem + 0.125 * (100vw - 24.375rem) / 50.625), 0.875rem);
+  --fluid-course-desc-lh: 1.6;
+
+  --fluid-toggle-height: clamp(1.7501rem, calc(1.7501rem + 1.4999 * (100vw - 24.375rem) / 50.625), 3.25rem);
+  --fluid-toggle-min-width: clamp(4.5rem, calc(4.5rem + 3.875 * (100vw - 24.375rem) / 50.625), 8.375rem);
+  --fluid-toggle-padding-x: clamp(0.5385rem, calc(0.5385rem + 0.4615 * (100vw - 24.375rem) / 50.625), 1rem);
+  --fluid-toggle-font-size: clamp(
+    0.6875rem,
+    calc(0.6875rem + 0.3125 * (100vw - 24.375rem) / 50.625),
+    1rem
+  );
+  --fluid-toggle-font-lh: 1.5;
+
+  --fluid-nav-btn-size: clamp(1.3462rem, calc(1.3462rem + 0.9038 * (100vw - 24.375rem) / 50.625), 2.25rem);
+  --fluid-nav-btn-icon-size: calc(var(--fluid-nav-btn-size) * 0.3889);
+
+  --fluid-pagination-size: clamp(0.3366rem, calc(0.3366rem + 0.2884 * (100vw - 24.375rem) / 50.625), 0.625rem);
+  --fluid-pagination-gap: clamp(0.2693rem, calc(0.2693rem + 0.2307 * (100vw - 24.375rem) / 50.625), 0.5rem);
+
+  --fluid-card-padding: clamp(0.5385rem, calc(0.5385rem + 0.4615 * (100vw - 24.375rem) / 50.625), 1rem);
+  --fluid-card-padding-lg: clamp(0.6731rem, calc(0.6731rem + 0.5769 * (100vw - 24.375rem) / 50.625), 1.25rem);
+  --fluid-content-gap-lg: clamp(1.8846rem, calc(1.8846rem + 1.6154 * (100vw - 24.375rem) / 50.625), 3.5rem);
+
+  --fluid-hero-info-icon: clamp(3.125rem, calc(3.125rem + 3.125 * (100vw - 24.375rem) / 50.625), 6.25rem);
+  --fluid-hero-info-divider-h: clamp(3.5rem, calc(3.5rem + 2.4375 * (100vw - 24.375rem) / 50.625), 5.9375rem);
+  --fluid-hero-info-padding: clamp(1rem, calc(1rem + 1 * (100vw - 24.375rem) / 50.625), 2rem);
+  --fluid-hero-info-padding-x: clamp(1rem, calc(1rem + 1.5 * (100vw - 24.375rem) / 50.625), 2.5rem);
+  --fluid-hero-info-gap: clamp(0.75rem, calc(0.75rem + 0.75 * (100vw - 24.375rem) / 50.625), 1.5rem);
+  --fluid-hero-info-radius: clamp(0.75rem, calc(0.75rem + 0.5 * (100vw - 24.375rem) / 50.625), 1.25rem);
+  --fluid-hero-action-margin: clamp(2rem, calc(2rem + 2.375 * (100vw - 24.375rem) / 50.625), 4.375rem);
+  --fluid-hero-text-margin-bottom: clamp(2.5rem, calc(2.5rem + 3.5 * (100vw - 24.375rem) / 50.625), 6rem);
+  --fluid-hero-inner-padding-bottom: clamp(1.5rem, calc(1.5rem + 4.125 * (100vw - 24.375rem) / 50.625), 5.625rem);
+
+  --fluid-header-menu-btn-size: clamp(1.6155rem, calc(1.6155rem + 1.3845 * (100vw - 24.375rem) / 50.625), 3rem);
+  --fluid-header-menu-icon-width: clamp(1.125rem, calc(1.125rem + 0.25 * (100vw - 24.375rem) / 50.625), 1.375rem);
+  --fluid-header-nav-gap: clamp(2rem, calc(2rem + 4.875 * (100vw - 24.375rem) / 50.625), 6.875rem);
+
+  --fluid-course-num-box: clamp(0.9424rem, calc(0.9424rem + 0.8076 * (100vw - 24.375rem) / 50.625), 1.75rem);
+  --fluid-course-num-font: clamp(0.625rem, calc(0.625rem + 0.0625 * (100vw - 24.375rem) / 50.625), 0.6875rem);
+  --fluid-course-desc-min-h: calc(2 * var(--fluid-course-desc-lh) * 1em);
+
+  /* Theme cards ??Desktop 402?430 reference; internal scale via cqi on .theme-card__surface */
+  --fluid-theme-card-ratio: 402 / 430;
+  --fluid-theme-media-ratio: 402 / 301;
+  --theme-card-radius: 1.25rem;
+
+  /* Interactive card hover ??Islands, Theme ???? */
+  --card-hover-lift: -0.3125rem;
+  --card-hover-buffer: 0.375rem;
+  --card-hover-duration: 0.42s;
+  --card-hover-easing: cubic-bezier(0.22, 1, 0.36, 1);
+  --card-hover-shadow: 0 0.375rem 1rem rgba(18, 41, 72, 0.1);
+  --card-hover-shadow-default: 0 0.0625rem 0.1875rem rgba(18, 41, 72, 0.04);
+
+  --fluid-theme-title-lh: 1.266667;
+  --fluid-theme-card-shadow: 0 0.0625rem 0.1875rem rgba(18, 41, 72, 0.04);
+  --fluid-theme-card-shadow-hover: 0 0.375rem 1rem rgba(18, 41, 72, 0.1);
+
+  --fluid-header-logo-width: clamp(5.5rem, calc(5.5rem + 1.75 * (100vw - 24.375rem) / 50.625), 7.25rem);
+  --fluid-header-logo-height: clamp(2.25rem, calc(2.25rem + 0.75 * (100vw - 24.375rem) / 50.625), 3rem);
+  --fluid-header-padding-block: clamp(1rem, calc(1rem + 1.25 * (100vw - 24.375rem) / 50.625), 2.25rem);
+
+  --fluid-footer-logo-width: clamp(4.375rem, calc(4.375rem + 1.375 * (100vw - 24.375rem) / 50.625), 5.75rem);
+  --fluid-footer-logo-height: clamp(1.8125rem, calc(1.8125rem + 0.5625 * (100vw - 24.375rem) / 50.625), 2.375rem);
+  --fluid-footer-padding-block: clamp(1.25rem, calc(1.25rem + 1.25 * (100vw - 24.375rem) / 50.625), 2.5rem);
+  --fluid-footer-info-gap: clamp(0.75rem, calc(0.75rem + 1.25 * (100vw - 24.375rem) / 50.625), 2rem);
+  --fluid-footer-sns-size: clamp(2rem, calc(2rem + 0.5 * (100vw - 24.375rem) / 50.625), 2.5rem);
+  --fluid-footer-sns-gap: clamp(0.5rem, calc(0.5rem + 0.25 * (100vw - 24.375rem) / 50.625), 0.75rem);
+
+  /* Semantic aliases ???? ??????fluid ??????? */
+  --radius-sm: var(--fluid-radius-sm);
+  --radius-md: var(--fluid-radius-md);
+  --radius-lg: var(--fluid-radius-lg);
+  --radius-xl: var(--fluid-radius-xl);
+
+  --button-height-01: var(--fluid-button-height-01);
+  --button-height-02: var(--fluid-button-height-02);
+  --button-padding-01: 0 var(--fluid-button-padding-x-01);
+  --button-padding-02: 0 var(--fluid-button-padding-x-02);
+  --button-tag-height: var(--fluid-tag-height);
+  --button-tag-padding: var(--fluid-tag-padding-y) var(--fluid-tag-padding-x);
+
+  --header-logo-width: var(--fluid-header-logo-width);
+  --header-logo-height: var(--fluid-header-logo-height);
+  --header-nav-font-size: var(--fluid-subtitle-03-size);
+  --header-nav-line-height: var(--fluid-subtitle-03-lh);
+  --header-nav-gap: var(--fluid-header-nav-gap);
+  --header-padding-block-mobile: var(--fluid-header-padding-block);
+  --header-padding-block-tablet: var(--fluid-header-padding-block);
+  --header-padding-block-desktop: var(--fluid-header-padding-block);
+
+  --footer-bg: var(--color-neutral-200);
+  --footer-logo-width-mobile: var(--fluid-footer-logo-width);
+  --footer-logo-height-mobile: var(--fluid-footer-logo-height);
+  --footer-logo-width-desktop: var(--fluid-footer-logo-width);
+  --footer-logo-height-desktop: var(--fluid-footer-logo-height);
+  --footer-padding-block-mobile: var(--fluid-footer-padding-block);
+  --footer-padding-block-tablet: var(--fluid-footer-padding-block);
+  --footer-padding-block-desktop: var(--fluid-footer-padding-block);
+  --footer-info-gap-mobile: var(--fluid-footer-info-gap);
+  --footer-info-gap-tablet: var(--fluid-footer-info-gap);
+  --footer-info-gap-desktop: var(--fluid-footer-info-gap);
+  --footer-text-gap: 0.25rem;
+  --footer-sns-size-mobile: var(--fluid-footer-sns-size);
+  --footer-sns-size-desktop: var(--fluid-footer-sns-size);
+  --footer-sns-gap-mobile: var(--fluid-footer-sns-gap);
+  --footer-sns-gap-desktop: var(--fluid-footer-sns-gap);
+
+  --spacing-md: 1rem;
+
+  --card-radius: var(--fluid-radius-card);
+  --card-media-radius: var(--fluid-radius-card);
+  --card-border: 0.0625rem solid var(--color-border-light);
+  --card-gap: var(--fluid-ui-gap-xl);
+  --card-hero-height-mobile: 12.5rem;
+  --card-hero-height-tablet: 20rem;
+  --card-hero-height-desktop: 36.25rem;
+  --card-placeholder-bg: var(--color-neutral-400);
+
+  /* Shadow */
+  --shadow-sm: 0 0.0625rem 0.25rem rgba(18, 41, 72, 0.08);
+  --shadow-md: 0 0.25rem 1rem rgba(18, 41, 72, 0.12);
+  --shadow-lg: 0 0.5rem 1.5rem rgba(18, 41, 72, 0.16);
+
+  /* Transition */
+  --transition-fast: 150ms ease;
+  --transition-base: 250ms ease;
+
+  /* Z-index */
+  --z-index-dropdown: 100;
+  --z-index-header: 300;
+  --z-index-popup: 400;
+}
+
+@media (min-width: 48rem) {
+  :root {
+    --grid-columns: 6;
+    --grid-gutter: 1.5rem;
+  }
+}
+
+@media (min-width: 75rem) {
+  :root {
+    --grid-columns: 12;
+    --grid-gutter: 1.5rem;
+  }
+}

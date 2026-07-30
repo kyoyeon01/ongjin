@@ -1,0 +1,116 @@
+/* ==========================================================================
+   Button
+   btn_01 : Hero / ?????????(outline white)
+   btn_02 : Card / ??? ????(outline primary)
+   btn--tag : Card_Info ??? pill
+   ========================================================================== */
+
+.button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--fluid-ui-gap-xs);
+  border-radius: var(--radius-full);
+  font-weight: var(--font-weight-semibold);
+  white-space: nowrap;
+  transition:
+    color var(--transition-base),
+    background-color var(--transition-base),
+    border-color var(--transition-base);
+}
+
+.button__icon {
+  flex-shrink: 0;
+  width: var(--fluid-icon-sm);
+  height: var(--fluid-icon-sm);
+}
+
+.button__arrow {
+  font-size: var(--fluid-icon-sm);
+  line-height: 1;
+}
+
+/* --------------------------------------------------------------------------
+   btn_01 ??outline white
+   -------------------------------------------------------------------------- */
+.button--01 {
+  min-height: var(--button-height-01);
+  padding: var(--button-padding-01);
+  border: 0.0625rem solid var(--color-text-inverse);
+  background-color: transparent;
+  color: var(--color-text-inverse);
+  font-size: var(--fluid-subtitle-03-size);
+  line-height: var(--fluid-subtitle-03-lh);
+  letter-spacing: var(--fluid-subtitle-03-ls);
+}
+
+.button--01:hover,
+.button--01:focus-visible {
+  background-color: var(--color-text-inverse);
+  color: var(--color-primary-800);
+}
+
+/* --------------------------------------------------------------------------
+   btn_02 ??outline primary
+   -------------------------------------------------------------------------- */
+.button--02 {
+  min-height: var(--button-height-02);
+  padding: var(--button-padding-02);
+  border: 0.0625rem solid var(--color-primary-800);
+  background-color: transparent;
+  color: var(--color-primary-800);
+  font-size: var(--fluid-subtitle-03-size);
+  line-height: var(--fluid-subtitle-03-lh);
+  letter-spacing: var(--fluid-subtitle-03-ls);
+}
+
+.button--02:hover,
+.button--02:focus-visible {
+  background-color: var(--color-primary-800);
+  color: var(--color-text-inverse);
+}
+
+.button--02-full {
+  width: 100%;
+}
+
+/* --------------------------------------------------------------------------
+   btn_cta ????? CTA (???????, ?? ? ?? ??
+   -------------------------------------------------------------------------- */
+.button--cta {
+  flex-shrink: 0;
+  width: fit-content;
+  min-height: var(--fluid-button-height-02-sm);
+  padding: 0 var(--fluid-button-padding-x-02-sm);
+  font-size: var(--fluid-button-font-size-02-sm);
+  line-height: 1.5;
+  letter-spacing: 0;
+}
+
+/* --------------------------------------------------------------------------
+   Tag pill ??Card_Info B??
+   -------------------------------------------------------------------------- */
+.button--tag {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  height: var(--button-tag-height);
+  padding: 0 var(--fluid-tag-padding-x);
+  border: none;
+  background-color: var(--color-primary-800);
+  color: var(--color-text-inverse);
+  font-size: var(--fluid-tag-font-size);
+  line-height: 1;
+  text-align: center;
+  font-weight: var(--font-weight-medium);
+}
+
+.button--tag:hover,
+.button--tag:focus-visible {
+  background-color: var(--color-primary-700);
+}
+
+.button--tag.is-active,
+.button--tag[aria-pressed="true"] {
+  background-color: var(--color-primary-700);
+}
