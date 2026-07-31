@@ -1,0 +1,227 @@
+/* ==========================================================================
+   Island Detail — 추천 포토스팟 Section
+   Desktop base (≥1280) + Tablet/Mobile override only
+   Swiper UI: 메인 islands 섹션과 동일 (헤더 nav + 하단 pagination)
+   ========================================================================== */
+
+.island-photos {
+  width: 100%;
+  min-height: 56.6875rem;
+  background-color: #f6f8fb;
+}
+
+.island-photos__container {
+  width: 100%;
+  max-width: 105rem;
+  margin-inline: auto;
+  padding-inline: 2rem;
+  padding-block: 5rem;
+}
+
+.island-photos__header {
+  margin-bottom: 3.375rem;
+}
+
+.island-photos__title {
+  font-size: 3rem;
+  line-height: 1.154;
+  font-weight: var(--font-weight-bold);
+  color: var(--color-neutral-900);
+  text-align: left;
+}
+
+.island-photos__nav,
+.island-photos__pagination {
+  display: none;
+}
+
+.island-photos__slider-wrap {
+  margin-top: 0;
+}
+
+.island-photos__slider {
+  position: relative;
+  overflow: visible;
+  width: 100%;
+}
+
+.island-photos__grid {
+  display: grid;
+  grid-template-columns: repeat(4, 25.125rem);
+  gap: 1.5rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.island-photos-card {
+  min-width: 0;
+}
+
+.island-photos-card__inner {
+  display: flex;
+  flex-direction: column;
+  width: 25.125rem;
+  height: 34rem;
+  overflow: hidden;
+  border-radius: 1.25rem;
+  background-color: var(--color-bg-default);
+  box-shadow: 0 0.125rem 0.5rem rgba(18, 41, 72, 0.06);
+}
+
+.island-photos-card__media {
+  flex-shrink: 0;
+  width: 100%;
+  height: 21.4375rem;
+  overflow: hidden;
+}
+
+.island-photos-card__img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.island-photos-card__body {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  align-items: flex-start;
+  padding: 1.25rem 1.5rem 1.5rem;
+  text-align: left;
+}
+
+.island-photos-card__title {
+  font-size: 1.75rem;
+  line-height: 1.4;
+  font-weight: var(--font-weight-semibold);
+  color: var(--color-neutral-900);
+}
+
+.island-photos-card__desc {
+  margin-top: 1.25rem;
+  font-size: 0.9375rem;
+  line-height: 1.6;
+  font-weight: var(--font-weight-semibold);
+  color: var(--color-neutral-700);
+  word-break: keep-all;
+}
+
+/* --------------------------------------------------------------------------
+   Tablet (768–1279) — Swiper (3 slides), islands 섹션 UI
+   -------------------------------------------------------------------------- */
+
+@media (max-width: 79.9375rem) {
+  .island-photos {
+    min-height: auto;
+  }
+
+  .island-photos__container {
+    padding-inline: 1.5rem;
+    padding-block: 4rem;
+  }
+
+  .island-photos__header {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    column-gap: 1.5rem;
+    align-items: center;
+    margin-bottom: 1.5rem;
+  }
+
+  .island-photos__title {
+    font-size: 2.625rem;
+  }
+
+  .island-photos__nav {
+    display: flex;
+    gap: var(--fluid-ui-gap-sm);
+    align-self: center;
+    justify-self: end;
+  }
+
+  .island-photos__slider {
+    overflow: hidden;
+  }
+
+  .island-photos__slider .swiper-wrapper {
+    align-items: stretch;
+  }
+
+  .island-photos__slider .swiper-wrapper,
+  .island-photos__slider .swiper-slide {
+    height: auto;
+  }
+
+  .island-photos__grid {
+    display: flex;
+    grid-template-columns: none;
+    gap: 0;
+  }
+
+  /* Swiper가 슬라이드 너비를 분배 — 카드는 100% 채우며 402:544 비율 유지 */
+  .island-photos-card {
+    width: auto;
+    height: auto;
+  }
+
+  .island-photos-card__inner {
+    container-type: inline-size;
+    width: 100%;
+    height: auto;
+    aspect-ratio: 402 / 544;
+    border-radius: calc(100cqw * 20 / 402);
+  }
+
+  .island-photos-card__media {
+    width: 100%;
+    height: auto;
+    aspect-ratio: 402 / 343;
+  }
+
+  .island-photos-card__body {
+    padding: calc(100cqw * 20 / 402) calc(100cqw * 24 / 402)
+      calc(100cqw * 24 / 402);
+  }
+
+  .island-photos-card__title {
+    font-size: calc(100cqw * 28 / 402);
+  }
+
+  .island-photos-card__desc {
+    margin-top: calc(100cqw * 20 / 402);
+    font-size: calc(100cqw * 15 / 402);
+  }
+
+  .island-photos__pagination {
+    position: static;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 1.5rem;
+  }
+}
+
+/* --------------------------------------------------------------------------
+   Mobile (≤767) — Swiper (2 slides)
+   -------------------------------------------------------------------------- */
+
+@media (max-width: 47.9375rem) {
+  .island-photos__container {
+    padding-inline: 1rem;
+    padding-block: 3rem;
+  }
+
+  .island-photos__header {
+    margin-bottom: 1.25rem;
+  }
+
+  .island-photos__title {
+    font-size: 2rem;
+  }
+
+  .island-photos__pagination {
+    margin-top: 1.25rem;
+  }
+}

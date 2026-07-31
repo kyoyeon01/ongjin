@@ -6,6 +6,7 @@
 .islands__pagination .swiper-pagination-bullet,
 .travel__pagination .swiper-pagination-bullet,
 .theme__pagination .swiper-pagination-bullet,
+.island-photos__pagination .swiper-pagination-bullet,
 .card__swiper-pagination .swiper-pagination-bullet {
   width: var(--fluid-pagination-size);
   height: var(--fluid-pagination-size);
@@ -20,6 +21,7 @@
 .islands__pagination .swiper-pagination-bullet-active,
 .travel__pagination .swiper-pagination-bullet-active,
 .theme__pagination .swiper-pagination-bullet-active,
+.island-photos__pagination .swiper-pagination-bullet-active,
 .card__swiper-pagination .swiper-pagination-bullet-active {
   background-color: var(--color-primary-700);
 }
@@ -27,6 +29,7 @@
 .islands__pagination,
 .travel__pagination,
 .theme__pagination,
+.island-photos__pagination,
 .card__swiper-pagination {
   gap: var(--fluid-pagination-gap);
 }

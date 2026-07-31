@@ -3,7 +3,8 @@
    ========================================================================== */
 
 .islands__nav-btn,
-.theme__nav-btn {
+.theme__nav-btn,
+.island-photos__nav-btn {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -23,7 +24,9 @@
 .islands__nav-btn:hover,
 .islands__nav-btn:focus-visible,
 .theme__nav-btn:hover,
-.theme__nav-btn:focus-visible {
+.theme__nav-btn:focus-visible,
+.island-photos__nav-btn:hover,
+.island-photos__nav-btn:focus-visible {
   border-color: var(--color-primary-700);
   background-color: var(--color-primary-50);
   box-shadow: var(--shadow-sm);
@@ -57,6 +60,7 @@
 
 .islands__nav-icon,
 .theme__nav-icon,
+.island-photos__nav-icon,
 .card__swiper-nav-icon {
   display: block;
   width: var(--fluid-nav-btn-icon-size);
