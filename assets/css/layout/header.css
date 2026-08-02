@@ -18,16 +18,46 @@
   position: absolute;
   top: 0;
   left: 0;
-  z-index: var(--z-index-header, 300);
+  z-index: 400;
   width: 100%;
   color: var(--color-text-inverse);
+  background: rgba(0, 0, 0, 0.12);
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
 }
 
 .header--fixed {
   position: fixed;
 }
 
+.header.is-scroll-hidden {
+  background: transparent;
+  backdrop-filter: none;
+  -webkit-backdrop-filter: none;
+  pointer-events: none;
+}
+
+.header.is-scroll-hidden .header__inner {
+  pointer-events: none;
+}
+
+.header.is-open {
+  pointer-events: auto;
+  color: var(--color-primary-800);
+  background: #ffffff;
+  backdrop-filter: none;
+  -webkit-backdrop-filter: none;
+  box-shadow: 0 0.0625rem 0 rgba(18, 41, 72, 0.06);
+}
+
+.header.is-open .header__logo-img {
+  /* keep logo visible on white bar */
+  filter: none;
+}
+
 .header__inner {
+  position: relative;
+  z-index: 1;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -134,12 +164,19 @@
    Hamburger Button
    -------------------------------------------------------------------------- */
 .header__menu-btn {
+  position: relative;
+  z-index: 1;
   display: flex;
   align-items: center;
   justify-content: center;
   width: var(--fluid-header-menu-btn-size);
   height: var(--fluid-header-menu-btn-size);
   flex-shrink: 0;
+  padding: 0;
+  border: none;
+  background: transparent;
+  color: inherit;
+  cursor: pointer;
 }
 
 .header__menu-btn-icon,
@@ -150,7 +187,7 @@
   height: 0.125rem;
   border-radius: var(--radius-full, 9999px);
   background-color: currentColor;
-  transition: transform var(--transition-base, 250ms ease);
+  transition: transform 0.35s ease, top 0.35s ease, background-color 0.35s ease;
 }
 
 .header__menu-btn-icon {
@@ -172,6 +209,10 @@
   top: calc(var(--fluid-header-menu-icon-width) * 0.32);
 }
 
+.header.is-open .header__menu-btn {
+  color: var(--color-primary-800);
+}
+
 .header.is-open .header__menu-btn-icon {
   background-color: transparent;
 }
@@ -187,28 +228,64 @@
 }
 
 /* --------------------------------------------------------------------------
-   Mobile Navigation
+   Overlay (appended to body)
+   -------------------------------------------------------------------------- */
+.header__overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 390;
+  background-color: rgba(18, 41, 72, 0.35);
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  transition:
+    opacity 0.35s ease,
+    visibility 0.35s ease;
+}
+
+.header__overlay.is-open {
+  opacity: 1;
+  visibility: visible;
+  pointer-events: auto;
+}
+
+/* --------------------------------------------------------------------------
+   Mobile Navigation (appended to body — full viewport panel)
    -------------------------------------------------------------------------- */
 .header__mobile-nav {
   position: fixed;
-  inset: 0;
-  z-index: calc(var(--z-index-header, 300) - 1);
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: 395;
+  width: 100%;
+  height: 100%;
+  min-height: 100vh;
+  min-height: 100dvh;
   padding:
     calc(var(--header-logo-height) + (var(--header-padding-block-mobile) * 2) + 1rem)
     var(--container-padding)
     2rem;
-  background-color: var(--color-bg-default);
+  background-color: #ffffff;
+  overflow-x: hidden;
   overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
   opacity: 0;
   visibility: hidden;
+  transform: translateY(-0.75rem);
+  pointer-events: none;
   transition:
-    opacity var(--transition-base, 250ms ease),
-    visibility var(--transition-base, 250ms ease);
+    opacity 0.35s ease,
+    visibility 0.35s ease,
+    transform 0.35s ease;
 }
 
 .header__mobile-nav.is-open {
   opacity: 1;
   visibility: visible;
+  transform: translateY(0);
+  pointer-events: auto;
 }
 
 .header__mobile-nav-list {
@@ -314,7 +391,8 @@ body.is-nav-open {
     display: none;
   }
 
-  .header__mobile-nav {
-    display: none;
+  .header__mobile-nav,
+  .header__overlay {
+    display: none !important;
   }
 }

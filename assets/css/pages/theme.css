@@ -23,7 +23,9 @@
   display: block;
   width: 100%;
   height: 100%;
-  cursor: default;
+  cursor: pointer;
+  text-decoration: none;
+  color: inherit;
 }
 
 .theme-card__surface {

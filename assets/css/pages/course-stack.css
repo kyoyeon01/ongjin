@@ -1,0 +1,272 @@
+/* ==========================================================================
+   Course Stack Carousel — 2장 노출 슬라이드 (day-trip / overnight 공용)
+   ========================================================================== */
+
+.course-stack {
+  --course-stack-card-radius: var(--fluid-radius-card);
+  --course-stack-title-size: 3.5rem;
+  --course-stack-text-size: 1.25rem;
+  --course-stack-gap: 1.5rem;
+  --course-stack-nav-size: 2.75rem;
+
+  width: 100%;
+  padding-block: 5rem 4rem;
+  background-color: var(--color-bg-default);
+}
+
+.course-stack__inner {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+}
+
+.course-stack__title {
+  margin: 0;
+  font-size: var(--course-stack-title-size);
+  line-height: 1.154;
+  font-weight: var(--font-weight-bold);
+  color: var(--color-neutral-900);
+  text-align: left;
+}
+
+.course-stack__viewport {
+  position: relative;
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr) auto;
+  align-items: center;
+  gap: 1rem;
+  width: 100%;
+  margin-top: 2.5rem;
+}
+
+.course-stack__nav--prev {
+  grid-column: 1;
+  grid-row: 1;
+}
+
+.course-stack__slider {
+  grid-column: 2;
+  grid-row: 1;
+  width: 100%;
+  min-width: 0;
+  overflow: hidden;
+}
+
+.course-stack__nav--next {
+  grid-column: 3;
+  grid-row: 1;
+}
+
+.course-stack__stage {
+  align-items: stretch;
+}
+
+.course-stack__slider .swiper-slide {
+  height: auto;
+}
+
+/* --------------------------------------------------------------------------
+   Card (디자인 유지)
+   -------------------------------------------------------------------------- */
+
+.course-stack-card {
+  position: relative;
+  display: block;
+  width: 100%;
+  height: auto;
+  aspect-ratio: 431 / 604;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  border: none;
+  border-radius: var(--course-stack-card-radius);
+  background-color: var(--color-neutral-200);
+  box-shadow: 0 0.5rem 1.5rem rgba(18, 41, 72, 0.12);
+  cursor: pointer;
+  appearance: none;
+  -webkit-appearance: none;
+  text-align: left;
+}
+
+.course-stack-card__media {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+}
+
+.course-stack-card__img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  pointer-events: none;
+}
+
+.course-stack-card__overlay {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  background: linear-gradient(
+    180deg,
+    rgba(0, 49, 91, 0) 38%,
+    rgba(0, 49, 91, 0.7) 72%,
+    rgba(0, 49, 91, 1) 100%
+  );
+  pointer-events: none;
+}
+
+.course-stack-card__text {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 2;
+  display: block;
+  margin: 0;
+  padding: 1.5rem 1.5rem 1.75rem;
+  font-size: var(--course-stack-text-size);
+  line-height: 1.5;
+  font-weight: var(--font-weight-semibold);
+  color: #ffffff;
+  white-space: pre-line;
+  word-break: keep-all;
+  pointer-events: none;
+}
+
+/* --------------------------------------------------------------------------
+   Nav arrows — circular, outside cards
+   -------------------------------------------------------------------------- */
+
+.course-stack__nav {
+  position: relative;
+  z-index: 2;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: var(--course-stack-nav-size);
+  height: var(--course-stack-nav-size);
+  padding: 0;
+  border: 0.0625rem solid var(--color-border-default);
+  border-radius: var(--radius-full);
+  background-color: #ffffff;
+  color: var(--color-primary-800);
+  cursor: pointer;
+  transition:
+    border-color 0.3s ease,
+    background-color 0.3s ease,
+    color 0.3s ease,
+    opacity 0.3s ease;
+}
+
+.course-stack__nav:hover:not(:disabled):not(.swiper-button-disabled),
+.course-stack__nav:focus-visible:not(:disabled):not(.swiper-button-disabled) {
+  border-color: var(--color-primary-800);
+  background-color: var(--color-primary-800);
+  color: #ffffff;
+}
+
+.course-stack__nav:disabled,
+.course-stack__nav.swiper-button-disabled {
+  opacity: 0.35;
+  cursor: default;
+  pointer-events: none;
+}
+
+.course-stack__nav-icon {
+  display: block;
+  width: 0.875rem;
+  height: 0.875rem;
+  filter: none;
+}
+
+.course-stack__nav:hover:not(:disabled):not(.swiper-button-disabled) .course-stack__nav-icon,
+.course-stack__nav:focus-visible:not(:disabled):not(.swiper-button-disabled) .course-stack__nav-icon {
+  filter: brightness(0) invert(1);
+}
+
+/* --------------------------------------------------------------------------
+   Pagination
+   -------------------------------------------------------------------------- */
+
+.course-stack__pagination {
+  position: static;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--fluid-pagination-gap);
+  margin-top: 2rem;
+  width: 100%;
+}
+
+.course-stack__pagination .swiper-pagination-bullet,
+.course-stack__dot {
+  width: var(--fluid-pagination-size);
+  height: var(--fluid-pagination-size);
+  margin: 0 !important;
+  padding: 0;
+  border: none;
+  border-radius: var(--radius-full);
+  background-color: var(--color-neutral-400);
+  opacity: 1;
+  cursor: pointer;
+  transition:
+    background-color 0.3s ease,
+    transform 0.3s ease;
+}
+
+.course-stack__pagination .swiper-pagination-bullet-active,
+.course-stack__dot.is-active {
+  background-color: var(--color-primary-700);
+  transform: scale(1.1);
+}
+
+/* --------------------------------------------------------------------------
+   Tablet
+   -------------------------------------------------------------------------- */
+
+@media (max-width: 64rem) and (min-width: 48rem) {
+  .course-stack {
+    --course-stack-title-size: clamp(2.25rem, 4vw, 3.5rem);
+    --course-stack-text-size: clamp(0.9375rem, 1.8vw, 1.25rem);
+    --course-stack-gap: 1.25rem;
+    --course-stack-nav-size: 2.5rem;
+    padding-block: 4rem 3.5rem;
+  }
+
+  .course-stack__viewport {
+    gap: 0.75rem;
+    margin-top: 2rem;
+  }
+
+  .course-stack-card__text {
+    padding: 1.25rem;
+  }
+}
+
+/* --------------------------------------------------------------------------
+   Mobile — still 2 cards, arrows + pagination kept
+   -------------------------------------------------------------------------- */
+
+@media (max-width: 47.9375rem) {
+  .course-stack {
+    --course-stack-title-size: clamp(1.75rem, 8vw, 2.25rem);
+    --course-stack-text-size: clamp(0.8125rem, 3.5vw, 1rem);
+    --course-stack-gap: 0.75rem;
+    --course-stack-nav-size: 2.25rem;
+    padding-block: 3rem 2.5rem;
+  }
+
+  .course-stack__viewport {
+    gap: 0.5rem;
+    margin-top: 1.5rem;
+  }
+
+  .course-stack-card__text {
+    padding: 0.875rem 0.875rem 1rem;
+  }
+
+  .course-stack__pagination {
+    margin-top: 1.5rem;
+  }
+}

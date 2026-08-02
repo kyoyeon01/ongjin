@@ -180,7 +180,7 @@
 
   --fluid-header-logo-width: clamp(5.5rem, calc(5.5rem + 1.75 * (100vw - 24.375rem) / 50.625), 7.25rem);
   --fluid-header-logo-height: clamp(2.25rem, calc(2.25rem + 0.75 * (100vw - 24.375rem) / 50.625), 3rem);
-  --fluid-header-padding-block: clamp(1rem, calc(1rem + 1.25 * (100vw - 24.375rem) / 50.625), 2.25rem);
+  --fluid-header-padding-block: clamp(0.75rem, calc(0.75rem + 0.75 * (100vw - 24.375rem) / 50.625), 1.5rem);
 
   --fluid-footer-logo-width: clamp(4.375rem, calc(4.375rem + 1.375 * (100vw - 24.375rem) / 50.625), 5.75rem);
   --fluid-footer-logo-height: clamp(1.8125rem, calc(1.8125rem + 0.5625 * (100vw - 24.375rem) / 50.625), 2.375rem);

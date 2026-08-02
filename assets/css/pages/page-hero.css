@@ -1,0 +1,77 @@
+/* ==========================================================================
+   Page Hero — 축제·행사 / 배편·교통
+   1박2일·테마 course-hero 레이아웃 재사용 (캐릭터 없음)
+   배경 교체: 각 페이지 --*-hero-bg-image 한 줄만 수정
+   예) --festival-hero-bg-image: url("../../images/festival/hero-festival.webp");
+   ========================================================================== */
+
+.course-hero--festival,
+.course-hero--transport {
+  --course-hero-title-size: 3.5rem;
+  --course-hero-desc-size: 1.5rem;
+
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+}
+
+.course-hero--festival {
+  --festival-hero-bg-image: none;
+  --festival-hero-bg-color: #d9d9d9;
+
+  background-color: var(--festival-hero-bg-color);
+  background-image: var(--festival-hero-bg-image);
+}
+
+.course-hero--transport {
+  --transport-hero-bg-image: none;
+  --transport-hero-bg-color: #d9d9d9;
+
+  background-color: var(--transport-hero-bg-color);
+  background-image: var(--transport-hero-bg-image);
+}
+
+.course-hero--festival .course-hero__bg,
+.course-hero--transport .course-hero__bg {
+  display: none;
+}
+
+.course-hero--festival .course-hero__overlay,
+.course-hero--transport .course-hero__overlay {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  background-color: rgba(0, 0, 0, 0.3);
+  pointer-events: none;
+}
+
+.course-hero--festival .course-hero__inner,
+.course-hero--transport .course-hero__inner {
+  z-index: 1;
+}
+
+.course-hero--festival .course-hero__desc,
+.course-hero--transport .course-hero__desc {
+  color: rgba(255, 255, 255, 0.9);
+}
+
+.course-hero--festival .course-hero__character,
+.course-hero--transport .course-hero__character {
+  display: none;
+}
+
+@media (max-width: 79.9375rem) and (min-width: 48rem) {
+  .course-hero--festival,
+  .course-hero--transport {
+    --course-hero-title-size: clamp(2.25rem, calc(2.25rem + (100vw - 48rem) * 1.25 / 32), 3.5rem);
+    --course-hero-desc-size: clamp(1.125rem, calc(1.125rem + (100vw - 48rem) * 0.375 / 32), 1.5rem);
+  }
+}
+
+@media (max-width: 47.9375rem) {
+  .course-hero--festival,
+  .course-hero--transport {
+    --course-hero-title-size: clamp(1.75rem, calc(1.75rem + (100vw - 24.375rem) * 0.5 / 23.625), 2.25rem);
+    --course-hero-desc-size: clamp(1rem, calc(1rem + (100vw - 24.375rem) * 0.25 / 23.625), 1.25rem);
+  }
+}

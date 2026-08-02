@@ -69,10 +69,8 @@
   z-index: 2;
   display: flex;
   flex-direction: column;
-  max-width: 90rem;
   padding-top: 8rem;
   padding-bottom: 4rem;
-  padding-inline: 2rem;
 }
 
 .island-hero__layout {
@@ -313,10 +311,8 @@
   }
 
   .island-hero__container {
-    max-width: none;
     padding-top: clamp(7rem, calc(7rem + (100vw - 48rem) / 32), 8rem);
     padding-bottom: clamp(3rem, calc(3rem + (100vw - 48rem) / 32), 4rem);
-    padding-inline: clamp(1.5rem, calc(1.5rem + (100vw - 48rem) / 64), 2rem);
   }
 
   .island-hero__layout {
@@ -401,7 +397,6 @@
   .island-hero__container {
     padding-top: 6rem;
     padding-bottom: 2rem;
-    padding-inline: 1rem;
   }
 
   .island-hero__layout {

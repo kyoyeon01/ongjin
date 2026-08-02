@@ -34,11 +34,7 @@
   z-index: 1;
   display: flex;
   align-items: center;
-  width: 100%;
-  max-width: 90rem;
   min-height: 20.0625rem;
-  margin-inline: auto;
-  padding-inline: 2rem;
 }
 
 .island-cta__layout {
@@ -123,7 +119,6 @@
 
   .island-cta__container {
     min-height: auto;
-    padding-inline: 1.5rem;
     padding-block: 3rem;
   }
 
@@ -168,7 +163,6 @@
   }
 
   .island-cta__container {
-    padding-inline: 1rem;
     padding-block: 2.5rem;
   }
 

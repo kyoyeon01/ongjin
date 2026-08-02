@@ -2,20 +2,16 @@
    Island Detail — 추천 포토스팟 Section
    Desktop base (≥1280) + Tablet/Mobile override only
    Swiper UI: 메인 islands 섹션과 동일 (헤더 nav + 하단 pagination)
+   Container: 공통 .container (90rem)
    ========================================================================== */
 
 .island-photos {
   width: 100%;
-  min-height: 56.6875rem;
   background-color: #f6f8fb;
 }
 
 .island-photos__container {
-  width: 100%;
-  max-width: 105rem;
-  margin-inline: auto;
-  padding-inline: 2rem;
-  padding-block: 5rem;
+  padding-block: 5rem 6.25rem;
 }
 
 .island-photos__header {
@@ -37,34 +33,40 @@
 
 .island-photos__slider-wrap {
   margin-top: 0;
+  width: 100%;
+  min-width: 0;
 }
 
 .island-photos__slider {
   position: relative;
-  overflow: visible;
+  overflow: hidden;
   width: 100%;
 }
 
 .island-photos__grid {
   display: grid;
-  grid-template-columns: repeat(4, 25.125rem);
+  grid-template-columns: repeat(4, minmax(0, 1fr));
   gap: 1.5rem;
   margin: 0;
   padding: 0;
   list-style: none;
+  width: 100%;
 }
 
 .island-photos-card {
   min-width: 0;
+  width: 100%;
 }
 
 .island-photos-card__inner {
+  container-type: inline-size;
   display: flex;
   flex-direction: column;
-  width: 25.125rem;
-  height: 34rem;
+  width: 100%;
+  height: auto;
+  aspect-ratio: 402 / 544;
   overflow: hidden;
-  border-radius: 1.25rem;
+  border-radius: var(--fluid-radius-card);
   background-color: var(--color-bg-default);
   box-shadow: 0 0.125rem 0.5rem rgba(18, 41, 72, 0.06);
 }
@@ -72,7 +74,8 @@
 .island-photos-card__media {
   flex-shrink: 0;
   width: 100%;
-  height: 21.4375rem;
+  height: auto;
+  aspect-ratio: 402 / 343;
   overflow: hidden;
 }
 
@@ -88,20 +91,21 @@
   flex: 1;
   flex-direction: column;
   align-items: flex-start;
-  padding: 1.25rem 1.5rem 1.5rem;
+  padding: calc(100cqw * 20 / 402) calc(100cqw * 24 / 402)
+    calc(100cqw * 24 / 402);
   text-align: left;
 }
 
 .island-photos-card__title {
-  font-size: 1.75rem;
+  font-size: calc(100cqw * 28 / 402);
   line-height: 1.4;
   font-weight: var(--font-weight-semibold);
   color: var(--color-neutral-900);
 }
 
 .island-photos-card__desc {
-  margin-top: 1.25rem;
-  font-size: 0.9375rem;
+  margin-top: calc(100cqw * 20 / 402);
+  font-size: calc(100cqw * 15 / 402);
   line-height: 1.6;
   font-weight: var(--font-weight-semibold);
   color: var(--color-neutral-700);
@@ -113,12 +117,7 @@
    -------------------------------------------------------------------------- */
 
 @media (max-width: 79.9375rem) {
-  .island-photos {
-    min-height: auto;
-  }
-
   .island-photos__container {
-    padding-inline: 1.5rem;
     padding-block: 4rem;
   }
 
@@ -141,10 +140,6 @@
     justify-self: end;
   }
 
-  .island-photos__slider {
-    overflow: hidden;
-  }
-
   .island-photos__slider .swiper-wrapper {
     align-items: stretch;
   }
@@ -160,38 +155,9 @@
     gap: 0;
   }
 
-  /* Swiper가 슬라이드 너비를 분배 — 카드는 100% 채우며 402:544 비율 유지 */
   .island-photos-card {
     width: auto;
     height: auto;
-  }
-
-  .island-photos-card__inner {
-    container-type: inline-size;
-    width: 100%;
-    height: auto;
-    aspect-ratio: 402 / 544;
-    border-radius: calc(100cqw * 20 / 402);
-  }
-
-  .island-photos-card__media {
-    width: 100%;
-    height: auto;
-    aspect-ratio: 402 / 343;
-  }
-
-  .island-photos-card__body {
-    padding: calc(100cqw * 20 / 402) calc(100cqw * 24 / 402)
-      calc(100cqw * 24 / 402);
-  }
-
-  .island-photos-card__title {
-    font-size: calc(100cqw * 28 / 402);
-  }
-
-  .island-photos-card__desc {
-    margin-top: calc(100cqw * 20 / 402);
-    font-size: calc(100cqw * 15 / 402);
   }
 
   .island-photos__pagination {
@@ -209,7 +175,6 @@
 
 @media (max-width: 47.9375rem) {
   .island-photos__container {
-    padding-inline: 1rem;
     padding-block: 3rem;
   }
 
