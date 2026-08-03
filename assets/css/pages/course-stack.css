@@ -1,12 +1,17 @@
 /* ==========================================================================
-   Course Stack Carousel — 2장 노출 슬라이드 (day-trip / overnight 공용)
+   Course Stack Carousel — day-trip / overnight 공용
+   Desktop/Tablet: 스택형 카드 넘김
+   Mobile: 2장 노출 슬라이드
    ========================================================================== */
 
 .course-stack {
-  --course-stack-card-radius: var(--fluid-radius-card);
+  --course-stack-card-w: 22.0625rem;
+  --course-stack-card-h: calc(var(--course-stack-card-w) * 604 / 431);
+  --course-stack-gap: 7.25rem;
+  --course-stack-radius: var(--fluid-radius-card);
   --course-stack-title-size: 3.5rem;
   --course-stack-text-size: 1.25rem;
-  --course-stack-gap: 1.5rem;
+  --course-stack-stage-h: calc(var(--course-stack-card-h) + 2.5rem);
   --course-stack-nav-size: 2.75rem;
 
   width: 100%;
@@ -31,55 +36,57 @@
 
 .course-stack__viewport {
   position: relative;
-  display: grid;
-  grid-template-columns: auto minmax(0, 1fr) auto;
-  align-items: center;
-  gap: 1rem;
   width: 100%;
   margin-top: 2.5rem;
-}
-
-.course-stack__nav--prev {
-  grid-column: 1;
-  grid-row: 1;
+  user-select: none;
+  touch-action: pan-y;
 }
 
 .course-stack__slider {
-  grid-column: 2;
-  grid-row: 1;
   width: 100%;
-  min-width: 0;
-  overflow: hidden;
-}
-
-.course-stack__nav--next {
-  grid-column: 3;
-  grid-row: 1;
+  overflow: visible;
 }
 
 .course-stack__stage {
-  align-items: stretch;
+  position: relative;
+  display: block;
+  width: 100%;
+  height: var(--course-stack-stage-h);
+  overflow: visible;
+  transform: none;
 }
 
+/* Desktop/Tablet — slides act as absolute stack items */
 .course-stack__slider .swiper-slide {
-  height: auto;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  z-index: 1;
+  width: var(--course-stack-card-w);
+  height: var(--course-stack-card-h);
+  margin: 0;
+  transform: translate(-50%, -50%);
+  transition:
+    transform 0.45s cubic-bezier(0.22, 1, 0.36, 1),
+    opacity 0.45s cubic-bezier(0.22, 1, 0.36, 1);
 }
 
-/* --------------------------------------------------------------------------
-   Card (디자인 유지)
-   -------------------------------------------------------------------------- */
+.course-stack__slider .swiper-slide.is-hidden {
+  opacity: 0;
+  pointer-events: none;
+  visibility: hidden;
+}
 
 .course-stack-card {
   position: relative;
   display: block;
   width: 100%;
-  height: auto;
-  aspect-ratio: 431 / 604;
+  height: 100%;
   margin: 0;
   padding: 0;
   overflow: hidden;
   border: none;
-  border-radius: var(--course-stack-card-radius);
+  border-radius: var(--course-stack-radius);
   background-color: var(--color-neutral-200);
   box-shadow: 0 0.5rem 1.5rem rgba(18, 41, 72, 0.12);
   cursor: pointer;
@@ -134,36 +141,41 @@
   pointer-events: none;
 }
 
-/* --------------------------------------------------------------------------
-   Nav arrows — circular, outside cards
-   -------------------------------------------------------------------------- */
-
 .course-stack__nav {
-  position: relative;
-  z-index: 2;
-  display: inline-flex;
+  position: absolute;
+  top: 50%;
+  z-index: 20;
+  display: flex;
   align-items: center;
   justify-content: center;
-  width: var(--course-stack-nav-size);
-  height: var(--course-stack-nav-size);
-  padding: 0;
-  border: 0.0625rem solid var(--color-border-default);
-  border-radius: var(--radius-full);
-  background-color: #ffffff;
-  color: var(--color-primary-800);
+  width: var(--fluid-nav-btn-size);
+  height: var(--fluid-nav-btn-size);
+  border: var(--card-border);
+  border-radius: var(--radius-sm);
+  background-color: var(--color-bg-default);
+  color: var(--color-neutral-900);
+  transform: translateY(-50%);
   cursor: pointer;
   transition:
     border-color 0.3s ease,
     background-color 0.3s ease,
-    color 0.3s ease,
+    box-shadow 0.3s ease,
     opacity 0.3s ease;
 }
 
-.course-stack__nav:hover:not(:disabled):not(.swiper-button-disabled),
-.course-stack__nav:focus-visible:not(:disabled):not(.swiper-button-disabled) {
-  border-color: var(--color-primary-800);
-  background-color: var(--color-primary-800);
-  color: #ffffff;
+.course-stack__nav:hover,
+.course-stack__nav:focus-visible {
+  border-color: var(--color-primary-700);
+  background-color: var(--color-primary-50);
+  box-shadow: var(--shadow-sm);
+}
+
+.course-stack__nav--prev {
+  left: 0;
+}
+
+.course-stack__nav--next {
+  right: 0;
 }
 
 .course-stack__nav:disabled,
@@ -175,19 +187,9 @@
 
 .course-stack__nav-icon {
   display: block;
-  width: 0.875rem;
-  height: 0.875rem;
-  filter: none;
+  width: var(--fluid-nav-btn-icon-size);
+  height: var(--fluid-nav-btn-icon-size);
 }
-
-.course-stack__nav:hover:not(:disabled):not(.swiper-button-disabled) .course-stack__nav-icon,
-.course-stack__nav:focus-visible:not(:disabled):not(.swiper-button-disabled) .course-stack__nav-icon {
-  filter: brightness(0) invert(1);
-}
-
-/* --------------------------------------------------------------------------
-   Pagination
-   -------------------------------------------------------------------------- */
 
 .course-stack__pagination {
   position: static;
@@ -207,12 +209,10 @@
   padding: 0;
   border: none;
   border-radius: var(--radius-full);
-  background-color: var(--color-neutral-400);
+  background-color: var(--color-primary-300);
   opacity: 1;
   cursor: pointer;
-  transition:
-    background-color 0.3s ease,
-    transform 0.3s ease;
+  transition: background-color 0.3s ease, transform 0.3s ease;
 }
 
 .course-stack__pagination .swiper-pagination-bullet-active,
@@ -221,45 +221,122 @@
   transform: scale(1.1);
 }
 
+.course-stack__dot:focus-visible {
+  outline: 0.125rem solid var(--color-primary-700);
+  outline-offset: 0.125rem;
+}
+
 /* --------------------------------------------------------------------------
-   Tablet
+   Tablet (768–1024) — Desktop 스택 비율 축소
    -------------------------------------------------------------------------- */
 
 @media (max-width: 64rem) and (min-width: 48rem) {
   .course-stack {
+    --course-stack-card-w: clamp(14.5rem, 34vw, 22.0625rem);
+    --course-stack-card-h: calc(var(--course-stack-card-w) * 604 / 431);
+    --course-stack-gap: clamp(4rem, 7vw, 7.25rem);
     --course-stack-title-size: clamp(2.25rem, 4vw, 3.5rem);
     --course-stack-text-size: clamp(0.9375rem, 1.8vw, 1.25rem);
-    --course-stack-gap: 1.25rem;
-    --course-stack-nav-size: 2.5rem;
     padding-block: 4rem 3.5rem;
   }
 
   .course-stack__viewport {
-    gap: 0.75rem;
     margin-top: 2rem;
-  }
-
-  .course-stack-card__text {
-    padding: 1.25rem;
   }
 }
 
 /* --------------------------------------------------------------------------
-   Mobile — still 2 cards, arrows + pagination kept
+   Mobile (≤767) — 2장 캐러셀
    -------------------------------------------------------------------------- */
 
 @media (max-width: 47.9375rem) {
   .course-stack {
     --course-stack-title-size: clamp(1.75rem, 8vw, 2.25rem);
     --course-stack-text-size: clamp(0.8125rem, 3.5vw, 1rem);
-    --course-stack-gap: 0.75rem;
     --course-stack-nav-size: 2.25rem;
     padding-block: 3rem 2.5rem;
   }
 
   .course-stack__viewport {
+    display: grid;
+    grid-template-columns: auto minmax(0, 1fr) auto;
+    align-items: center;
     gap: 0.5rem;
     margin-top: 1.5rem;
+  }
+
+  .course-stack__nav--prev {
+    position: relative;
+    top: auto;
+    left: auto;
+    grid-column: 1;
+    grid-row: 1;
+    transform: none;
+    width: var(--course-stack-nav-size);
+    height: var(--course-stack-nav-size);
+    border-radius: var(--radius-full);
+    border: 0.0625rem solid var(--color-border-default);
+    background-color: #ffffff;
+    color: var(--color-primary-800);
+  }
+
+  .course-stack__nav--next {
+    position: relative;
+    top: auto;
+    right: auto;
+    grid-column: 3;
+    grid-row: 1;
+    transform: none;
+    width: var(--course-stack-nav-size);
+    height: var(--course-stack-nav-size);
+    border-radius: var(--radius-full);
+    border: 0.0625rem solid var(--color-border-default);
+    background-color: #ffffff;
+    color: var(--color-primary-800);
+  }
+
+  .course-stack__nav:hover:not(:disabled):not(.swiper-button-disabled),
+  .course-stack__nav:focus-visible:not(:disabled):not(.swiper-button-disabled) {
+    border-color: var(--color-primary-800);
+    background-color: var(--color-primary-800);
+    color: #ffffff;
+    box-shadow: none;
+  }
+
+  .course-stack__slider {
+    grid-column: 2;
+    grid-row: 1;
+    min-width: 0;
+    overflow: hidden;
+  }
+
+  .course-stack__stage {
+    display: flex;
+    height: auto;
+  }
+
+  .course-stack__slider .swiper-slide {
+    position: relative;
+    top: auto;
+    left: auto;
+    width: auto;
+    height: auto;
+    transform: none !important;
+    opacity: 1 !important;
+    visibility: visible !important;
+    pointer-events: auto !important;
+    transition: none;
+  }
+
+  .course-stack__slider .swiper-slide.is-hidden {
+    opacity: 1;
+    visibility: visible;
+    pointer-events: auto;
+  }
+
+  .course-stack-card {
+    aspect-ratio: 431 / 604;
+    height: auto;
   }
 
   .course-stack-card__text {
@@ -268,5 +345,15 @@
 
   .course-stack__pagination {
     margin-top: 1.5rem;
+  }
+
+  .course-stack__pagination .swiper-pagination-bullet,
+  .course-stack__dot {
+    background-color: var(--color-neutral-400);
+  }
+
+  .course-stack__pagination .swiper-pagination-bullet-active,
+  .course-stack__dot.is-active {
+    background-color: var(--color-primary-700);
   }
 }
