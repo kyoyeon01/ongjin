@@ -1,5 +1,7 @@
 /**
  * Islands Section — Swiper slider
+ * Mobile/Tablet: auto + min-width Peek (2장 페이지)
+ * Desktop: 기존 다열 레이아웃 유지
  */
 (function () {
   "use strict";
@@ -16,11 +18,11 @@
 
   var islandsSwiper = new Swiper(sliderEl, {
     speed: 500,
-    rewind: true,
+    rewind: false,
     grabCursor: true,
-    slidesPerView: 2,
+    slidesPerView: "auto",
     slidesPerGroup: 2,
-    spaceBetween: 15,
+    spaceBetween: 16,
     watchOverflow: true,
     pagination: {
       el: ".islands__pagination",
@@ -29,11 +31,12 @@
     navigation: {
       prevEl: ".islands__nav-btn--prev",
       nextEl: ".islands__nav-btn--next",
+      disabledClass: "swiper-button-disabled",
     },
     breakpoints: {
       768: {
-        slidesPerView: 3,
-        slidesPerGroup: 3,
+        slidesPerView: "auto",
+        slidesPerGroup: 2,
         spaceBetween: 24,
       },
       1200: {

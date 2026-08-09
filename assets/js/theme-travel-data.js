@@ -1,6 +1,10 @@
 /**
  * Theme Travel Page — 테마별 콘텐츠 데이터
- * images 배열만 수정하면 슬라이더 이미지가 교체됩니다.
+ *
+ * 카드 구조 (변경 금지):
+ * - 카드 1개 = 섬 1개
+ * - images[3] = 왼쪽 섬/테마 갤러리 (Carousel) — 추천장소와 1:1 연결하지 않음
+ * - places[3] = 오른쪽 추천장소 목록 (고정 표시)
  */
 window.THEME_TRAVEL_DATA = {
   nature: {
@@ -14,8 +18,8 @@ window.THEME_TRAVEL_DATA = {
         desc: "유네스코 세계지질공원의 자연을 품은 섬",
         images: [
           "assets/images/island/photo-baengnyeong-01.webp",
-          "assets/images/island/photo-baengnyeong-02.webp",
-          "assets/images/island/hero-slide-baengnyeong-01.webp",
+          "assets/images/island/photo-baengnyeong-03.webp",
+          "assets/images/baekryeongdo-folded-strata.webp",
         ],
         places: [
           { name: "두무진", desc: "기암절벽이 만들어내는 서해의 대표 절경" },
@@ -27,23 +31,23 @@ window.THEME_TRAVEL_DATA = {
         name: "덕적도",
         desc: "울창한 해송숲과 서해 풍경이 어우러진 힐링 섬",
         images: [
-          "assets/images/island/hero-slide-deokjeok-01.webp",
-          "assets/images/island/hero-slide-deokjeok-02.webp",
-          "assets/images/course/day-trip-deokjeokdo.webp",
+          "assets/images/island/photo-deokjeok-01.webp",
+          "assets/images/island/photo-deokjeok-02.webp",
+          "assets/images/island/photo-deokjeok-03.webp",
         ],
         places: [
-          { name: "비조봉", desc: "섬 전체를 한눈에 담을 수 있는 전망 명소" },
           { name: "서포리 해수욕장", desc: "해송숲과 함께하는 아름다운 해변" },
-          { name: "밧지름해변", desc: "한적하게 쉬어가기 좋은 숨은 해변" },
+          { name: "서포리 소나무산책로", desc: "해송숲을 따라 걷는 여유로운 산책 코스" },
+          { name: "능동자갈마당", desc: "몽돌과 기암이 어우러진 해안 경관" },
         ],
       },
       {
         name: "장봉도",
         desc: "숲길과 해변을 함께 즐길 수 있는 고요한 섬",
         images: [
-          "assets/images/course/day-trip-jangbongdo.webp",
-          "assets/images/theme/theme-nature.webp",
-          "assets/images/theme/theme-sea.webp",
+          "assets/images/jangbongdo-overview.webp",
+          "assets/images/island/hero-slide-bukdo-02.webp",
+          "assets/images/island/hero-slide-bukdo-03.webp",
         ],
         places: [
           { name: "국사봉", desc: "장봉도에서 가장 탁 트인 전망을 만날 수 있는 곳" },
@@ -64,9 +68,9 @@ window.THEME_TRAVEL_DATA = {
         name: "영흥도",
         desc: "드넓은 해변과 아름다운 서해 노을을 만나는 섬",
         images: [
-          "assets/images/course/day-trip-yeongheungdo.webp",
-          "assets/images/theme/theme-sea.webp",
-          "assets/images/theme/theme-photo.webp",
+          "assets/images/island/photo-yeongheung-02.webp",
+          "assets/images/island/photo-yeongheung-01.webp",
+          "assets/images/island/cta-yeongheung.webp",
         ],
         places: [
           {
@@ -85,8 +89,8 @@ window.THEME_TRAVEL_DATA = {
         desc: "맑은 바다와 고운 백사장이 어우러진 섬",
         images: [
           "assets/images/course/day-trip-seungbongdo.webp",
-          "assets/images/theme/theme-sea.webp",
-          "assets/images/theme/theme-photo.webp",
+          "assets/images/course/day-trip-seungbongdo.webp",
+          "assets/images/course/day-trip-seungbongdo.webp",
         ],
         places: [
           { name: "이일레해변", desc: "에메랄드빛 바다와 고운 모래가 인상적인 해변" },
@@ -98,9 +102,9 @@ window.THEME_TRAVEL_DATA = {
         name: "대청도",
         desc: "맑은 바다와 깨끗한 자연을 품은 섬",
         images: [
-          "assets/images/course/overnight-daecheongdo.webp",
-          "assets/images/theme/theme-sea.webp",
-          "assets/images/theme/theme-nature.webp",
+          "assets/images/island/photo-daecheong-01.webp",
+          "assets/images/island/photo-daecheong-02.webp",
+          "assets/images/island/photo-daecheong-04.webp",
         ],
         places: [
           {
@@ -129,7 +133,7 @@ window.THEME_TRAVEL_DATA = {
         images: [
           "assets/images/island/photo-baengnyeong-04.webp",
           "assets/images/island/hero-slide-baengnyeong-02.webp",
-          "assets/images/theme/theme-history.webp",
+          "assets/images/baekryeongdo-folded-strata.webp",
         ],
         places: [
           { name: "심청각", desc: "심청전의 배경이 된 설화의 공간" },
@@ -141,9 +145,9 @@ window.THEME_TRAVEL_DATA = {
         name: "연평도",
         desc: "서해의 역사와 평화를 기억하는 섬",
         images: [
-          "assets/images/course/overnight-yeonpyeongdo.webp",
-          "assets/images/theme/theme-history.webp",
-          "assets/images/theme/theme-photo.webp",
+          "assets/images/island/photo-yeonpyeong-01.webp",
+          "assets/images/island/hero-slide-yeonpyeong-02.webp",
+          "assets/images/island/hero-slide-yeonpyeong-03.webp",
         ],
         places: [
           { name: "조기역사관", desc: "조기 어업의 역사를 담은 전시 공간" },
@@ -159,8 +163,8 @@ window.THEME_TRAVEL_DATA = {
         desc: "예술과 자연이 공존하는 섬",
         images: [
           "assets/images/course/day-trip-sinsimodo.webp",
-          "assets/images/theme/theme-history.webp",
-          "assets/images/theme/theme-photo.webp",
+          "assets/images/island/hero-slide-bukdo-02.webp",
+          "assets/images/island/hero-slide-bukdo-03.webp",
         ],
         places: [
           {
@@ -185,8 +189,8 @@ window.THEME_TRAVEL_DATA = {
         desc: "세개의 섬을 가장 자유롭게 즐기는 라이딩 여행",
         images: [
           "assets/images/course/day-trip-sinsimodo.webp",
-          "assets/images/theme/theme-activity.webp",
-          "assets/images/theme/theme-photo.webp",
+          "assets/images/island/hero-slide-bukdo-01.webp",
+          "assets/images/island/cta-bukdo.webp",
         ],
         places: [
           {
@@ -204,9 +208,9 @@ window.THEME_TRAVEL_DATA = {
         name: "영흥도",
         desc: "바다를 가장 다채롭게 즐길 수 있는 액티비티 섬",
         images: [
-          "assets/images/course/day-trip-yeongheungdo.webp",
-          "assets/images/theme/theme-activity.webp",
-          "assets/images/theme/theme-nature.webp",
+          "assets/images/island/photo-yeongheung-01.webp",
+          "assets/images/island/photo-yeongheung-02.webp",
+          "assets/images/island/photo-yeongheung-03.webp",
         ],
         places: [
           {
@@ -221,9 +225,9 @@ window.THEME_TRAVEL_DATA = {
         name: "선재도",
         desc: "가족과 함께 즐기기 좋은 체험 여행지",
         images: [
-          "assets/images/course/day-trip-seonjaedo.webp",
-          "assets/images/theme/theme-activity.webp",
-          "assets/images/theme/theme-sea.webp",
+          "assets/images/island/photo-yeongheung-04.webp",
+          "assets/images/yeongheungdo-bridge-02.webp",
+          "assets/images/island/photo-yeongheung-01.webp",
         ],
         places: [
           {
@@ -247,9 +251,9 @@ window.THEME_TRAVEL_DATA = {
         name: "소청도",
         desc: "이국적인 풍경을 담은 섬",
         images: [
-          "assets/images/theme/theme-photo.webp",
+          "assets/images/socheongdo-stromatolite.webp",
           "assets/images/course/overnight-daecheongdo.webp",
-          "assets/images/theme/theme-nature.webp",
+          "assets/images/island/photo-daecheong-01.webp",
         ],
         places: [
           {
@@ -267,9 +271,9 @@ window.THEME_TRAVEL_DATA = {
         name: "굴업도",
         desc: "자연 그대로의 풍경을 간직한 섬",
         images: [
-          "assets/images/theme/theme-nature.webp",
-          "assets/images/theme/theme-photo.webp",
-          "assets/images/theme/theme-sea.webp",
+          "assets/images/guleopdo-aerial.webp",
+          "assets/images/course/overnight-deokjeokdo.webp",
+          "assets/images/island/hero-slide-deokjeok-01.webp",
         ],
         places: [
           {
@@ -290,9 +294,9 @@ window.THEME_TRAVEL_DATA = {
         name: "영흥도",
         desc: "노을이 가장 아름다운 섬",
         images: [
-          "assets/images/course/day-trip-yeongheungdo.webp",
-          "assets/images/theme/theme-photo.webp",
-          "assets/images/theme/theme-sea.webp",
+          "assets/images/island/photo-yeongheung-02.webp",
+          "assets/images/island/photo-yeongheung-03.webp",
+          "assets/images/island/photo-yeongheung-01.webp",
         ],
         places: [
           { name: "노가리해변", desc: "붉은 절벽과 해식동굴이 만들어내는 독특한 풍경" },

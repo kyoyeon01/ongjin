@@ -1,10 +1,18 @@
 /**
- * Festival Page — 필터 + 페이지네이션 (Desktop/Tablet 4개, Mobile 1개)
+ * Festival Page — 필터 + 페이지네이션
+ * Desktop: 4개(2×2) / Tablet·Mobile: 2개(min-width Peek)
+ * 상태 태그: data-start / data-end 기준 자동 판별
  */
 (function () {
   "use strict";
 
-  var MOBILE_MQ = "(max-width: 47.9375rem)";
+  var DESKTOP_MQ = "(min-width: 75rem)";
+  var STATUS_LABELS = {
+    ongoing: "진행중",
+    upcoming: "예정",
+    ended: "종료",
+  };
+
   var root = document.querySelector(".festival-page");
   if (!root) {
     return;
@@ -27,12 +35,85 @@
   var touchStartX = 0;
   var touchStartY = 0;
 
-  function isMobile() {
-    return window.matchMedia(MOBILE_MQ).matches;
+  function parseDate(value) {
+    if (!value) {
+      return null;
+    }
+    var parts = String(value).trim().split("-");
+    if (parts.length !== 3) {
+      return null;
+    }
+    var y = Number(parts[0]);
+    var m = Number(parts[1]);
+    var d = Number(parts[2]);
+    if (!y || !m || !d) {
+      return null;
+    }
+    return new Date(y, m - 1, d);
+  }
+
+  function startOfToday() {
+    var now = new Date();
+    return new Date(now.getFullYear(), now.getMonth(), now.getDate());
+  }
+
+  function resolveStatus(startDate, endDate, today) {
+    if (!startDate || !endDate) {
+      return "";
+    }
+    if (today < startDate) {
+      return "upcoming";
+    }
+    if (today > endDate) {
+      return "ended";
+    }
+    return "ongoing";
+  }
+
+  function ensureStatusBadge(media) {
+    var badge = media.querySelector(".festival-event__status");
+    if (badge) {
+      return badge;
+    }
+    badge = document.createElement("span");
+    badge.className = "festival-event__status";
+    badge.setAttribute("aria-hidden", "true");
+    media.insertBefore(badge, media.firstChild);
+    return badge;
+  }
+
+  function applyEventStatuses() {
+    var today = startOfToday();
+
+    items.forEach(function (item) {
+      var startDate = parseDate(item.getAttribute("data-start"));
+      var endDate = parseDate(item.getAttribute("data-end")) || startDate;
+      var status = resolveStatus(startDate, endDate, today);
+
+      if (!status) {
+        status = item.getAttribute("data-status") || "";
+      }
+
+      item.setAttribute("data-status", status);
+
+      var media = item.querySelector(".festival-event__media");
+      if (!media || !status) {
+        return;
+      }
+
+      var badge = ensureStatusBadge(media);
+      badge.textContent = STATUS_LABELS[status] || status;
+      badge.setAttribute("data-state", status);
+      badge.classList.add("is-visible");
+    });
+  }
+
+  function isDesktop() {
+    return window.matchMedia(DESKTOP_MQ).matches;
   }
 
   function perPage() {
-    return isMobile() ? 1 : 4;
+    return isDesktop() ? 4 : 2;
   }
 
   function matches(item, status) {
@@ -68,7 +149,7 @@
       }
     });
 
-    if (isMobile() || visibleItems.length === 0) {
+    if (!isDesktop() || visibleItems.length === 0) {
       return;
     }
 
@@ -174,6 +255,10 @@
       renderPagination(total);
       updateNav(total);
 
+      if (viewport) {
+        viewport.scrollLeft = 0;
+      }
+
       requestAnimationFrame(function () {
         equalizeHeights(pageItems);
         window.setTimeout(function () {
@@ -262,7 +347,7 @@
     viewport.addEventListener(
       "touchstart",
       function (event) {
-        if (!isMobile() || !event.changedTouches.length) {
+        if (isDesktop() || !event.changedTouches.length) {
           return;
         }
         touchStartX = event.changedTouches[0].clientX;
@@ -274,7 +359,7 @@
     viewport.addEventListener(
       "touchend",
       function (event) {
-        if (!isMobile() || !event.changedTouches.length) {
+        if (isDesktop() || !event.changedTouches.length) {
           return;
         }
         var dx = event.changedTouches[0].clientX - touchStartX;
@@ -304,6 +389,7 @@
     }, 150);
   });
 
+  applyEventStatuses();
   setActiveFilter(currentFilter);
   showPage(0, false);
 })();

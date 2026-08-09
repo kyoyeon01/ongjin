@@ -1,6 +1,7 @@
 /* ==========================================================================
-   Festival Page — 필터 / 2×2 페이지 / 페이지네이션
-   (메인 .festival 슬라이더와 분리)
+   Festival Page — 필터 / 페이지네이션
+   Desktop: 2×2 (4장/페이지)
+   Tablet·Mobile: 카드 min-width 우선 + 2장 구조 Peek
    ========================================================================== */
 
 .festival-page {
@@ -8,6 +9,7 @@
   --festival-page-gap: 1.875rem;
   --festival-page-padding: 2rem;
   --festival-page-filter-gap: 1.375rem;
+  --festival-card-min: 20rem;
 
   width: 100%;
   padding-block: 3.5rem 5rem;
@@ -21,7 +23,7 @@
 }
 
 /* --------------------------------------------------------------------------
-   Filters — 컨테이너 100% / 동일 너비
+   Filters
    -------------------------------------------------------------------------- */
 
 .festival-page__filters {
@@ -76,7 +78,7 @@
 }
 
 /* --------------------------------------------------------------------------
-   Grid — Desktop/Tablet 2×2 (한 페이지 4장)
+   Grid — Desktop 2×2
    -------------------------------------------------------------------------- */
 
 .festival-page__viewport {
@@ -125,7 +127,7 @@
 }
 
 /* --------------------------------------------------------------------------
-   Event Card — 정보 전용 (클릭 없음)
+   Event Card
    -------------------------------------------------------------------------- */
 
 .festival-event {
@@ -155,6 +157,38 @@
   overflow: hidden;
   aspect-ratio: 16 / 9;
   background-color: var(--color-neutral-200);
+}
+
+.festival-event__status {
+  position: absolute;
+  top: 1rem; /* 16px */
+  left: 1rem; /* 16px */
+  z-index: 1;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  min-height: 1.5rem;
+  padding: 0.25rem 0.625rem;
+  border-radius: 9999px;
+  background-color: var(--color-primary-800);
+  color: #ffffff;
+  font-size: 0.75rem;
+  font-weight: var(--font-weight-bold);
+  line-height: 1.2;
+  letter-spacing: -0.01em;
+  white-space: nowrap;
+  pointer-events: none;
+}
+
+.festival-event__status.is-visible {
+  display: inline-flex;
+}
+
+.festival-event__status[data-state="ongoing"],
+.festival-event__status[data-state="upcoming"],
+.festival-event__status[data-state="ended"] {
+  background-color: var(--color-primary-800);
+  color: #ffffff;
 }
 
 .festival-event__img {
@@ -196,10 +230,15 @@
   font-weight: var(--font-weight-regular);
   color: var(--color-neutral-700);
   word-break: keep-all;
+  overflow: visible;
+  text-overflow: unset;
+  white-space: normal;
+  -webkit-line-clamp: unset;
+  line-clamp: unset;
 }
 
 /* --------------------------------------------------------------------------
-   Pagination / Mobile Nav
+   Pagination — ← dots →
    -------------------------------------------------------------------------- */
 
 .festival-page__controls {
@@ -287,7 +326,7 @@
 }
 
 /* --------------------------------------------------------------------------
-   Tablet (768–1199)
+   Tablet (768–1199) — 2장 + min-width Peek
    -------------------------------------------------------------------------- */
 
 @media (max-width: 74.9375rem) and (min-width: 48rem) {
@@ -295,6 +334,7 @@
     --festival-page-padding: 1.5rem;
     --festival-page-gap: 1.5rem;
     --festival-page-filter-gap: 1.25rem;
+    --festival-card-min: 18.75rem;
     padding-block: 3rem 4rem;
   }
 
@@ -302,20 +342,58 @@
     gap: 2rem;
   }
 
+  .festival-page__viewport {
+    overflow-x: auto;
+    overflow-y: visible;
+    -webkit-overflow-scrolling: touch;
+    touch-action: pan-x pan-y;
+    scrollbar-width: none;
+  }
+
+  .festival-page__viewport::-webkit-scrollbar {
+    display: none;
+  }
+
+  .festival-page__grid {
+    display: flex;
+    flex-wrap: nowrap;
+    align-items: stretch;
+    width: max-content;
+    min-width: 100%;
+    gap: var(--festival-page-gap);
+  }
+
+  .festival-page__item.is-visible,
+  .festival-page__item.is-animating-out {
+    flex: 0 0 auto;
+    width: var(--festival-card-min);
+    min-width: var(--festival-card-min);
+  }
+
+  .festival-event {
+    height: auto;
+  }
+
   .festival-event__title {
-    font-size: 1.0625rem;
+    font-size: 1.125rem;
+  }
+
+  .festival-event__meta,
+  .festival-event__desc {
+    font-size: 0.875rem;
   }
 }
 
 /* --------------------------------------------------------------------------
-   Mobile (≤767) — 한 페이지 1장 + 스와이프/이전다음
+   Mobile (≤767) — 2장 구조 + min-width Peek (압축 금지)
    -------------------------------------------------------------------------- */
 
 @media (max-width: 47.9375rem) {
   .festival-page {
     --festival-page-padding: 1.25rem;
-    --festival-page-gap: 1.5rem;
+    --festival-page-gap: 1rem;
     --festival-page-filter-gap: 0.5rem;
+    --festival-card-min: 16rem;
     padding-block: 2rem 3rem;
   }
 
@@ -325,19 +403,47 @@
 
   .festival-page__filter {
     height: 2.5rem;
-    font-size: 0.8125rem;
+    font-size: 0.875rem;
+  }
+
+  .festival-page__viewport {
+    overflow-x: auto;
+    overflow-y: visible;
+    -webkit-overflow-scrolling: touch;
+    touch-action: pan-x pan-y;
+    scrollbar-width: none;
+  }
+
+  .festival-page__viewport::-webkit-scrollbar {
+    display: none;
   }
 
   .festival-page__grid {
-    grid-template-columns: 1fr;
+    display: flex;
+    flex-wrap: nowrap;
+    align-items: stretch;
+    width: max-content;
+    min-width: 100%;
+    gap: var(--festival-page-gap);
+  }
+
+  .festival-page__item.is-visible,
+  .festival-page__item.is-animating-out {
+    flex: 0 0 auto;
+    width: var(--festival-card-min);
+    min-width: var(--festival-card-min);
+  }
+
+  .festival-event {
+    height: auto;
   }
 
   .festival-event__title {
-    font-size: 1.0625rem;
+    font-size: 1rem;
   }
 
   .festival-event__meta,
   .festival-event__desc {
-    font-size: 0.8125rem;
+    font-size: 0.875rem;
   }
 }

@@ -1,5 +1,8 @@
 /**
  * Island Detail — Hero Swiper + Background Sync
+ *
+ * PC (≥1280): 오른쪽 슬라이드 + 배경 동기화
+ * Tablet/Mobile (<1280): 슬라이드 숨김, 동일 이미지로 배경 자동 페이드(5초)
  */
 (function () {
   "use strict";
@@ -18,6 +21,10 @@
   var bgLayers = bgEl.querySelectorAll(".island-hero__bg-layer");
   var activeLayerIndex = 0;
   var slideSources = [];
+  var bgIndex = 0;
+  var bgTimer = null;
+  var BG_DELAY = 5000;
+  var desktopMq = window.matchMedia("(min-width: 80rem)");
 
   function collectSlideSources() {
     slideSources = [];
@@ -40,6 +47,8 @@
           ""
       );
     });
+
+    slideSources = slideSources.filter(Boolean);
   }
 
   collectSlideSources();
@@ -56,13 +65,7 @@
     }
   }
 
-  function syncHeroBackground(swiper) {
-    if (slideSources.length === 0) {
-      collectSlideSources();
-    }
-
-    var src = slideSources[swiper.realIndex];
-
+  function fadeToBackground(src) {
     if (!src || bgLayers.length < 2) {
       return;
     }
@@ -79,10 +82,54 @@
     var nextLayer = bgLayers[nextLayerIndex];
 
     setLayerImage(nextLayer, src);
-
     nextLayer.classList.add("is-active");
     activeLayer.classList.remove("is-active");
     activeLayerIndex = nextLayerIndex;
+  }
+
+  function syncHeroBackground(swiper) {
+    if (slideSources.length === 0) {
+      collectSlideSources();
+    }
+
+    var src = slideSources[swiper.realIndex];
+
+    if (!src) {
+      return;
+    }
+
+    bgIndex = swiper.realIndex % slideSources.length;
+    fadeToBackground(src);
+  }
+
+  function stopBgAutoplay() {
+    if (bgTimer) {
+      clearInterval(bgTimer);
+      bgTimer = null;
+    }
+  }
+
+  function startBgAutoplay() {
+    stopBgAutoplay();
+
+    if (slideSources.length === 0) {
+      collectSlideSources();
+    }
+
+    if (slideSources.length === 0) {
+      return;
+    }
+
+    fadeToBackground(slideSources[bgIndex % slideSources.length]);
+
+    if (slideSources.length < 2) {
+      return;
+    }
+
+    bgTimer = window.setInterval(function () {
+      bgIndex = (bgIndex + 1) % slideSources.length;
+      fadeToBackground(slideSources[bgIndex]);
+    }, BG_DELAY);
   }
 
   var islandHeroSwiper = new Swiper(sliderEl, {
@@ -95,7 +142,7 @@
     observer: true,
     observeParents: true,
     autoplay: {
-      delay: 5000,
+      delay: BG_DELAY,
       disableOnInteraction: false,
       pauseOnMouseEnter: true,
     },
@@ -112,17 +159,51 @@
         syncHeroBackground(swiper);
       },
       slideChangeTransitionStart: function (swiper) {
+        if (!desktopMq.matches) {
+          return;
+        }
+
         syncHeroBackground(swiper);
       },
     },
   });
 
+  function applyViewportMode() {
+    collectSlideSources();
+
+    if (desktopMq.matches) {
+      stopBgAutoplay();
+
+      if (islandHeroSwiper.autoplay && islandHeroSwiper.autoplay.start) {
+        islandHeroSwiper.autoplay.start();
+      }
+
+      syncHeroBackground(islandHeroSwiper);
+      islandHeroSwiper.update();
+      return;
+    }
+
+    if (islandHeroSwiper.autoplay && islandHeroSwiper.autoplay.stop) {
+      islandHeroSwiper.autoplay.stop();
+    }
+
+    startBgAutoplay();
+  }
+
+  applyViewportMode();
+
   var resizeTimer;
 
-  window.addEventListener("resize", function () {
+  function onViewportChange() {
     clearTimeout(resizeTimer);
-    resizeTimer = setTimeout(function () {
-      islandHeroSwiper.update();
-    }, 150);
-  });
+    resizeTimer = setTimeout(applyViewportMode, 150);
+  }
+
+  if (typeof desktopMq.addEventListener === "function") {
+    desktopMq.addEventListener("change", onViewportChange);
+  } else if (typeof desktopMq.addListener === "function") {
+    desktopMq.addListener(onViewportChange);
+  }
+
+  window.addEventListener("resize", onViewportChange);
 })();

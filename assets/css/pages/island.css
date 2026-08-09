@@ -10,13 +10,8 @@
   --island-hero-swiper-radius: 2rem;
   --island-hero-content-gap: 7.3125rem;
   --island-hero-bg-fade-duration: 600ms;
-  --island-hero-overlay: linear-gradient(
-    90deg,
-    rgba(0, 0, 0, 0.72) 0%,
-    rgba(0, 0, 0, 0.48) 38%,
-    rgba(0, 0, 0, 0.18) 62%,
-    rgba(0, 0, 0, 0) 100%
-  );
+  /* 섹션 전체 균일 오버레이 (왼쪽만 어두운 그라데이션 제거) */
+  --island-hero-overlay: rgba(0, 0, 0, 0.4);
 
   position: relative;
   overflow: hidden;
@@ -292,35 +287,24 @@
 }
 
 /* --------------------------------------------------------------------------
-   Tablet (768–1279) — Gap / Swiper / Typography 연동 (2열 유지)
+   Tablet (768–1279) — 슬라이드 제거, 배경 자동 전환 + 텍스트 + 정보 박스
    -------------------------------------------------------------------------- */
 
 @media (max-width: 79.9375rem) and (min-width: 48rem) {
-  .island-hero {
-    /* 768px → 1280px 구간 선형 보간 (Desktop 값과 1280px에서 일치) */
-    --island-hero-content-gap: clamp(
-      2rem,
-      calc(2rem + (100vw - 48rem) * 5.3125 / 32),
-      7.3125rem
-    );
-    --island-hero-swiper-width: clamp(
-      16rem,
-      calc(16rem + (100vw - 48rem) * 40 / 32),
-      56rem
-    );
-  }
-
   .island-hero__container {
     padding-top: clamp(7rem, calc(7rem + (100vw - 48rem) / 32), 8rem);
     padding-bottom: clamp(3rem, calc(3rem + (100vw - 48rem) / 32), 4rem);
   }
 
   .island-hero__layout {
-    grid-template-columns:
-      minmax(0, 1fr)
-      var(--island-hero-content-gap)
-      minmax(0, var(--island-hero-swiper-width));
+    grid-template-columns: minmax(0, 1fr);
+    grid-template-rows: auto auto;
     row-gap: clamp(2rem, calc(2rem + (100vw - 48rem) / 64), 2.5rem);
+  }
+
+  .island-hero__text {
+    grid-column: 1;
+    grid-row: 1;
   }
 
   .island-hero__label {
@@ -328,51 +312,77 @@
   }
 
   .island-hero__title {
-    font-size: clamp(2rem, calc(2rem + (100vw - 48rem) * 2.0625 / 32), 4.0625rem);
+    font-size: clamp(2.5rem, calc(2.5rem + (100vw - 48rem) * 0.5 / 32), 3rem);
     line-height: 1.154;
   }
 
   .island-hero__desc {
-    font-size: clamp(1rem, calc(1rem + (100vw - 48rem) * 0.25 / 32), 1.25rem);
+    font-size: clamp(1rem, calc(1rem + (100vw - 48rem) * 0.125 / 32), 1.125rem);
   }
 
+  /* 오른쪽 이미지 슬라이드 완전 제거 */
   .island-hero__swiper-area {
-    justify-self: end;
-    width: 100%;
-    max-width: var(--island-hero-swiper-width);
-    min-width: 0;
+    display: none !important;
   }
 
-  .island-hero__slider {
-    width: 100%;
-    max-width: 100%;
-    height: auto;
-    aspect-ratio: 896 / 558;
-    border-radius: var(--island-hero-swiper-radius);
+  .island-hero__nav,
+  .island-hero__pagination {
+    display: none !important;
   }
-}
 
-/* Tablet — Info Card (768–1279) */
-@media (max-width: 79.9375rem) and (min-width: 48rem) {
+  .island-hero__info {
+    grid-column: 1;
+    grid-row: 2;
+  }
+
   .island-hero__info-panel {
-    min-height: 10rem;
-    padding: 1.75rem 2rem;
+    min-height: 0;
+    padding: 1.5rem 1.75rem;
   }
 
   .island-hero__info-list {
+    position: relative;
     display: grid;
     grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: 1.25rem;
+    grid-template-rows: repeat(2, auto);
+    gap: 0;
+    align-items: stretch;
+  }
+
+  .island-hero__info-list::before,
+  .island-hero__info-list::after {
+    content: "";
+    position: absolute;
+    z-index: 1;
+    background-color: #e5e5e5;
+    pointer-events: none;
+  }
+
+  .island-hero__info-list::before {
+    top: 0.75rem;
+    bottom: 0.75rem;
+    left: 50%;
+    width: 1px;
+    transform: translateX(-50%);
+  }
+
+  .island-hero__info-list::after {
+    left: 0.75rem;
+    right: 0.75rem;
+    top: 50%;
+    height: 1px;
+    transform: translateY(-50%);
   }
 
   .island-hero__info-item {
     flex: none;
-    gap: 1.25rem;
+    gap: 1rem;
+    padding: 1rem 0.75rem;
   }
 
   .island-hero__info-icon {
-    width: 5.625rem;
-    height: 5.625rem;
+    width: 4.5rem;
+    height: 4.5rem;
   }
 
   .island-hero__info-title {
@@ -390,7 +400,7 @@
 }
 
 /* --------------------------------------------------------------------------
-   Mobile (≤767) — Desktop/Tablet 덮어쓰기
+   Mobile (≤767) — 슬라이드 제거, 배경 자동 전환 + 텍스트 + 정보 박스 2×2
    -------------------------------------------------------------------------- */
 
 @media (max-width: 47.9375rem) {
@@ -415,44 +425,101 @@
   }
 
   .island-hero__title {
-    font-size: 2rem;
+    font-size: clamp(1.875rem, calc(1.875rem + (100vw - 24.375rem) * 0.375 / 23.625), 2.25rem);
     line-height: 1.15;
   }
 
   .island-hero__desc {
-    font-size: 1rem;
+    font-size: clamp(0.9375rem, calc(0.9375rem + (100vw - 24.375rem) * 0.125 / 23.625), 1.0625rem);
   }
 
   .island-hero__swiper-area {
-    grid-column: 1;
-    grid-row: 2;
-    justify-self: stretch;
-    width: 100%;
-    max-width: none;
-    min-width: 0;
+    display: none !important;
   }
 
-  .island-hero__slider {
-    width: 100%;
-    max-width: none;
-    height: auto;
-    aspect-ratio: 896 / 558;
-    border-radius: 1.5rem;
-  }
-
-  .island-hero__nav--prev {
-    left: 1rem;
-  }
-
-  .island-hero__nav--next {
-    right: 1rem;
-  }
-
+  .island-hero__nav,
   .island-hero__pagination {
-    bottom: 1rem;
+    display: none !important;
   }
 
   .island-hero__info {
+    display: block;
+    grid-column: 1;
+    grid-row: 2;
+  }
+
+  .island-hero__info-panel {
+    min-height: 0;
+    padding: clamp(0.75rem, 3.5vw, 1rem) clamp(0.625rem, 3vw, 0.875rem);
+  }
+
+  .island-hero__info-list {
+    position: relative;
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    grid-template-rows: repeat(2, auto);
+    gap: 0;
+    align-items: stretch;
+  }
+
+  .island-hero__info-list::before,
+  .island-hero__info-list::after {
+    content: "";
+    position: absolute;
+    z-index: 1;
+    background-color: #e5e5e5;
+    pointer-events: none;
+  }
+
+  .island-hero__info-list::before {
+    top: clamp(0.625rem, 3vw, 1rem);
+    bottom: clamp(0.625rem, 3vw, 1rem);
+    left: 50%;
+    width: 1px;
+    transform: translateX(-50%);
+  }
+
+  .island-hero__info-list::after {
+    left: clamp(0.625rem, 3vw, 1rem);
+    right: clamp(0.625rem, 3vw, 1rem);
+    top: 50%;
+    height: 1px;
+    transform: translateY(-50%);
+  }
+
+  .island-hero__info-divider {
     display: none;
+  }
+
+  .island-hero__info-item {
+    flex: none;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: clamp(0.375rem, 2vw, 0.5rem);
+    padding: clamp(0.625rem, 3vw, 0.875rem) clamp(0.375rem, 2vw, 0.625rem);
+    min-height: clamp(4.75rem, 22vw, 5.75rem);
+  }
+
+  .island-hero__info-text {
+    flex: none;
+    align-items: center;
+    text-align: center;
+  }
+
+  .island-hero__info-icon {
+    width: clamp(2rem, 9vw, 2.75rem);
+    height: clamp(2rem, 9vw, 2.75rem);
+  }
+
+  .island-hero__info-title {
+    font-size: clamp(0.875rem, 4.5vw, 1.125rem); /* min 14px */
+    line-height: 1.25;
+  }
+
+  .island-hero__info-desc {
+    margin-top: clamp(0.125rem, 1vw, 0.25rem);
+    font-size: clamp(0.875rem, 3.2vw, 0.9375rem); /* min 14px */
+    line-height: 1.4;
   }
 }

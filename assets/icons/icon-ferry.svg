@@ -1,0 +1,39 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="80" height="80" viewBox="0 0 80 80" fill="none" aria-hidden="true">
+  <!-- Hull -->
+  <path
+    d="M16 46h48l-4.5 10.5A6 6 0 0 1 54 60H26a6 6 0 0 1-5.5-3.5L16 46Z"
+    stroke="#00315B"
+    stroke-width="2"
+    stroke-linejoin="round"
+  />
+  <!-- Deck line -->
+  <path d="M18 46h44" stroke="#00315B" stroke-width="2" stroke-linecap="round" />
+  <!-- Cabin -->
+  <path
+    d="M28 46V34.5A2.5 2.5 0 0 1 30.5 32h15A2.5 2.5 0 0 1 48 34.5V46"
+    stroke="#00315B"
+    stroke-width="2"
+    stroke-linejoin="round"
+  />
+  <!-- Cabin windows (accent) -->
+  <path d="M33 38h4M39 38h4" stroke="#80C6FF" stroke-width="2" stroke-linecap="round" />
+  <!-- Mast / funnel -->
+  <path d="M40 32V22" stroke="#00315B" stroke-width="2" stroke-linecap="round" />
+  <path d="M36 22h8" stroke="#80C6FF" stroke-width="2" stroke-linecap="round" />
+  <!-- Motion waves (accent) -->
+  <path
+    d="M20 68c3.5-3 7.5-3 11 0s7.5 3 11 0 7.5-3 11 0 7.5 3 11 0"
+    stroke="#80C6FF"
+    stroke-width="2"
+    stroke-linecap="round"
+    stroke-linejoin="round"
+  />
+  <!-- Direction arrow (accent) -->
+  <path
+    d="M54 28h10m0 0-3.5-3.5M64 28l-3.5 3.5"
+    stroke="#80C6FF"
+    stroke-width="2"
+    stroke-linecap="round"
+    stroke-linejoin="round"
+  />
+</svg>

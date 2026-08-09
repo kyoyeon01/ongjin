@@ -77,7 +77,11 @@
               aria-expanded="false"
             >
               <span>옹진 섬 소개</span>
-              <span class="header__mobile-nav-toggle" aria-hidden="true">⌄</span>
+              <span class="header__mobile-nav-toggle" aria-hidden="true">
+                <svg class="header__mobile-nav-chevron" viewBox="0 0 16 16" width="16" height="16" focusable="false">
+                  <path d="M4.5 6.25 8 9.75l3.5-3.5" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+              </span>
             </button>
             <ul class="header__mobile-subnav">
               <li><a href="island/baengnyeong.html" class="header__mobile-subnav-link">백령면</a></li>
@@ -96,7 +100,11 @@
               aria-expanded="false"
             >
               <span>여행 기간별 추천</span>
-              <span class="header__mobile-nav-toggle" aria-hidden="true">⌄</span>
+              <span class="header__mobile-nav-toggle" aria-hidden="true">
+                <svg class="header__mobile-nav-chevron" viewBox="0 0 16 16" width="16" height="16" focusable="false">
+                  <path d="M4.5 6.25 8 9.75l3.5-3.5" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+              </span>
             </button>
             <ul class="header__mobile-subnav">
               <li><a href="day-trip.html" class="header__mobile-subnav-link">당일치기 코스</a></li>
@@ -175,11 +183,12 @@
 
           <div class="festival-page__viewport">
           <ul class="festival-page__grid">
-            <li class="festival-page__item" data-status="upcoming">
+            <li class="festival-page__item" data-start="2026-07-01" data-end="2026-08-31" data-status="">
               <article class="festival-event">
                 <div class="festival-event__media">
+                  <span class="festival-event__status" aria-hidden="true"></span>
                   <img
-                    src="assets/images/festival/festival-deokjeok.png"
+                    src="assets/images/festival/festival-deokjeok.webp"
                     alt=""
                     class="festival-event__img"
                     width="640"
@@ -198,9 +207,10 @@
               </article>
             </li>
 
-            <li class="festival-page__item" data-status="ended">
+            <li class="festival-page__item" data-start="2025-06-20" data-end="2025-06-20" data-status="">
               <article class="festival-event">
                 <div class="festival-event__media">
+                  <span class="festival-event__status" aria-hidden="true"></span>
                   <img
                     src="assets/images/course/day-trip-yeongheungdo.webp"
                     alt=""
@@ -221,11 +231,12 @@
               </article>
             </li>
 
-            <li class="festival-page__item" data-status="upcoming">
+            <li class="festival-page__item" data-start="2026-04-18" data-end="2026-04-18" data-status="">
               <article class="festival-event">
                 <div class="festival-event__media">
+                  <span class="festival-event__status" aria-hidden="true"></span>
                   <img
-                    src="assets/images/festival/festival-jangbong.png"
+                    src="assets/images/festival/festival-jangbong.webp"
                     alt=""
                     class="festival-event__img"
                     width="640"
@@ -244,11 +255,12 @@
               </article>
             </li>
 
-            <li class="festival-page__item" data-status="ongoing">
+            <li class="festival-page__item" data-start="2025-09-28" data-end="2026-09-29" data-status="">
               <article class="festival-event">
                 <div class="festival-event__media">
+                  <span class="festival-event__status" aria-hidden="true"></span>
                   <img
-                    src="assets/images/theme/theme-activity.webp"
+                    src="assets/images/island/photo-deokjeok-04.webp"
                     alt=""
                     class="festival-event__img"
                     width="640"
@@ -267,11 +279,12 @@
               </article>
             </li>
 
-            <li class="festival-page__item" data-status="upcoming">
+            <li class="festival-page__item" data-start="2026-08-15" data-end="2026-08-16" data-status="">
               <article class="festival-event">
                 <div class="festival-event__media">
+                  <span class="festival-event__status" aria-hidden="true"></span>
                   <img
-                    src="assets/images/festival/festival-baengnyeon.png"
+                    src="assets/images/festival/festival-baengnyeong.webp"
                     alt=""
                     class="festival-event__img"
                     width="640"
@@ -290,9 +303,10 @@
               </article>
             </li>
 
-            <li class="festival-page__item" data-status="upcoming">
+            <li class="festival-page__item" data-start="2026-09-12" data-end="2026-09-13" data-status="">
               <article class="festival-event">
                 <div class="festival-event__media">
+                  <span class="festival-event__status" aria-hidden="true"></span>
                   <img
                     src="assets/images/course/day-trip-jangbongdo.webp"
                     alt=""
@@ -313,9 +327,10 @@
               </article>
             </li>
 
-            <li class="festival-page__item" data-status="ongoing">
+            <li class="festival-page__item" data-start="2026-07-01" data-end="2026-07-31" data-status="">
               <article class="festival-event">
                 <div class="festival-event__media">
+                  <span class="festival-event__status" aria-hidden="true"></span>
                   <img
                     src="assets/images/course/day-trip-jawoldo.webp"
                     alt=""
@@ -336,9 +351,10 @@
               </article>
             </li>
 
-            <li class="festival-page__item" data-status="upcoming">
+            <li class="festival-page__item" data-start="2026-08-22" data-end="2026-08-22" data-status="">
               <article class="festival-event">
                 <div class="festival-event__media">
+                  <span class="festival-event__status" aria-hidden="true"></span>
                   <img
                     src="assets/images/course/day-trip-seungbongdo.webp"
                     alt=""
@@ -359,9 +375,10 @@
               </article>
             </li>
 
-            <li class="festival-page__item" data-status="ended">
+            <li class="festival-page__item" data-start="2025-10-11" data-end="2025-10-12" data-status="">
               <article class="festival-event">
                 <div class="festival-event__media">
+                  <span class="festival-event__status" aria-hidden="true"></span>
                   <img
                     src="assets/images/course/overnight-deokjeokdo.webp"
                     alt=""
@@ -382,9 +399,10 @@
               </article>
             </li>
 
-            <li class="festival-page__item" data-status="upcoming">
+            <li class="festival-page__item" data-start="2026-10-03" data-end="2026-10-03" data-status="">
               <article class="festival-event">
                 <div class="festival-event__media">
+                  <span class="festival-event__status" aria-hidden="true"></span>
                   <img
                     src="assets/images/theme/theme-photo.webp"
                     alt=""
@@ -405,9 +423,10 @@
               </article>
             </li>
 
-            <li class="festival-page__item" data-status="ongoing">
+            <li class="festival-page__item" data-start="2026-06-01" data-end="2026-08-31" data-status="">
               <article class="festival-event">
                 <div class="festival-event__media">
+                  <span class="festival-event__status" aria-hidden="true"></span>
                   <img
                     src="assets/images/course/overnight-daecheongdo.webp"
                     alt=""
@@ -428,9 +447,10 @@
               </article>
             </li>
 
-            <li class="festival-page__item" data-status="ended">
+            <li class="festival-page__item" data-start="2025-05-17" data-end="2025-05-17" data-status="">
               <article class="festival-event">
                 <div class="festival-event__media">
+                  <span class="festival-event__status" aria-hidden="true"></span>
                   <img
                     src="assets/images/course/overnight-yeonpyeongdo.webp"
                     alt=""
@@ -451,9 +471,10 @@
               </article>
             </li>
 
-            <li class="festival-page__item" data-status="upcoming">
+            <li class="festival-page__item" data-start="2026-08-08" data-end="2026-08-09" data-status="">
               <article class="festival-event">
                 <div class="festival-event__media">
+                  <span class="festival-event__status" aria-hidden="true"></span>
                   <img
                     src="assets/images/theme/theme-sea.webp"
                     alt=""
@@ -474,9 +495,10 @@
               </article>
             </li>
 
-            <li class="festival-page__item" data-status="ended">
+            <li class="festival-page__item" data-start="2025-04-26" data-end="2025-04-26" data-status="">
               <article class="festival-event">
                 <div class="festival-event__media">
+                  <span class="festival-event__status" aria-hidden="true"></span>
                   <img
                     src="assets/images/course/overnight-daeijakdo.webp"
                     alt=""
@@ -497,9 +519,10 @@
               </article>
             </li>
 
-            <li class="festival-page__item" data-status="upcoming">
+            <li class="festival-page__item" data-start="2026-09-05" data-end="2026-09-05" data-status="">
               <article class="festival-event">
                 <div class="festival-event__media">
+                  <span class="festival-event__status" aria-hidden="true"></span>
                   <img
                     src="assets/images/course/day-trip-sinsimodo.webp"
                     alt=""
@@ -520,9 +543,10 @@
               </article>
             </li>
 
-            <li class="festival-page__item" data-status="ended">
+            <li class="festival-page__item" data-start="2025-05-31" data-end="2025-05-31" data-status="">
               <article class="festival-event">
                 <div class="festival-event__media">
+                  <span class="festival-event__status" aria-hidden="true"></span>
                   <img
                     src="assets/images/theme/theme-nature.webp"
                     alt=""

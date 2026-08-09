@@ -47,6 +47,10 @@
   overflow: visible;
 }
 
+.course-stack__slider.swiper {
+  overflow: visible;
+}
+
 .course-stack__stage {
   position: relative;
   display: block;
@@ -227,16 +231,20 @@
 }
 
 /* --------------------------------------------------------------------------
-   Tablet (768–1024) — Desktop 스택 비율 축소
+   Tablet (768–1279) — 타이틀 한 단계 축소 (PC 크기까지 올리지 않음)
    -------------------------------------------------------------------------- */
 
-@media (max-width: 64rem) and (min-width: 48rem) {
+@media (max-width: 79.9375rem) and (min-width: 48rem) {
   .course-stack {
     --course-stack-card-w: clamp(14.5rem, 34vw, 22.0625rem);
     --course-stack-card-h: calc(var(--course-stack-card-w) * 604 / 431);
     --course-stack-gap: clamp(4rem, 7vw, 7.25rem);
-    --course-stack-title-size: clamp(2.25rem, 4vw, 3.5rem);
-    --course-stack-text-size: clamp(0.9375rem, 1.8vw, 1.25rem);
+    --course-stack-title-size: clamp(
+      2.5rem,
+      calc(2.5rem + (100vw - 48rem) * 0.25 / 32),
+      2.75rem
+    );
+    --course-stack-text-size: clamp(0.9375rem, 1.8vw, 1.125rem);
     padding-block: 4rem 3.5rem;
   }
 
@@ -251,41 +259,78 @@
 
 @media (max-width: 47.9375rem) {
   .course-stack {
-    --course-stack-title-size: clamp(1.75rem, 8vw, 2.25rem);
-    --course-stack-text-size: clamp(0.8125rem, 3.5vw, 1rem);
-    --course-stack-nav-size: 2.25rem;
+    --course-stack-title-size: clamp(
+      1.875rem,
+      calc(1.875rem + (100vw - 24.375rem) * 0.375 / 23.625),
+      2.25rem
+    );
+    --course-stack-text-size: max(0.875rem, clamp(0.875rem, 3.5vw, 1rem));
+    --course-stack-nav-size: 2.5rem;
+    --course-stack-card-min: 16rem;
     padding-block: 3rem 2.5rem;
   }
 
   .course-stack__viewport {
-    display: grid;
-    grid-template-columns: auto minmax(0, 1fr) auto;
-    align-items: center;
-    gap: 0.5rem;
+    display: block;
     margin-top: 1.5rem;
   }
 
-  .course-stack__nav--prev {
+  .course-stack__slider {
+    width: 100%;
+    min-width: 0;
+    overflow: hidden;
+  }
+
+  .course-stack__stage {
+    display: flex;
+    height: auto;
+  }
+
+  .course-stack__slider .swiper-slide {
     position: relative;
     top: auto;
     left: auto;
-    grid-column: 1;
-    grid-row: 1;
-    transform: none;
-    width: var(--course-stack-nav-size);
-    height: var(--course-stack-nav-size);
-    border-radius: var(--radius-full);
-    border: 0.0625rem solid var(--color-border-default);
-    background-color: #ffffff;
-    color: var(--color-primary-800);
+    width: var(--course-stack-card-min);
+    height: auto;
+    transform: none !important;
+    opacity: 1 !important;
+    visibility: visible !important;
+    pointer-events: auto !important;
+    transition: none;
   }
 
+  .course-stack__slider .swiper-slide.is-hidden {
+    opacity: 1;
+    visibility: visible;
+    pointer-events: auto;
+  }
+
+  .course-stack-card {
+    aspect-ratio: 431 / 604;
+    width: 100%;
+    min-width: var(--course-stack-card-min);
+    height: auto;
+  }
+
+  .course-stack-card__text {
+    padding: 0.875rem 0.875rem 1rem;
+    font-size: max(0.875rem, var(--course-stack-text-size));
+  }
+
+  .course-stack__controls {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
+    margin-top: 1.5rem;
+  }
+
+  .course-stack__nav--prev,
   .course-stack__nav--next {
     position: relative;
     top: auto;
+    left: auto;
     right: auto;
-    grid-column: 3;
-    grid-row: 1;
     transform: none;
     width: var(--course-stack-nav-size);
     height: var(--course-stack-nav-size);
@@ -303,48 +348,14 @@
     box-shadow: none;
   }
 
-  .course-stack__slider {
-    grid-column: 2;
-    grid-row: 1;
-    min-width: 0;
-    overflow: hidden;
-  }
-
-  .course-stack__stage {
-    display: flex;
-    height: auto;
-  }
-
-  .course-stack__slider .swiper-slide {
-    position: relative;
-    top: auto;
-    left: auto;
-    width: auto;
-    height: auto;
-    transform: none !important;
-    opacity: 1 !important;
-    visibility: visible !important;
-    pointer-events: auto !important;
-    transition: none;
-  }
-
-  .course-stack__slider .swiper-slide.is-hidden {
-    opacity: 1;
-    visibility: visible;
-    pointer-events: auto;
-  }
-
-  .course-stack-card {
-    aspect-ratio: 431 / 604;
-    height: auto;
-  }
-
-  .course-stack-card__text {
-    padding: 0.875rem 0.875rem 1rem;
+  .course-stack__nav.swiper-button-disabled,
+  .course-stack__nav:disabled {
+    opacity: 0.35;
+    cursor: default;
   }
 
   .course-stack__pagination {
-    margin-top: 1.5rem;
+    margin-top: 0;
   }
 
   .course-stack__pagination .swiper-pagination-bullet,

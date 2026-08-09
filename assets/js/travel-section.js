@@ -187,17 +187,18 @@
     return {
       speed: 500,
       grabCursor: true,
-      slidesPerView: 2,
+      slidesPerView: "auto",
       slidesPerGroup: 2,
-      spaceBetween: 15,
+      spaceBetween: 16,
+      watchOverflow: true,
       pagination: {
         el: ".travel__pagination",
         clickable: true,
       },
       breakpoints: {
         768: {
-          slidesPerView: 3,
-          slidesPerGroup: 3,
+          slidesPerView: "auto",
+          slidesPerGroup: 2,
           spaceBetween: 24,
         },
         1200: {

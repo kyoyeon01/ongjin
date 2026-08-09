@@ -1,5 +1,7 @@
 /**
  * Theme Section — Swiper slider
+ * Mobile/Tablet: auto + min-width Peek (2장 페이지)
+ * Desktop: 기존 다열 레이아웃 유지
  */
 (function () {
   "use strict";
@@ -17,9 +19,9 @@
   var themeSwiper = new Swiper(sliderEl, {
     speed: 500,
     grabCursor: true,
-    slidesPerView: 2,
+    slidesPerView: "auto",
     slidesPerGroup: 2,
-    spaceBetween: 15,
+    spaceBetween: 16,
     watchOverflow: true,
     pagination: {
       el: ".theme__pagination",
@@ -28,11 +30,12 @@
     navigation: {
       prevEl: ".theme__nav-btn--prev",
       nextEl: ".theme__nav-btn--next",
+      disabledClass: "swiper-button-disabled",
     },
     breakpoints: {
       768: {
-        slidesPerView: 3,
-        slidesPerGroup: 3,
+        slidesPerView: "auto",
+        slidesPerGroup: 2,
         spaceBetween: 24,
       },
       1200: {

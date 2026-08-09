@@ -98,8 +98,17 @@
     --course-hero-height: clamp(40rem, calc(40rem + (100vw - 48rem) * 13.75 / 32), 53.75rem);
     --course-hero-text-top: clamp(12rem, calc(12rem + (100vw - 48rem) * 6.75 / 32), 18.75rem);
     --course-hero-character-top: clamp(24rem, calc(24rem + (100vw - 48rem) * 10.375 / 32), 34.375rem);
-    --course-hero-title-size: clamp(2.5rem, calc(2.5rem + (100vw - 48rem) * 1.5625 / 32), 4.0625rem);
-    --course-hero-desc-size: clamp(1rem, calc(1rem + (100vw - 48rem) * 0.25 / 32), 1.25rem);
+    /* Tablet 40~48px — PC(65px)까지 올리지 않음 */
+    --course-hero-title-size: clamp(
+      2.5rem,
+      calc(2.5rem + (100vw - 48rem) * 0.5 / 32),
+      3rem
+    );
+    --course-hero-desc-size: clamp(
+      1rem,
+      calc(1rem + (100vw - 48rem) * 0.125 / 32),
+      1.125rem
+    );
   }
 
   .course-hero__character {
@@ -115,8 +124,17 @@
   .course-hero {
     --course-hero-height: auto;
     --course-hero-text-top: clamp(7.5rem, calc(7.5rem + (100vw - 24.375rem) * 2.5 / 23.625), 10rem);
-    --course-hero-title-size: clamp(1.75rem, calc(1.75rem + (100vw - 24.375rem) * 0.75 / 23.625), 2.5rem);
-    --course-hero-desc-size: clamp(0.9375rem, calc(0.9375rem + (100vw - 24.375rem) * 0.1875 / 23.625), 1.125rem);
+    /* Mobile 30~36px */
+    --course-hero-title-size: clamp(
+      1.875rem,
+      calc(1.875rem + (100vw - 24.375rem) * 0.375 / 23.625),
+      2.25rem
+    );
+    --course-hero-desc-size: clamp(
+      0.9375rem,
+      calc(0.9375rem + (100vw - 24.375rem) * 0.125 / 23.625),
+      1.0625rem
+    );
   }
 
   .course-hero__inner {

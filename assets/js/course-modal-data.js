@@ -35,9 +35,9 @@ window.COURSE_MODAL_DATA = {
       map: "#",
       images: [
         "assets/images/course/day-trip-seonjaedo.webp",
-        "assets/images/theme/theme-nature.webp",
-        "assets/images/theme/theme-activity.webp",
-        "assets/images/course/day-trip-seonjaedo.webp",
+        "assets/images/island/photo-yeongheung-04.webp",
+        "assets/images/island/photo-yeongheung-01.webp",
+        "assets/images/yeongheungdo-bridge-02.webp",
       ],
     },
     {

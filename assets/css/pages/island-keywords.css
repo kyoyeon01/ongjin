@@ -154,11 +154,11 @@
   }
 
   .island-keywords__title {
-    font-size: 2.625rem;
+    font-size: clamp(2.25rem, calc(2.25rem + (100vw - 48rem) * 0.25 / 32), 2.5rem);
   }
 
   .island-keywords__desc {
-    font-size: 1.125rem;
+    font-size: clamp(1rem, calc(1rem + (100vw - 48rem) * 0.125 / 32), 1.125rem);
   }
 
   .island-keywords__grid {
@@ -204,7 +204,7 @@
   }
 
   .island-keywords__title {
-    font-size: 2rem;
+    font-size: clamp(1.875rem, calc(1.875rem + (100vw - 24.375rem) * 0.25 / 23.625), 2.125rem);
   }
 
   .island-keywords__desc {

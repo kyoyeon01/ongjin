@@ -78,7 +78,7 @@ window.TRANSPORT_ROUTES = [
       },
       {
         name: "대청도 선진포항",
-        image: "assets/images/course/overnight-daecheongdo.webp",
+        image: "assets/images/island/photo-daecheong-01.webp",
         address: "인천광역시 옹진군 대청면 대청로 1",
         phone: "032-836-2001",
         parking: "선진포항 인근 주차장 이용",
@@ -118,7 +118,7 @@ window.TRANSPORT_ROUTES = [
       },
       {
         name: "연평항 여객선터미널",
-        image: "assets/images/course/overnight-yeonpyeongdo.webp",
+        image: "assets/images/island/photo-yeonpyeong-01.webp",
         address: "인천광역시 옹진군 연평면 연평로 120",
         phone: "032-831-2701",
         parking: "연평항 공영주차장 이용",
@@ -160,7 +160,7 @@ window.TRANSPORT_ROUTES = [
       },
       {
         name: "덕적도 진리항",
-        image: "assets/images/course/overnight-deokjeokdo.webp",
+        image: "assets/images/transport/terminal-deokjeok.webp",
         address: "인천광역시 옹진군 덕적면 진리항로 25",
         phone: "032-832-3501",
         parking: "진리항 인근 공영주차장 이용",
@@ -202,7 +202,7 @@ window.TRANSPORT_ROUTES = [
       },
       {
         name: "자월도 선착장",
-        image: "assets/images/course/day-trip-jawoldo.webp",
+        image: "assets/images/island/photo-jawol-03.webp",
         address: "인천광역시 옹진군 자월면 자월로 78",
         phone: "032-832-3801",
         parking: "선착장 인근 소규모 주차장 이용",
@@ -321,14 +321,14 @@ window.TRANSPORT_ROUTES = [
     terminals: [
       {
         name: "영흥대교",
-        image: "assets/images/course/day-trip-yeongheungdo.webp",
+        image: "assets/images/island/photo-yeongheung-03.webp",
         address: "인천광역시 옹진군 영흥면 영흥대로 일원",
         phone: "032-899-2114",
         parking: "교량 인근 공용주차장·휴게공간 이용",
       },
       {
         name: "선재대교",
-        image: "assets/images/course/day-trip-seonjaedo.webp",
+        image: "assets/images/island/photo-yeongheung-02.webp",
         address: "인천광역시 옹진군 북도면 선재로 일원",
         phone: "032-899-2114",
         parking: "선재도·대부도 방면 공용주차장 이용",

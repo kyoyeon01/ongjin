@@ -26,6 +26,7 @@
     this.root = root;
     this.sliderEl = root.querySelector(".course-stack__slider");
     this.stage = root.querySelector(".course-stack__stage");
+    this.viewport = root.querySelector(".course-stack__viewport");
     this.slides = Array.prototype.slice.call(
       root.querySelectorAll(".swiper-slide")
     );
@@ -35,6 +36,7 @@
     this.prevBtn = root.querySelector(".course-stack__nav--prev");
     this.nextBtn = root.querySelector(".course-stack__nav--next");
     this.pagination = root.querySelector(".course-stack__pagination");
+    this._controlsWrap = null;
     this.activeIndex = 0;
     this.count = this.slides.length || this.cards.length;
     this.dots = [];
@@ -132,9 +134,16 @@
       this.initSwiper();
     } else {
       this.destroySwiper();
+      this.restoreDesktopControls();
       this.buildStackPagination();
       this.bindStackDrag();
       this.updateStack();
+
+      // 레이아웃 확정 후 한 번 더 배치해 첫 페인트부터 스택이 보이게 함
+      var self = this;
+      window.requestAnimationFrame(function () {
+        self.updateStack();
+      });
     }
   };
 
@@ -170,10 +179,12 @@
       return;
     }
 
+    this.ensureMobileControls();
+
     this.swiper = new Swiper(this.sliderEl, {
-      slidesPerView: 2,
+      slidesPerView: "auto",
       slidesPerGroup: 2,
-      spaceBetween: 12,
+      spaceBetween: 16,
       speed: 450,
       watchOverflow: true,
       grabCursor: true,
@@ -190,6 +201,35 @@
         bulletActiveClass: "is-active",
       },
     });
+  };
+
+  CourseStack.prototype.ensureMobileControls = function () {
+    if (this._controlsWrap || !this.prevBtn || !this.nextBtn || !this.pagination) {
+      return;
+    }
+
+    var wrap = document.createElement("div");
+    wrap.className = "course-stack__controls";
+    this.pagination.parentNode.insertBefore(wrap, this.pagination);
+    wrap.appendChild(this.prevBtn);
+    wrap.appendChild(this.pagination);
+    wrap.appendChild(this.nextBtn);
+    this._controlsWrap = wrap;
+  };
+
+  CourseStack.prototype.restoreDesktopControls = function () {
+    if (!this._controlsWrap || !this.viewport) {
+      return;
+    }
+
+    this.viewport.appendChild(this.prevBtn);
+    this.viewport.appendChild(this.nextBtn);
+    this._controlsWrap.parentNode.insertBefore(
+      this.pagination,
+      this._controlsWrap
+    );
+    this._controlsWrap.remove();
+    this._controlsWrap = null;
   };
 
   CourseStack.prototype.buildStackPagination = function () {
@@ -228,6 +268,24 @@
     return ((index % n) + n) % n;
   };
 
+  /**
+   * 순환 오프셋: 첫/끝 카드가 중앙이어도 좌우에 스택이 보이도록
+   * 예) 7장, active=0 → offsets: 0,1,2,3,-3,-2,-1
+   */
+  CourseStack.prototype.getCircularOffset = function (index) {
+    var n = this.count;
+    var raw = index - this.activeIndex;
+    var half = Math.floor(n / 2);
+
+    if (raw > half) {
+      raw -= n;
+    } else if (raw < -half) {
+      raw += n;
+    }
+
+    return raw;
+  };
+
   CourseStack.prototype.getGap = function () {
     var styles = window.getComputedStyle(this.root);
     var gap = styles.getPropertyValue("--course-stack-gap").trim();
@@ -247,7 +305,7 @@
     var gap = this.getGap();
 
     this.slides.forEach(function (slide, index) {
-      var offset = index - self.activeIndex;
+      var offset = self.getCircularOffset(index);
       var abs = Math.abs(offset);
       var hidden = abs > MAX_VISIBLE_OFFSET;
       var scale = Math.max(0.64, 1 - abs * 0.12);

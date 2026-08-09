@@ -290,7 +290,8 @@
   position: relative;
   z-index: 1;
   background-color: #f3f8fc;
-  overflow: visible;
+  overflow-x: clip;
+  overflow-y: visible;
 }
 
 .about__inner {
@@ -302,6 +303,7 @@
   display: flex;
   flex-direction: column;
   gap: var(--fluid-content-gap-lg);
+  min-width: 0;
 }
 
 .about__text {
@@ -343,6 +345,8 @@
 
 .about__map {
   width: 100%;
+  max-width: 100%;
+  min-width: 0;
 }
 
 .about__map-img {
@@ -362,6 +366,23 @@
   object-fit: contain;
 }
 
+/* Tablet / Mobile — keep map near PC size; scroll inside map area only */
+@media (max-width: 74.9375rem) {
+  .about__map {
+    overflow-x: auto;
+    overflow-y: hidden;
+    -webkit-overflow-scrolling: touch;
+    overscroll-behavior-x: contain;
+  }
+
+  .about__map-img {
+    width: 59.5rem; /* Pc-map.svg intrinsic 952px — no forced shrink */
+    max-width: none;
+    min-width: 59.5rem;
+    height: auto;
+  }
+}
+
 @media (min-width: 75rem) {
   .about__content {
     flex-direction: row;
@@ -379,6 +400,14 @@
     max-width: 60%;
     align-self: flex-start;
     margin-top: calc(var(--fluid-subtitle-01-lh) + var(--fluid-ui-gap-sm));
+    overflow: visible;
+  }
+
+  .about__map-img {
+    width: 100%;
+    min-width: 0;
+    max-width: 100%;
+    height: auto;
   }
 
   .about__character {
@@ -471,5 +500,39 @@
   align-items: center;
   justify-content: center;
   margin-top: var(--fluid-ui-gap-xl);
+}
+
+/* Tablet/Mobile — 카드 min-width 유지 + Peek */
+@media (max-width: 74.9375rem) {
+  .islands__slider .swiper-slide {
+    width: 18.75rem;
+  }
+
+  .islands-card {
+    min-width: 18.75rem;
+  }
+
+  .islands-card__title {
+    font-size: max(0.875rem, var(--fluid-subtitle-02-size));
+  }
+
+  .islands-card__desc {
+    font-size: max(0.875rem, var(--fluid-body-02-size));
+    overflow: visible;
+    text-overflow: unset;
+    white-space: normal;
+    -webkit-line-clamp: unset;
+    line-clamp: unset;
+  }
+}
+
+@media (max-width: 47.9375rem) {
+  .islands__slider .swiper-slide {
+    width: 16rem;
+  }
+
+  .islands-card {
+    min-width: 16rem;
+  }
 }
 

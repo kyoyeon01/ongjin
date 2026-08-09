@@ -123,10 +123,31 @@
   width: 100%;
   margin: 0;
   margin-top: var(--theme-title-shift);
-  font-size: var(--theme-title-size);
+  font-size: max(0.875rem, var(--theme-title-size));
   line-height: var(--fluid-theme-title-lh);
   letter-spacing: -0.01em;
   font-weight: var(--font-weight-semibold);
   color: var(--color-neutral-900);
   word-break: keep-all;
+}
+
+/* Tablet/Mobile — 카드 min-width 유지 + Peek */
+@media (max-width: 74.9375rem) {
+  .theme__slider .swiper-slide {
+    width: 18.75rem;
+  }
+
+  .theme-card {
+    min-width: 18.75rem;
+  }
+}
+
+@media (max-width: 47.9375rem) {
+  .theme__slider .swiper-slide {
+    width: 16rem;
+  }
+
+  .theme-card {
+    min-width: 16rem;
+  }
 }

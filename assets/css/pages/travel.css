@@ -223,8 +223,8 @@
 
 @supports (width: 1cqi) {
   .course-card {
-    --course-title-size: clamp(0.8125rem, 7.27cqi, 1.25rem);
-    --course-desc-size: clamp(0.75rem, 5.45cqi, 0.875rem);
+    --course-title-size: clamp(0.875rem, 7.27cqi, 1.25rem);
+    --course-desc-size: clamp(0.875rem, 5.45cqi, 0.875rem);
   }
 }
 
@@ -417,5 +417,51 @@
     display: block;
     right: -0.25rem;
     bottom: 0.5rem;
+  }
+}
+
+/* --------------------------------------------------------------------------
+   Tablet/Mobile — 카드 min-width Peek + 텍스트 가독성
+   -------------------------------------------------------------------------- */
+
+@media (max-width: 74.9375rem) {
+  .travel__slider .swiper-slide {
+    width: 18.75rem;
+  }
+
+  .course-card {
+    min-width: 18.75rem;
+  }
+
+  .course-card__title {
+    overflow: visible;
+    text-overflow: unset;
+    white-space: normal;
+    font-size: max(0.875rem, var(--course-title-size));
+  }
+
+  .course-card__desc {
+    height: auto;
+    min-height: 0;
+    max-height: none;
+    overflow: visible;
+    font-size: max(0.875rem, var(--course-desc-size));
+  }
+
+  .course-card__tag {
+    height: auto;
+    min-height: 1.75rem;
+    padding: 0.3125rem 0.75rem;
+    font-size: 0.875rem;
+  }
+}
+
+@media (max-width: 47.9375rem) {
+  .travel__slider .swiper-slide {
+    width: 16rem;
+  }
+
+  .course-card {
+    min-width: 16rem;
   }
 }
