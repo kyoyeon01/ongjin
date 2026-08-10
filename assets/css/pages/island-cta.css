@@ -7,10 +7,11 @@
 .island-cta {
   --island-cta-btn-width: 21.25rem;
   --island-cta-btn-height: 4.625rem;
+  --island-cta-min-height: 16.5rem;
 
   position: relative;
   width: 100%;
-  min-height: 20.0625rem;
+  min-height: var(--island-cta-min-height);
   overflow: hidden;
   background-color: var(--color-primary-800);
 }
@@ -34,7 +35,7 @@
   z-index: 1;
   display: flex;
   align-items: center;
-  min-height: 20.0625rem;
+  min-height: var(--island-cta-min-height);
 }
 
 .island-cta__layout {
@@ -57,11 +58,8 @@
   flex-shrink: 0;
   width: clamp(4.25rem, 5.5vw, 5.25rem);
   height: clamp(4.25rem, 5.5vw, 5.25rem);
-  padding: clamp(0.625rem, 0.85vw, 0.875rem);
-  box-sizing: border-box;
   object-fit: contain;
-  border-radius: 50%;
-  background-color: rgba(255, 255, 255, 0.95);
+  filter: drop-shadow(0 0.0625rem 0.375rem rgba(0, 0, 0, 0.28));
 }
 
 .island-cta__text {
@@ -123,13 +121,13 @@
 
   .island-cta__container {
     min-height: auto;
-    padding-block: 3rem;
+    padding-block: 2.25rem;
   }
 
   .island-cta__layout {
     flex-direction: column;
     align-items: flex-start;
-    gap: 2rem;
+    gap: 1.5rem;
   }
 
   .island-cta__content {
@@ -167,7 +165,7 @@
   }
 
   .island-cta__container {
-    padding-block: 2.5rem;
+    padding-block: 2rem;
   }
 
   .island-cta__layout {
