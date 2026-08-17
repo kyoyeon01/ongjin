@@ -5,13 +5,8 @@
    ========================================================================== */
 
 .island-cta {
-<<<<<<< HEAD
   --island-cta-btn-height: 2.75rem;
-=======
-  --island-cta-btn-width: 21.25rem;
-  --island-cta-btn-height: 4.625rem;
   --island-cta-min-height: 16.5rem;
->>>>>>> 339e84f95dcd32f713cb35db9ba4758e8504e1b3
 
   position: relative;
   width: 100%;
@@ -146,15 +141,22 @@
   .island-cta__layout {
     flex-direction: column;
     align-items: flex-start;
+    justify-content: flex-start;
     gap: 1.5rem;
   }
 
   .island-cta__content {
+    width: 100%;
     gap: 0;
   }
 
   .island-cta__icon {
     display: none;
+  }
+
+  .island-cta__text {
+    width: 100%;
+    text-align: left;
   }
 
   .island-cta__title {
@@ -166,10 +168,7 @@
   }
 
   .island-cta__btn {
-    align-self: flex-end;
-    min-height: 2.625rem;
-    padding: 0 1.125rem;
-    font-size: 0.9375rem;
+    align-self: flex-start;
   }
 }
 
@@ -178,10 +177,6 @@
    -------------------------------------------------------------------------- */
 
 @media (max-width: 47.9375rem) {
-  .island-cta {
-    --island-cta-btn-height: 2.5rem;
-  }
-
   .island-cta__container {
     padding-block: 2rem;
   }
@@ -200,19 +195,5 @@
 
   .island-cta__desc {
     font-size: 1rem;
-  }
-
-  .island-cta__btn {
-    align-self: flex-start;
-    min-height: 2.5rem;
-    padding: 0 1rem;
-    font-size: 0.875rem;
-  }
-
-  .island-cta__btn::after {
-    width: 0.375rem;
-    height: 0.375rem;
-    border-inline-end-width: 1.4px;
-    border-block-end-width: 1.4px;
   }
 }

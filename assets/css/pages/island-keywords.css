@@ -162,14 +162,20 @@
   }
 
   .island-keywords__grid {
-    grid-template-columns: minmax(0, 1fr);
+    grid-template-columns: repeat(2, minmax(0, 1fr));
     gap: 1.5rem;
     margin-top: 3rem;
   }
 
+  .island-keywords-card:last-child {
+    grid-column: 1 / -1;
+    width: calc((100% - 1.5rem) / 2);
+    justify-self: center;
+  }
+
   .island-keywords-card__inner {
-    max-width: 34rem;
     width: 100%;
+    max-width: none;
     height: auto;
     aspect-ratio: 544 / 456;
     padding: 1.75rem;
@@ -217,8 +223,15 @@
     margin-top: 2rem;
   }
 
+  .island-keywords-card:last-child {
+    grid-column: auto;
+    width: 100%;
+    justify-self: stretch;
+  }
+
   .island-keywords-card__inner {
-    max-width: 34rem;
+    width: 100%;
+    max-width: none;
     height: auto;
     aspect-ratio: 544 / 456;
     padding: 2rem 1.5rem;

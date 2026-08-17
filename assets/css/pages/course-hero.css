@@ -7,7 +7,7 @@
   --course-hero-height: 53.75rem;
   --course-hero-text-top: 18.75rem;
   --course-hero-character-top: 34.375rem;
-  --course-hero-title-size: 4.0625rem;
+  --course-hero-title-size: 3.5rem;
   --course-hero-desc-size: 1.25rem;
   --course-hero-text-gap: 0.375rem;
 
@@ -53,6 +53,7 @@
 .course-hero__title {
   font-size: var(--course-hero-title-size);
   line-height: 1.154;
+  letter-spacing: 0;
   font-weight: var(--font-weight-bold);
   color: #ffffff;
   text-wrap: balance;
@@ -98,11 +99,11 @@
     --course-hero-height: clamp(40rem, calc(40rem + (100vw - 48rem) * 13.75 / 32), 53.75rem);
     --course-hero-text-top: clamp(12rem, calc(12rem + (100vw - 48rem) * 6.75 / 32), 18.75rem);
     --course-hero-character-top: clamp(24rem, calc(24rem + (100vw - 48rem) * 10.375 / 32), 34.375rem);
-    /* Tablet 40~48px — PC(65px)까지 올리지 않음 */
+    /* Tablet 38~44px — 다른 내부 페이지 히어로와 동일 */
     --course-hero-title-size: clamp(
-      2.5rem,
-      calc(2.5rem + (100vw - 48rem) * 0.5 / 32),
-      3rem
+      2.375rem,
+      calc(2.375rem + (100vw - 48rem) * 0.375 / 32),
+      2.75rem
     );
     --course-hero-desc-size: clamp(
       1rem,

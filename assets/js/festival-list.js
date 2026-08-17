@@ -1,12 +1,13 @@
 /**
- * Festival Page — 필터 + 페이지네이션
- * Desktop: 4개(2×2) / Tablet·Mobile: 2개(min-width Peek)
+ * Festival Page — 필터 + 목록
+ * Desktop (≥1024): 4개(2×2) 페이지네이션
+ * Tablet·Mobile: Swiper 1장 보기
  * 상태 태그: data-start / data-end 기준 자동 판별
  */
 (function () {
   "use strict";
 
-  var DESKTOP_MQ = "(min-width: 75rem)";
+  var DESKTOP_MQ = "(min-width: 64rem)";
   var STATUS_LABELS = {
     ongoing: "진행중",
     upcoming: "예정",
@@ -28,12 +29,13 @@
   var prevBtn = root.querySelector(".festival-page__nav--prev");
   var nextBtn = root.querySelector(".festival-page__nav--next");
   var emptyEl = root.querySelector(".festival-page__empty");
+  var controlsEl = root.querySelector(".festival-page__controls");
 
   var currentFilter = "all";
   var currentPage = 0;
   var animating = false;
-  var touchStartX = 0;
-  var touchStartY = 0;
+  var swiperInstance = null;
+  var desktopMq = window.matchMedia(DESKTOP_MQ);
 
   function parseDate(value) {
     if (!value) {
@@ -109,11 +111,7 @@
   }
 
   function isDesktop() {
-    return window.matchMedia(DESKTOP_MQ).matches;
-  }
-
-  function perPage() {
-    return isDesktop() ? 4 : 2;
+    return desktopMq.matches;
   }
 
   function matches(item, status) {
@@ -130,7 +128,7 @@
   }
 
   function pageCount(list) {
-    return Math.max(1, Math.ceil(list.length / perPage()));
+    return Math.max(1, Math.ceil(list.length / 4));
   }
 
   function setActiveFilter(status) {
@@ -141,33 +139,95 @@
     });
   }
 
-  function equalizeHeights(visibleItems) {
-    visibleItems.forEach(function (item) {
-      var card = item.querySelector(".festival-event");
-      if (card) {
-        card.style.minHeight = "";
-      }
-    });
+  function setControlsVisible(visible) {
+    if (controlsEl) {
+      controlsEl.hidden = !visible;
+    }
+  }
 
-    if (!isDesktop() || visibleItems.length === 0) {
+  function clearItemState() {
+    items.forEach(function (item) {
+      item.classList.remove("is-visible", "is-animating-out", "swiper-slide");
+      item.style.animationDelay = "";
+      item.style.width = "";
+      item.style.marginRight = "";
+      item.style.minHeight = "";
+    });
+  }
+
+  function destroySwiper() {
+    if (swiperInstance) {
+      swiperInstance.destroy(true, true);
+      swiperInstance = null;
+    }
+
+    if (viewport) {
+      viewport.classList.remove("swiper");
+    }
+    if (grid) {
+      grid.classList.remove("swiper-wrapper");
+    }
+
+    items.forEach(function (item) {
+      item.classList.remove("swiper-slide");
+      item.style.width = "";
+      item.style.marginRight = "";
+    });
+  }
+
+  function createSwiper(initialIndex) {
+    if (!viewport || !grid || typeof Swiper === "undefined") {
       return;
     }
 
-    var max = 0;
-    visibleItems.forEach(function (item) {
-      var card = item.querySelector(".festival-event");
-      if (card) {
-        max = Math.max(max, card.offsetHeight);
+    viewport.classList.add("swiper");
+    grid.classList.add("swiper-wrapper");
+
+    items.forEach(function (item) {
+      if (item.classList.contains("is-visible")) {
+        item.classList.add("swiper-slide");
+      } else {
+        item.classList.remove("swiper-slide");
       }
     });
 
-    if (max > 0) {
-      visibleItems.forEach(function (item) {
-        var card = item.querySelector(".festival-event");
-        if (card) {
-          card.style.minHeight = max + "px";
-        }
-      });
+    if (prevBtn) {
+      prevBtn.disabled = false;
+      prevBtn.classList.remove("swiper-button-disabled");
+    }
+    if (nextBtn) {
+      nextBtn.disabled = false;
+      nextBtn.classList.remove("swiper-button-disabled");
+    }
+
+    swiperInstance = new Swiper(viewport, {
+      speed: 450,
+      slidesPerView: 1,
+      spaceBetween: 16,
+      watchOverflow: true,
+      observer: true,
+      observeParents: true,
+      grabCursor: true,
+      navigation: {
+        prevEl: prevBtn,
+        nextEl: nextBtn,
+        disabledClass: "swiper-button-disabled",
+      },
+      pagination: {
+        el: pagination,
+        clickable: true,
+        bulletClass: "festival-page__dot",
+        bulletActiveClass: "is-active",
+      },
+      breakpoints: {
+        768: {
+          spaceBetween: 24,
+        },
+      },
+    });
+
+    if (initialIndex > 0) {
+      swiperInstance.slideTo(initialIndex, 0);
     }
   }
 
@@ -202,30 +262,36 @@
   function updateNav(totalPages) {
     if (prevBtn) {
       prevBtn.disabled = currentPage <= 0;
+      prevBtn.classList.toggle("swiper-button-disabled", currentPage <= 0);
     }
     if (nextBtn) {
       nextBtn.disabled = currentPage >= totalPages - 1;
+      nextBtn.classList.toggle(
+        "swiper-button-disabled",
+        currentPage >= totalPages - 1
+      );
     }
   }
 
-  function showPage(page, animate) {
-    if (animating) {
-      return;
+  function showEmpty() {
+    destroySwiper();
+    clearItemState();
+    currentPage = 0;
+    if (emptyEl) {
+      emptyEl.classList.add("is-visible");
     }
+    setControlsVisible(false);
+    if (pagination) {
+      pagination.hidden = true;
+      pagination.innerHTML = "";
+    }
+  }
 
+  function renderSwiper(keepIndex) {
     var filtered = getFiltered();
-    var total = pageCount(filtered);
 
     if (filtered.length === 0) {
-      currentPage = 0;
-      items.forEach(function (item) {
-        item.classList.remove("is-visible", "is-animating-out");
-      });
-      if (emptyEl) {
-        emptyEl.classList.add("is-visible");
-      }
-      renderPagination(0);
-      updateNav(1);
+      showEmpty();
       return;
     }
 
@@ -233,15 +299,62 @@
       emptyEl.classList.remove("is-visible");
     }
 
+    var slideIndex = 0;
+    if (keepIndex && swiperInstance) {
+      slideIndex = swiperInstance.activeIndex || 0;
+    } else {
+      slideIndex = Math.min(currentPage * 4, filtered.length - 1);
+    }
+    slideIndex = Math.max(0, Math.min(slideIndex, filtered.length - 1));
+
+    destroySwiper();
+    clearItemState();
+
+    filtered.forEach(function (item) {
+      item.classList.add("is-visible");
+    });
+
+    setControlsVisible(true);
+    if (pagination) {
+      pagination.hidden = false;
+    }
+
+    createSwiper(slideIndex);
+    animating = false;
+  }
+
+  function showPage(page, animate) {
+    if (animating) {
+      return;
+    }
+
+    if (!isDesktop()) {
+      renderSwiper(false);
+      return;
+    }
+
+    destroySwiper();
+
+    var filtered = getFiltered();
+    var total = pageCount(filtered);
+
+    if (filtered.length === 0) {
+      showEmpty();
+      animating = false;
+      return;
+    }
+
+    if (emptyEl) {
+      emptyEl.classList.remove("is-visible");
+    }
+
+    setControlsVisible(true);
     currentPage = Math.max(0, Math.min(page, total - 1));
-    var start = currentPage * perPage();
-    var end = start + perPage();
-    var pageItems = filtered.slice(start, end);
+    var start = currentPage * 4;
+    var pageItems = filtered.slice(start, start + 4);
 
     function applyVisible() {
-      items.forEach(function (item) {
-        item.classList.remove("is-visible", "is-animating-out");
-      });
+      clearItemState();
 
       pageItems.forEach(function (item, index) {
         item.classList.add("is-visible");
@@ -255,12 +368,7 @@
       renderPagination(total);
       updateNav(total);
 
-      if (viewport) {
-        viewport.scrollLeft = 0;
-      }
-
       requestAnimationFrame(function () {
-        equalizeHeights(pageItems);
         window.setTimeout(function () {
           pageItems.forEach(function (item) {
             item.style.animationDelay = "";
@@ -299,7 +407,7 @@
   }
 
   function goToPage(page) {
-    if (page === currentPage) {
+    if (!isDesktop() || page === currentPage) {
       return;
     }
     showPage(page, true);
@@ -312,7 +420,20 @@
     currentFilter = status;
     setActiveFilter(status);
     currentPage = 0;
-    showPage(0, true);
+    showPage(0, isDesktop());
+  }
+
+  function syncLayout() {
+    if (isDesktop()) {
+      var total = pageCount(getFiltered());
+      if (currentPage > total - 1) {
+        currentPage = Math.max(0, total - 1);
+      }
+      showPage(currentPage, false);
+      return;
+    }
+
+    renderSwiper(true);
   }
 
   filters.forEach(function (btn) {
@@ -323,6 +444,9 @@
 
   if (pagination) {
     pagination.addEventListener("click", function (event) {
+      if (!isDesktop()) {
+        return;
+      }
       var dot = event.target.closest(".festival-page__dot");
       if (!dot) {
         return;
@@ -333,61 +457,33 @@
 
   if (prevBtn) {
     prevBtn.addEventListener("click", function () {
+      if (!isDesktop()) {
+        return;
+      }
       goToPage(currentPage - 1);
     });
   }
 
   if (nextBtn) {
     nextBtn.addEventListener("click", function () {
+      if (!isDesktop()) {
+        return;
+      }
       goToPage(currentPage + 1);
     });
-  }
-
-  if (viewport) {
-    viewport.addEventListener(
-      "touchstart",
-      function (event) {
-        if (isDesktop() || !event.changedTouches.length) {
-          return;
-        }
-        touchStartX = event.changedTouches[0].clientX;
-        touchStartY = event.changedTouches[0].clientY;
-      },
-      { passive: true }
-    );
-
-    viewport.addEventListener(
-      "touchend",
-      function (event) {
-        if (isDesktop() || !event.changedTouches.length) {
-          return;
-        }
-        var dx = event.changedTouches[0].clientX - touchStartX;
-        var dy = event.changedTouches[0].clientY - touchStartY;
-        if (Math.abs(dx) < 48 || Math.abs(dx) < Math.abs(dy)) {
-          return;
-        }
-        if (dx < 0) {
-          goToPage(currentPage + 1);
-        } else {
-          goToPage(currentPage - 1);
-        }
-      },
-      { passive: true }
-    );
   }
 
   var resizeTimer;
   window.addEventListener("resize", function () {
     clearTimeout(resizeTimer);
-    resizeTimer = setTimeout(function () {
-      var total = pageCount(getFiltered());
-      if (currentPage > total - 1) {
-        currentPage = total - 1;
-      }
-      showPage(currentPage, false);
-    }, 150);
+    resizeTimer = setTimeout(syncLayout, 150);
   });
+
+  if (typeof desktopMq.addEventListener === "function") {
+    desktopMq.addEventListener("change", syncLayout);
+  } else if (typeof desktopMq.addListener === "function") {
+    desktopMq.addListener(syncLayout);
+  }
 
   applyEventStatuses();
   setActiveFilter(currentFilter);

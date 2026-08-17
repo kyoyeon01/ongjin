@@ -1,17 +1,17 @@
 /* ==========================================================================
-   Festival Page — 필터 / 페이지네이션
-   Desktop: 2×2 (4장/페이지)
-   Tablet·Mobile: 카드 min-width 우선 + 2장 구조 Peek
+   Festival Page — 필터 / 카드 목록
+   Desktop (≥1024): 2×2 Grid, 4장/페이지 — 1200px 전후도 컨테이너에 맞춰 자연 축소
+   Tablet·Mobile (<1024): Swiper 1장 보기
    ========================================================================== */
 
 .festival-page {
   --festival-page-card-radius: 1rem;
-  --festival-page-gap: 1.875rem;
-  --festival-page-padding: 2rem;
-  --festival-page-filter-gap: 1.375rem;
-  --festival-card-min: 20rem;
+  --festival-page-gap: clamp(1.25rem, calc(1.25rem + 0.625 * (100vw - 48rem) / 42), 1.875rem);
+  --festival-page-padding: clamp(1.25rem, calc(1.25rem + 0.75 * (100vw - 48rem) / 42), 2rem);
+  --festival-page-filter-gap: clamp(0.75rem, calc(0.75rem + 0.625 * (100vw - 48rem) / 42), 1.375rem);
 
   width: 100%;
+  overflow-x: clip;
   padding-block: 3.5rem 5rem;
   background-color: #f3f8fc;
 }
@@ -83,6 +83,7 @@
 
 .festival-page__viewport {
   width: 100%;
+  min-width: 0;
   touch-action: pan-y;
 }
 
@@ -134,6 +135,7 @@
   display: flex;
   flex-direction: column;
   width: 100%;
+  min-width: 0;
   height: 100%;
   overflow: hidden;
   border-radius: var(--festival-page-card-radius);
@@ -203,12 +205,13 @@
   flex: 1 1 auto;
   flex-direction: column;
   gap: 0.375rem;
+  min-width: 0;
   padding: var(--festival-page-padding);
 }
 
 .festival-event__title {
   margin: 0;
-  font-size: clamp(1.0625rem, 1.25vw, 1.25rem);
+  font-size: clamp(1rem, calc(1rem + 0.25 * (100vw - 64rem) / 26), 1.25rem);
   line-height: 1.4;
   font-weight: var(--font-weight-bold);
   color: var(--color-neutral-900);
@@ -255,6 +258,7 @@
 
 .festival-page__pagination {
   display: flex;
+  flex-wrap: wrap;
   align-items: center;
   justify-content: center;
   gap: 0.5rem;
@@ -264,6 +268,8 @@
 }
 
 .festival-page__dot {
+  display: block;
+  flex-shrink: 0;
   width: 0.5rem;
   height: 0.5rem;
   padding: 0;
@@ -295,15 +301,13 @@
 }
 
 /* --------------------------------------------------------------------------
-   Tablet (768–1199) — 2장 + min-width Peek
+   Tablet / Mobile — 1장 Swiper (1024px 미만)
    -------------------------------------------------------------------------- */
 
-@media (max-width: 74.9375rem) and (min-width: 48rem) {
+@media (max-width: 63.9375rem) {
   .festival-page {
     --festival-page-padding: 1.5rem;
-    --festival-page-gap: 1.5rem;
     --festival-page-filter-gap: 1.25rem;
-    --festival-card-min: 18.75rem;
     padding-block: 3rem 4rem;
   }
 
@@ -311,36 +315,30 @@
     gap: 2rem;
   }
 
-  .festival-page__viewport {
-    overflow-x: auto;
-    overflow-y: visible;
-    -webkit-overflow-scrolling: touch;
-    touch-action: pan-x pan-y;
-    scrollbar-width: none;
+  .festival-page__viewport.swiper {
+    overflow: hidden;
+    width: 100%;
+    touch-action: pan-y pinch-zoom;
   }
 
-  .festival-page__viewport::-webkit-scrollbar {
-    display: none;
-  }
-
-  .festival-page__grid {
+  .festival-page__viewport.swiper .festival-page__grid {
     display: flex;
-    flex-wrap: nowrap;
     align-items: stretch;
-    width: max-content;
-    min-width: 100%;
-    gap: var(--festival-page-gap);
+    gap: 0;
+    width: auto;
+    min-width: 0;
+    box-sizing: content-box;
   }
 
-  .festival-page__item.is-visible,
-  .festival-page__item.is-animating-out {
-    flex: 0 0 auto;
-    width: var(--festival-card-min);
-    min-width: var(--festival-card-min);
-  }
-
-  .festival-event {
+  .festival-page__viewport.swiper .festival-page__item.is-visible,
+  .festival-page__viewport.swiper .festival-page__item.is-animating-out {
+    width: 100%;
     height: auto;
+    flex-shrink: 0;
+  }
+
+  .festival-page__viewport.swiper .festival-event {
+    height: 100%;
   }
 
   .festival-event__title {
@@ -354,15 +352,13 @@
 }
 
 /* --------------------------------------------------------------------------
-   Mobile (≤767) — 2장 구조 + min-width Peek (압축 금지)
+   Mobile
    -------------------------------------------------------------------------- */
 
 @media (max-width: 47.9375rem) {
   .festival-page {
     --festival-page-padding: 1.25rem;
-    --festival-page-gap: 1rem;
     --festival-page-filter-gap: 0.5rem;
-    --festival-card-min: 16rem;
     padding-block: 2rem 3rem;
   }
 
@@ -373,38 +369,6 @@
   .festival-page__filter {
     height: 2.5rem;
     font-size: 0.875rem;
-  }
-
-  .festival-page__viewport {
-    overflow-x: auto;
-    overflow-y: visible;
-    -webkit-overflow-scrolling: touch;
-    touch-action: pan-x pan-y;
-    scrollbar-width: none;
-  }
-
-  .festival-page__viewport::-webkit-scrollbar {
-    display: none;
-  }
-
-  .festival-page__grid {
-    display: flex;
-    flex-wrap: nowrap;
-    align-items: stretch;
-    width: max-content;
-    min-width: 100%;
-    gap: var(--festival-page-gap);
-  }
-
-  .festival-page__item.is-visible,
-  .festival-page__item.is-animating-out {
-    flex: 0 0 auto;
-    width: var(--festival-card-min);
-    min-width: var(--festival-card-min);
-  }
-
-  .festival-event {
-    height: auto;
   }
 
   .festival-event__title {

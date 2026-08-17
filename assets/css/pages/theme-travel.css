@@ -60,6 +60,7 @@
 
 .theme-travel__nav-icon {
   display: flex;
+  flex-shrink: 0;
   align-items: center;
   justify-content: center;
   width: var(--theme-travel-nav-size);
@@ -84,6 +85,7 @@
   font-weight: var(--font-weight-medium);
   color: var(--color-neutral-700);
   white-space: nowrap;
+  word-break: keep-all;
 }
 
 .theme-travel__nav-btn:hover .theme-travel__nav-icon,
@@ -294,21 +296,78 @@
 }
 
 /* --------------------------------------------------------------------------
-   Tablet
+   Tablet / Mobile — 5열 균등 배치, 담기지 않을 때만 가로 스크롤
    -------------------------------------------------------------------------- */
 
-@media (max-width: 64rem) and (min-width: 48rem) {
+@media (max-width: 79.9375rem) {
   .theme-travel {
     --theme-travel-nav-size: 3.5rem;
     --theme-travel-icon-size: 2.25rem;
+    --theme-travel-nav-col-min: 8.5rem;
+    --theme-travel-nav-gap: 0.5rem;
   }
 
-  .theme-travel__panels-wrap {
-    padding-block: 0 4rem;
+  .theme-travel__nav-wrap {
+    overflow-x: hidden;
+    overflow-y: hidden;
+  }
+
+  .theme-travel__nav-wrap .container {
+    min-width: 0;
+    max-width: 100%;
+    overflow-x: hidden;
+    overflow-y: hidden;
+  }
+
+  .theme-travel__nav-track {
+    width: 100%;
+    max-width: 100%;
+    overflow-x: auto;
+    overflow-y: hidden;
+    -webkit-overflow-scrolling: touch;
+    overscroll-behavior-x: contain;
+    overscroll-behavior-y: none;
+    touch-action: pan-x;
+    scrollbar-width: thin;
+  }
+
+  .theme-travel__nav-track::-webkit-scrollbar {
+    height: 0.25rem;
+  }
+
+  .theme-travel__nav {
+    display: grid;
+    grid-template-columns: repeat(5, minmax(var(--theme-travel-nav-col-min), 1fr));
+    gap: var(--theme-travel-nav-gap);
+    width: 100%;
+    min-width: calc(
+      (5 * var(--theme-travel-nav-col-min)) + (4 * var(--theme-travel-nav-gap))
+    );
+  }
+
+  .theme-travel__nav-item {
+    min-width: var(--theme-travel-nav-col-min);
+  }
+
+  .theme-travel__nav-btn {
+    width: 100%;
+    height: 100%;
   }
 
   .theme-travel__nav-label {
     font-size: 0.875rem;
+    line-height: 1.4;
+    white-space: nowrap;
+  }
+}
+
+/* --------------------------------------------------------------------------
+   Tablet (카드 레이아웃)
+   -------------------------------------------------------------------------- */
+
+@media (max-width: 64rem) and (min-width: 48rem) {
+  .theme-travel__panels-wrap {
+    padding-block: 0 4rem;
   }
 
   .theme-travel__content {
@@ -334,34 +393,22 @@
 
 @media (max-width: 47.9375rem) {
   .theme-travel {
-    --theme-travel-nav-size: 3rem;
-    --theme-travel-icon-size: 1.75rem;
+    --theme-travel-nav-size: 3.25rem;
+    --theme-travel-icon-size: 2rem;
+    --theme-travel-nav-col-min: 8.25rem;
+    --theme-travel-nav-gap: 0.375rem;
   }
 
   .theme-travel__nav-wrap {
     padding-block: 1.25rem 0;
   }
 
-  .theme-travel__nav-track {
-    overflow-x: auto;
-    -webkit-overflow-scrolling: touch;
-  }
-
   .theme-travel__nav {
-    width: max-content;
-    min-width: 100%;
-    gap: 0.25rem;
     padding-bottom: 1rem;
   }
 
-  .theme-travel__nav-item {
-    width: 4.75rem;
-  }
-
-  .theme-travel__nav-label {
-    font-size: 0.875rem;
-    white-space: normal;
-    text-align: center;
+  .theme-travel__nav-btn {
+    gap: 0.5rem;
   }
 
   .theme-travel__panels-wrap {
