@@ -54,38 +54,6 @@
 
 .transport-routes__nav-btn {
   flex-shrink: 0;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  width: 2.5rem;
-  height: 2.5rem;
-  padding: 0;
-  border: 0.0625rem solid var(--color-border-default);
-  border-radius: var(--radius-full);
-  background-color: #ffffff;
-  color: var(--color-primary-800);
-  cursor: pointer;
-  transition:
-    background-color 0.3s ease,
-    border-color 0.3s ease,
-    opacity 0.3s ease;
-}
-
-.transport-routes__nav-btn:hover:not(:disabled) {
-  border-color: var(--color-primary-800);
-  background-color: var(--color-primary-800);
-  color: #ffffff;
-}
-
-.transport-routes__nav-btn:disabled {
-  opacity: 0.35;
-  cursor: default;
-}
-
-.transport-routes__nav-icon {
-  display: block;
-  width: 0.875rem;
-  height: 0.875rem;
 }
 
 .transport-routes__nav-viewport {
@@ -199,7 +167,7 @@
 .transport-routes__table td {
   padding: 0.75rem 0.625rem;
   border-bottom: 0.0625rem solid var(--color-neutral-300);
-  font-size: 0.8125rem;
+  font-size: 0.875rem;
   line-height: 1.45;
   text-align: center;
   word-break: keep-all;
@@ -227,7 +195,7 @@
   padding: 0.875rem 1rem;
   border-top: 0.0625rem solid var(--color-neutral-300);
   background-color: #fff8e8;
-  font-size: 0.8125rem;
+  font-size: 0.875rem;
   line-height: 1.55;
   color: var(--color-neutral-700);
   word-break: keep-all;
@@ -433,11 +401,6 @@
 
   .transport-routes__nav {
     gap: 0.5rem;
-  }
-
-  .transport-routes__nav-btn {
-    width: 2.25rem;
-    height: 2.25rem;
   }
 
   .transport-routes__route-btn {

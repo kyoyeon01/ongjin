@@ -277,7 +277,7 @@
 
   .hero__info-desc {
     margin-top: clamp(0.125rem, 1vw, 0.25rem);
-    font-size: clamp(0.75rem, 3.2vw, 0.875rem);
+    font-size: clamp(0.875rem, 3.2vw, 0.875rem);
     line-height: 1.4;
   }
 }
@@ -499,7 +499,6 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  margin-top: var(--fluid-ui-gap-xl);
 }
 
 /* Tablet/Mobile — 카드 min-width 유지 + Peek */

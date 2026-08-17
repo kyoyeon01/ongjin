@@ -15,7 +15,10 @@
   --course-stack-nav-size: 2.75rem;
 
   width: 100%;
+  max-width: 100%;
   padding-block: 5rem 4rem;
+  overflow-x: hidden;
+  overflow-x: clip;
   background-color: var(--color-bg-default);
 }
 
@@ -37,6 +40,7 @@
 .course-stack__viewport {
   position: relative;
   width: 100%;
+  max-width: 100%;
   margin-top: 2.5rem;
   user-select: none;
   touch-action: pan-y;
@@ -149,29 +153,7 @@
   position: absolute;
   top: 50%;
   z-index: 20;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: var(--fluid-nav-btn-size);
-  height: var(--fluid-nav-btn-size);
-  border: var(--card-border);
-  border-radius: var(--radius-sm);
-  background-color: var(--color-bg-default);
-  color: var(--color-neutral-900);
   transform: translateY(-50%);
-  cursor: pointer;
-  transition:
-    border-color 0.3s ease,
-    background-color 0.3s ease,
-    box-shadow 0.3s ease,
-    opacity 0.3s ease;
-}
-
-.course-stack__nav:hover,
-.course-stack__nav:focus-visible {
-  border-color: var(--color-primary-700);
-  background-color: var(--color-primary-50);
-  box-shadow: var(--shadow-sm);
 }
 
 .course-stack__nav--prev {
@@ -180,19 +162,6 @@
 
 .course-stack__nav--next {
   right: 0;
-}
-
-.course-stack__nav:disabled,
-.course-stack__nav.swiper-button-disabled {
-  opacity: 0.35;
-  cursor: default;
-  pointer-events: none;
-}
-
-.course-stack__nav-icon {
-  display: block;
-  width: var(--fluid-nav-btn-icon-size);
-  height: var(--fluid-nav-btn-icon-size);
 }
 
 .course-stack__pagination {
@@ -275,8 +244,11 @@
     margin-top: 1.5rem;
   }
 
-  .course-stack__slider {
+  .course-stack__viewport,
+  .course-stack__slider,
+  .course-stack__slider.swiper {
     width: 100%;
+    max-width: 100%;
     min-width: 0;
     overflow: hidden;
   }
@@ -318,10 +290,6 @@
   }
 
   .course-stack__controls {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 1rem;
     margin-top: 1.5rem;
   }
 
@@ -332,26 +300,6 @@
     left: auto;
     right: auto;
     transform: none;
-    width: var(--course-stack-nav-size);
-    height: var(--course-stack-nav-size);
-    border-radius: var(--radius-full);
-    border: 0.0625rem solid var(--color-border-default);
-    background-color: #ffffff;
-    color: var(--color-primary-800);
-  }
-
-  .course-stack__nav:hover:not(:disabled):not(.swiper-button-disabled),
-  .course-stack__nav:focus-visible:not(:disabled):not(.swiper-button-disabled) {
-    border-color: var(--color-primary-800);
-    background-color: var(--color-primary-800);
-    color: #ffffff;
-    box-shadow: none;
-  }
-
-  .course-stack__nav.swiper-button-disabled,
-  .course-stack__nav:disabled {
-    opacity: 0.35;
-    cursor: default;
   }
 
   .course-stack__pagination {

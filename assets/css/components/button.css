@@ -1,18 +1,24 @@
 /* ==========================================================================
    Button
-   btn_01 : Hero / ?????????(outline white)
-   btn_02 : Card / ??? ????(outline primary)
-   btn--tag : Card_Info ??? pill
+   btn_01 : Hero / outline white
+   btn_02 : Card / outline primary
+   btn--cta : Section CTA (자세히 보기, 배편 · 교통)
+   btn--tag : Card_Info pill
    ========================================================================== */
 
 .button {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  gap: var(--fluid-ui-gap-xs);
-  border-radius: var(--radius-full);
+  gap: var(--fluid-button-gap);
+  width: fit-content;
+  max-width: 100%;
+  box-sizing: border-box;
+  border-radius: 999px;
   font-weight: var(--font-weight-semibold);
+  line-height: 1;
   white-space: nowrap;
+  vertical-align: middle;
   transition:
     color var(--transition-base),
     background-color var(--transition-base),
@@ -21,17 +27,37 @@
 
 .button__icon {
   flex-shrink: 0;
-  width: var(--fluid-icon-sm);
-  height: var(--fluid-icon-sm);
+  width: 0.875rem;
+  height: 0.875rem;
 }
 
 .button__arrow {
-  font-size: var(--fluid-icon-sm);
-  line-height: 1;
+  position: relative;
+  display: inline-flex;
+  flex-shrink: 0;
+  align-items: center;
+  justify-content: center;
+  width: var(--fluid-button-chevron);
+  height: var(--fluid-button-chevron);
+  overflow: hidden;
+  font-size: 0;
+  line-height: 0;
+  color: inherit;
+}
+
+.button__arrow::before {
+  content: "";
+  box-sizing: border-box;
+  width: 0.4375rem;
+  height: 0.4375rem;
+  margin-inline-start: -0.0625rem;
+  border-inline-end: 1.5px solid currentColor;
+  border-block-end: 1.5px solid currentColor;
+  transform: rotate(-45deg);
 }
 
 /* --------------------------------------------------------------------------
-   btn_01 ??outline white
+   btn_01 — outline white
    -------------------------------------------------------------------------- */
 .button--01 {
   min-height: var(--button-height-01);
@@ -39,9 +65,8 @@
   border: 0.0625rem solid var(--color-text-inverse);
   background-color: transparent;
   color: var(--color-text-inverse);
-  font-size: var(--fluid-subtitle-03-size);
-  line-height: var(--fluid-subtitle-03-lh);
-  letter-spacing: var(--fluid-subtitle-03-ls);
+  font-size: var(--fluid-button-font-size-01);
+  letter-spacing: 0;
 }
 
 .button--01:hover,
@@ -51,7 +76,7 @@
 }
 
 /* --------------------------------------------------------------------------
-   btn_02 ??outline primary
+   btn_02 — outline primary
    -------------------------------------------------------------------------- */
 .button--02 {
   min-height: var(--button-height-02);
@@ -59,9 +84,8 @@
   border: 0.0625rem solid var(--color-primary-800);
   background-color: transparent;
   color: var(--color-primary-800);
-  font-size: var(--fluid-subtitle-03-size);
-  line-height: var(--fluid-subtitle-03-lh);
-  letter-spacing: var(--fluid-subtitle-03-ls);
+  font-size: var(--fluid-button-font-size-01);
+  letter-spacing: 0;
 }
 
 .button--02:hover,
@@ -75,28 +99,30 @@
 }
 
 /* --------------------------------------------------------------------------
-   btn_cta ????? CTA (???????, ?? ? ?? ??
+   btn_cta — section CTA
    -------------------------------------------------------------------------- */
 .button--cta {
   flex-shrink: 0;
   width: fit-content;
+  max-width: 100%;
   min-height: var(--fluid-button-height-02-sm);
   padding: 0 var(--fluid-button-padding-x-02-sm);
   font-size: var(--fluid-button-font-size-02-sm);
-  line-height: 1.5;
   letter-spacing: 0;
 }
 
 /* --------------------------------------------------------------------------
-   Tag pill ??Card_Info B??
+   Tag pill — Card_Info
    -------------------------------------------------------------------------- */
 .button--tag {
   display: inline-flex;
   align-items: center;
   justify-content: center;
+  width: auto;
   height: var(--button-tag-height);
   padding: 0 var(--fluid-tag-padding-x);
   border: none;
+  border-radius: 999px;
   background-color: var(--color-primary-800);
   color: var(--color-text-inverse);
   font-size: var(--fluid-tag-font-size);
@@ -113,4 +139,47 @@
 .button--tag.is-active,
 .button--tag[aria-pressed="true"] {
   background-color: var(--color-primary-700);
+}
+
+/* --------------------------------------------------------------------------
+   Tablet (768–1279)
+   -------------------------------------------------------------------------- */
+@media (max-width: 79.9375rem) {
+  .button--01,
+  .button--02:not(.button--cta) {
+    min-height: 2.625rem;
+    padding-inline: 1.125rem;
+    font-size: 0.9375rem;
+  }
+
+  .button--cta {
+    min-height: 2.5rem;
+    padding-inline: 1.125rem;
+    font-size: 0.875rem;
+  }
+}
+
+/* --------------------------------------------------------------------------
+   Mobile (≤767) — compact pill, 40px / 14px
+   -------------------------------------------------------------------------- */
+@media (max-width: 47.9375rem) {
+  .button--01,
+  .button--02,
+  .button--cta {
+    min-height: 2.5rem;
+    padding-inline: 1rem;
+    font-size: 0.875rem;
+  }
+
+  .button--02-full {
+    width: fit-content;
+    max-width: 100%;
+  }
+
+  .button__arrow::before {
+    width: 0.375rem;
+    height: 0.375rem;
+    border-inline-end-width: 1.4px;
+    border-block-end-width: 1.4px;
+  }
 }

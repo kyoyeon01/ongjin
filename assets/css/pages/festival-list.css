@@ -172,7 +172,7 @@
   border-radius: 9999px;
   background-color: var(--color-primary-800);
   color: #ffffff;
-  font-size: 0.75rem;
+  font-size: 0.875rem;
   font-weight: var(--font-weight-bold);
   line-height: 1.2;
   letter-spacing: -0.01em;
@@ -250,38 +250,7 @@
 }
 
 .festival-page__nav {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  width: 2.5rem;
-  height: 2.5rem;
-  padding: 0;
-  border: 0.0625rem solid var(--color-border-default);
-  border-radius: var(--radius-full);
-  background-color: #ffffff;
-  color: var(--color-primary-800);
-  cursor: pointer;
-  transition:
-    background-color 0.3s ease,
-    border-color 0.3s ease,
-    opacity 0.3s ease;
-}
-
-.festival-page__nav:hover:not(:disabled) {
-  border-color: var(--color-primary-800);
-  background-color: var(--color-primary-800);
-  color: #ffffff;
-}
-
-.festival-page__nav:disabled {
-  opacity: 0.35;
-  cursor: default;
-}
-
-.festival-page__nav-icon {
-  display: block;
-  width: 0.75rem;
-  height: 0.75rem;
+  flex-shrink: 0;
 }
 
 .festival-page__pagination {

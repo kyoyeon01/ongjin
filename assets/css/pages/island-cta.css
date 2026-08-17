@@ -5,8 +5,7 @@
    ========================================================================== */
 
 .island-cta {
-  --island-cta-btn-width: 21.25rem;
-  --island-cta-btn-height: 4.625rem;
+  --island-cta-btn-height: 2.75rem;
 
   position: relative;
   width: 100%;
@@ -92,19 +91,34 @@
   flex-shrink: 0;
   align-items: center;
   justify-content: center;
-  width: var(--island-cta-btn-width);
-  height: var(--island-cta-btn-height);
-  padding-inline: 1.75rem;
-  border-radius: 1rem;
+  gap: var(--fluid-button-gap);
+  width: fit-content;
+  max-width: 100%;
+  min-height: var(--island-cta-btn-height);
+  height: auto;
+  padding: 0 1.5rem;
+  box-sizing: border-box;
+  border-radius: 999px;
   background-color: var(--color-bg-default);
   color: var(--color-primary-800);
-  font-size: 1.25rem;
-  line-height: 1.2;
+  font-size: 1rem;
+  line-height: 1;
   font-weight: var(--font-weight-semibold);
   text-align: center;
   text-decoration: none;
   white-space: nowrap;
   transition: background-color var(--transition-base);
+}
+
+.island-cta__btn::after {
+  content: "";
+  box-sizing: border-box;
+  width: 0.4375rem;
+  height: 0.4375rem;
+  margin-inline-start: 0.0625rem;
+  border-inline-end: 1.5px solid currentColor;
+  border-block-end: 1.5px solid currentColor;
+  transform: rotate(-45deg);
 }
 
 .island-cta__btn:hover,
@@ -150,10 +164,9 @@
 
   .island-cta__btn {
     align-self: flex-end;
-    width: var(--island-cta-btn-width);
-    height: var(--island-cta-btn-height);
-    padding-inline: 1.75rem;
-    font-size: 1.25rem;
+    min-height: 2.625rem;
+    padding: 0 1.125rem;
+    font-size: 0.9375rem;
   }
 }
 
@@ -163,7 +176,7 @@
 
 @media (max-width: 47.9375rem) {
   .island-cta {
-    --island-cta-btn-height: 2.75rem;
+    --island-cta-btn-height: 2.5rem;
   }
 
   .island-cta__container {
@@ -188,10 +201,15 @@
 
   .island-cta__btn {
     align-self: flex-start;
-    width: auto;
-    height: var(--island-cta-btn-height);
-    padding-inline: 1rem;
+    min-height: 2.5rem;
+    padding: 0 1rem;
     font-size: 0.875rem;
-    border-radius: 0.75rem;
+  }
+
+  .island-cta__btn::after {
+    width: 0.375rem;
+    height: 0.375rem;
+    border-inline-end-width: 1.4px;
+    border-block-end-width: 1.4px;
   }
 }

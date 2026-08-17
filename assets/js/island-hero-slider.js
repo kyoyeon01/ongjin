@@ -2,7 +2,7 @@
  * Island Detail — Hero Swiper + Background Sync
  *
  * PC (≥1280): 오른쪽 슬라이드 + 배경 동기화
- * Tablet/Mobile (<1280): 슬라이드 숨김, 동일 이미지로 배경 자동 페이드(5초)
+ * Tablet/Mobile (<1280): 슬라이드 숨김, 동일 이미지로 배경 자동 페이드(3초)
  */
 (function () {
   "use strict";
@@ -23,7 +23,7 @@
   var slideSources = [];
   var bgIndex = 0;
   var bgTimer = null;
-  var BG_DELAY = 5000;
+  var BG_DELAY = 3000;
   var desktopMq = window.matchMedia("(min-width: 80rem)");
 
   function collectSlideSources() {

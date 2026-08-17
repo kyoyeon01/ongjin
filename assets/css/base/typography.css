@@ -39,17 +39,17 @@
   --line-height-subtitle-02: 1.8rem;
   --font-size-subtitle-03: 1.0125rem;
   --line-height-subtitle-03: 1.575rem;
-  --font-size-subtitle-04: 0.9rem;
-  --line-height-subtitle-04: 1.4625rem;
+  --font-size-subtitle-04: 0.875rem;
+  --line-height-subtitle-04: 1.4219rem;
 
   --font-size-body-01: 0.875rem;
   --line-height-body-01: 1.4rem;
-  --font-size-body-02: 0.75rem;
-  --line-height-body-02: 1.2188rem;
-  --font-size-body-03: 0.625rem;
-  --line-height-body-03: 0.9821rem;
-  --font-size-body-04: 0.5rem;
-  --line-height-body-04: 0.75rem;
+  --font-size-body-02: 0.875rem;
+  --line-height-body-02: 1.4219rem;
+  --font-size-body-03: 0.875rem;
+  --line-height-body-03: 1.375rem;
+  --font-size-body-04: 0.875rem;
+  --line-height-body-04: 1.3125rem;
 
   /* --------------------------------------------------------------------------
      Fluid Typography ??Mobile(390px) ~ Desktop(1200px)
@@ -101,8 +101,8 @@
     1.125rem
   );
   --fluid-subtitle-04-size: clamp(
-    0.9rem,
-    calc(0.9rem + 0.1 * (100vw - 24.375rem) / 50.625),
+    0.875rem,
+    calc(0.875rem + 0.125 * (100vw - 24.375rem) / 50.625),
     1rem
   );
 
@@ -112,20 +112,12 @@
     1.25rem
   );
   --fluid-body-02-size: clamp(
-    0.75rem,
-    calc(0.75rem + 0.25 * (100vw - 24.375rem) / 50.625),
+    0.875rem,
+    calc(0.875rem + 0.125 * (100vw - 24.375rem) / 50.625),
     1rem
   );
-  --fluid-body-03-size: clamp(
-    0.625rem,
-    calc(0.625rem + 0.25 * (100vw - 24.375rem) / 50.625),
-    0.875rem
-  );
-  --fluid-body-04-size: clamp(
-    0.5rem,
-    calc(0.5rem + 0.25 * (100vw - 24.375rem) / 50.625),
-    0.75rem
-  );
+  --fluid-body-03-size: 0.875rem;
+  --fluid-body-04-size: 0.875rem;
 
   /* Section heading — Hero 제외
      Mobile 32~34px → Tablet 40~44px → Desktop 48px */
@@ -180,8 +172,8 @@
   --fluid-cq-title-03: clamp(1rem, 6.5cqi, 3rem);
   --fluid-cq-title-04: clamp(0.875rem, 5cqi, 2.25rem);
   --fluid-cq-subtitle-01: clamp(0.875rem, 4cqi, 1.5625rem);
-  --fluid-cq-subtitle-02: clamp(0.8125rem, 3.2cqi, 1.25rem);
-  --fluid-cq-body-01: clamp(0.75rem, 2.8cqi, 1.25rem);
+  --fluid-cq-subtitle-02: clamp(0.875rem, 3.2cqi, 1.25rem);
+  --fluid-cq-body-01: clamp(0.875rem, 2.8cqi, 1.25rem);
 }
 
 /* --------------------------------------------------------------------------
@@ -219,10 +211,10 @@
     --line-height-body-03: 1.625rem;
     --font-size-body-04: 0.875rem;
     --line-height-body-04: 1.375rem;
-    --font-size-body-05: 0.75rem;
-    --line-height-body-05: 1.125rem;
-    --font-size-body-06: 0.625rem;
-    --line-height-body-06: 0.9821rem;
+    --font-size-body-05: 0.875rem;
+    --line-height-body-05: 1.375rem;
+    --font-size-body-06: 0.875rem;
+    --line-height-body-06: 1.375rem;
 
     /* Section title — Tablet 40~44px / Desc 17~18px (PC 크기까지 올리지 않음) */
     --fluid-section-title-size: clamp(
@@ -269,8 +261,8 @@
     --line-height-body-02: 1.625rem;
     --font-size-body-03: 0.875rem;
     --line-height-body-03: 1.375rem;
-    --font-size-body-04: 0.75rem;
-    --line-height-body-04: 1.125rem;
+    --font-size-body-04: 0.875rem;
+    --line-height-body-04: 1.375rem;
 
     /* Section title — Desktop 현재 크기 유지 */
     --fluid-section-title-size: 3rem;

@@ -87,14 +87,14 @@
       "-" +
       cardIndex +
       '">' +
-      '<header class="theme-travel-card__header">' +
+      '<div class="theme-travel-card__header">' +
       '<h3 class="theme-travel-card__title">' +
       card.name +
       "</h3>" +
       '<p class="theme-travel-card__desc">' +
       card.desc +
       "</p>" +
-      "</header>" +
+      "</div>" +
       '<div class="theme-travel-card__body">' +
       '<div class="theme-travel-card__media">' +
       '<div class="swiper theme-travel-card__slider">' +
