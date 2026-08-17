@@ -14,6 +14,7 @@
       moreLink: "day-trip.html",
       courses: [
         {
+          id: "sinsimo",
           num: "01",
           title: "신시모도 코스",
           image: "day-trip-sinsimodo.webp",
@@ -21,6 +22,7 @@
           tags: ["수기해변", "연도교", "구봉산"],
         },
         {
+          id: "jangbong",
           num: "02",
           title: "장봉도 코스",
           image: "day-trip-jangbongdo.webp",
@@ -28,6 +30,7 @@
           tags: ["옹암해변", "가막머리전망대", "국사봉"],
         },
         {
+          id: "yeongheung",
           num: "03",
           title: "영흥도 코스",
           image: "day-trip-yeongheungdo.webp",
@@ -35,6 +38,7 @@
           tags: ["십리포해변", "에너지파크", "영흥대교"],
         },
         {
+          id: "jawol",
           num: "04",
           title: "자월도 코스",
           image: "day-trip-jawoldo.webp",
@@ -42,6 +46,7 @@
           tags: ["장골해변", "국사봉", "자월목섬"],
         },
         {
+          id: "seonjae",
           num: "05",
           title: "선재도 코스",
           image: "day-trip-seonjaedo.webp",
@@ -49,6 +54,7 @@
           tags: ["목섬", "선재도해변", "뻘다방"],
         },
         {
+          id: "seungbong",
           num: "06",
           title: "승봉도 코스",
           image: "day-trip-seungbongdo.webp",
@@ -56,6 +62,7 @@
           tags: ["촛대바위", "이일레해변", "남대문바위"],
         },
         {
+          id: "deokjeok",
           num: "07",
           title: "덕적도 코스",
           image: "day-trip-deokjeokdo.webp",
@@ -69,6 +76,7 @@
       moreLink: "overnight.html",
       courses: [
         {
+          id: "baengnyeong",
           num: "01",
           title: "백령도 코스",
           image: "overnight-baengnyeongdo.webp",
@@ -76,6 +84,7 @@
           tags: ["두무진", "콩돌해변", "천연기념물"],
         },
         {
+          id: "daecheong",
           num: "02",
           title: "대청도 코스",
           image: "overnight-daecheongdo.webp",
@@ -83,6 +92,7 @@
           tags: ["옥죽동", "모래사막", "해안절경"],
         },
         {
+          id: "deokjeok",
           num: "03",
           title: "덕적도 코스",
           image: "overnight-deokjeokdo.webp",
@@ -90,6 +100,7 @@
           tags: ["비조봉", "서포리해변", "캠핑명소"],
         },
         {
+          id: "daeijak",
           num: "04",
           title: "대이작도 코스",
           image: "overnight-daeijakdo.webp",
@@ -97,6 +108,7 @@
           tags: ["풀등", "부아산", "트레킹"],
         },
         {
+          id: "yeonpyeong",
           num: "05",
           title: "대연평도 코스",
           image: "overnight-yeonpyeongdo.webp",
@@ -123,6 +135,10 @@
 
   var currentType = "day-trip";
   var travelSwiper = null;
+  var cardInteractionBound = false;
+  var dragStartX = 0;
+  var dragDeltaX = 0;
+  var isDragging = false;
 
   function escapeHtml(text) {
     return text
@@ -147,7 +163,11 @@
 
     return (
       '<div class="swiper-slide">' +
-      '<article class="course-card">' +
+      '<article class="course-card course-card--interactive" data-course-id="' +
+      escapeHtml(course.id) +
+      '" tabindex="0" role="button" aria-label="' +
+      escapeHtml(course.title) +
+      ' 상세보기">' +
       '<div class="course-card__header">' +
       '<span class="course-card__num">' +
       escapeHtml(course.num) +
@@ -181,6 +201,69 @@
     wrapperEl.innerHTML = data.courses.map(createCardHTML).join("");
     courseTitleEl.textContent = data.courseTitle;
     moreLinkEl.setAttribute("href", data.moreLink);
+    sectionEl.setAttribute("data-course-type", type);
+  }
+
+  function openCardModal(card) {
+    if (typeof window.openCourseModal !== "function") {
+      return;
+    }
+
+    var courseId = card.getAttribute("data-course-id");
+    if (courseId) {
+      window.openCourseModal(courseId);
+    }
+  }
+
+  function bindCardInteraction() {
+    if (cardInteractionBound || !wrapperEl) {
+      return;
+    }
+
+    cardInteractionBound = true;
+
+    wrapperEl.addEventListener("pointerdown", function (event) {
+      if (!event.target.closest(".course-card--interactive")) {
+        return;
+      }
+
+      isDragging = true;
+      dragDeltaX = 0;
+      dragStartX = event.clientX;
+    });
+
+    wrapperEl.addEventListener("pointermove", function (event) {
+      if (!isDragging) {
+        return;
+      }
+
+      dragDeltaX = event.clientX - dragStartX;
+    });
+
+    wrapperEl.addEventListener("pointerup", function () {
+      isDragging = false;
+    });
+
+    wrapperEl.addEventListener("click", function (event) {
+      var card = event.target.closest(".course-card--interactive");
+      if (!card || Math.abs(dragDeltaX) > 8) {
+        return;
+      }
+
+      openCardModal(card);
+    });
+
+    wrapperEl.addEventListener("keydown", function (event) {
+      var card = event.target.closest(".course-card--interactive");
+      if (!card) {
+        return;
+      }
+
+      if (event.key === "Enter" || event.key === " ") {
+        event.preventDefault();
+        openCardModal(card);
+      }
+    });
   }
 
   function getSwiperOptions() {
@@ -261,6 +344,7 @@
 
   renderCards(currentType);
   setActiveToggle(currentType);
+  bindCardInteraction();
   initSwiper();
 
   var resizeTimer;

@@ -39,7 +39,16 @@
 
   function getCourseTypeFromPage() {
     var section = document.querySelector(".course-stack[data-course-type]");
-    return section ? section.getAttribute("data-course-type") : "day-trip";
+    if (section) {
+      return section.getAttribute("data-course-type");
+    }
+
+    var travel = document.querySelector(".travel[data-course-type]");
+    if (travel) {
+      return travel.getAttribute("data-course-type");
+    }
+
+    return "day-trip";
   }
 
   function normalizeList(type) {
