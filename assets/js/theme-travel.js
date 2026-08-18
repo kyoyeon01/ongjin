@@ -55,7 +55,7 @@
           '<div class="swiper-slide">' +
           '<img class="theme-travel-card__img" src="' +
           src +
-          '" alt="" loading="lazy" />' +
+          '" alt="" loading="eager" decoding="async" />' +
           "</div>"
         );
       })
@@ -151,6 +151,36 @@
     swipers = [];
   }
 
+  function isMobileView() {
+    return window.matchMedia("(max-width: 47.9375rem)").matches;
+  }
+
+  function revealCard(card) {
+    card.classList.add("is-visible");
+
+    var slider = card.querySelector(".theme-travel-card__slider");
+    if (slider && slider.swiper && slider.swiper.update) {
+      requestAnimationFrame(function () {
+        slider.swiper.update();
+      });
+    }
+  }
+
+  function updateAllSwipers() {
+    swipers.forEach(function (instance) {
+      if (instance && instance.update) {
+        instance.update();
+      }
+    });
+  }
+
+  function revealCardsInPanel(panel) {
+    panel.querySelectorAll(".theme-travel-card").forEach(function (card, index) {
+      card.style.transitionDelay = isMobileView() ? "0ms" : index * 80 + "ms";
+      revealCard(card);
+    });
+  }
+
   function initSwipers(panel) {
     if (typeof Swiper === "undefined" || !panel) {
       return;
@@ -164,21 +194,34 @@
         slidesPerView: 1,
         speed: 400,
         grabCursor: true,
+        observer: true,
+        observeParents: true,
+        observeSlideChildren: true,
+        watchOverflow: true,
         pagination: {
           el: pagination,
           clickable: true,
         },
+        on: {
+          init: function (swiper) {
+            requestAnimationFrame(function () {
+              swiper.update();
+            });
+          },
+        },
       });
+
+      requestAnimationFrame(function () {
+        instance.update();
+      });
+
       swipers.push(instance);
     });
   }
 
   function observeCards(panel) {
-    var cards = panel.querySelectorAll(".theme-travel-card");
-    if (!("IntersectionObserver" in window)) {
-      cards.forEach(function (card) {
-        card.classList.add("is-visible");
-      });
+    if (isMobileView() || !("IntersectionObserver" in window)) {
+      revealCardsInPanel(panel);
       return;
     }
 
@@ -186,18 +229,30 @@
       function (entries) {
         entries.forEach(function (entry) {
           if (entry.isIntersecting) {
-            entry.target.classList.add("is-visible");
+            revealCard(entry.target);
             observer.unobserve(entry.target);
           }
         });
       },
-      { threshold: 0.18, rootMargin: "0px 0px -8% 0px" }
+      { threshold: 0, rootMargin: "0px" }
     );
 
-    cards.forEach(function (card, index) {
+    panel.querySelectorAll(".theme-travel-card").forEach(function (card, index) {
       card.style.transitionDelay = index * 80 + "ms";
+
+      var rect = card.getBoundingClientRect();
+      if (rect.bottom > 0 && rect.top < window.innerHeight) {
+        revealCard(card);
+        return;
+      }
+
       observer.observe(card);
     });
+
+    window.setTimeout(function () {
+      panel.querySelectorAll(".theme-travel-card:not(.is-visible)").forEach(revealCard);
+      updateAllSwipers();
+    }, 500);
   }
 
   function updateIndicator() {
@@ -240,7 +295,13 @@
           card.classList.remove("is-visible");
         });
         initSwipers(panel);
-        observeCards(panel);
+
+        requestAnimationFrame(function () {
+          requestAnimationFrame(function () {
+            observeCards(panel);
+            updateAllSwipers();
+          });
+        });
       }
     });
 
