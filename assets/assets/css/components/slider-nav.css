@@ -1,0 +1,150 @@
+/* ==========================================================================
+   Slider Nav — 공통 네모형 prev/next
+   ========================================================================== */
+
+.slider-nav-btn,
+.islands__nav-btn,
+.theme__nav-btn,
+.island-photos__nav-btn,
+.course-stack__nav,
+.transport-routes__nav-btn,
+.festival-page__nav {
+  display: inline-flex;
+  flex-shrink: 0;
+  align-items: center;
+  justify-content: center;
+  width: var(--fluid-nav-btn-size);
+  height: var(--fluid-nav-btn-size);
+  padding: 0;
+  border: 0.0625rem solid #d9dee5;
+  border-radius: var(--radius-sm);
+  background-color: #ffffff;
+  color: var(--color-neutral-900);
+  cursor: pointer;
+  transition:
+    border-color 0.3s ease,
+    background-color 0.3s ease,
+    color 0.3s ease,
+    box-shadow 0.3s ease,
+    opacity 0.3s ease;
+}
+
+.slider-nav-btn:hover,
+.slider-nav-btn:focus-visible,
+.islands__nav-btn:hover,
+.islands__nav-btn:focus-visible,
+.theme__nav-btn:hover,
+.theme__nav-btn:focus-visible,
+.island-photos__nav-btn:hover,
+.island-photos__nav-btn:focus-visible,
+.course-stack__nav:hover,
+.course-stack__nav:focus-visible,
+.transport-routes__nav-btn:hover:not(:disabled),
+.transport-routes__nav-btn:focus-visible:not(:disabled),
+.festival-page__nav:hover:not(:disabled),
+.festival-page__nav:focus-visible:not(:disabled) {
+  border-color: var(--color-primary-700);
+  background-color: var(--color-primary-50);
+  box-shadow: var(--shadow-sm);
+}
+
+.slider-nav-btn:disabled,
+.slider-nav-btn.swiper-button-disabled,
+.islands__nav-btn:disabled,
+.islands__nav-btn.swiper-button-disabled,
+.theme__nav-btn:disabled,
+.theme__nav-btn.swiper-button-disabled,
+.island-photos__nav-btn:disabled,
+.island-photos__nav-btn.swiper-button-disabled,
+.course-stack__nav:disabled,
+.course-stack__nav.swiper-button-disabled,
+.transport-routes__nav-btn:disabled,
+.festival-page__nav:disabled {
+  opacity: 0.35;
+  cursor: default;
+  pointer-events: none;
+  box-shadow: none;
+}
+
+.slider-nav-btn__icon,
+.islands__nav-icon,
+.theme__nav-icon,
+.island-photos__nav-icon,
+.course-stack__nav-icon,
+.transport-routes__nav-icon,
+.festival-page__nav-icon {
+  display: block;
+  width: var(--fluid-nav-btn-icon-size);
+  height: var(--fluid-nav-btn-icon-size);
+  object-fit: contain;
+}
+
+/* --------------------------------------------------------------------------
+   [ < ] ● ● ● [ > ] 컨트롤 그룹
+   -------------------------------------------------------------------------- */
+
+.slider-nav-controls,
+.islands__controls,
+.theme__controls,
+.island-photos__controls,
+.course-stack__controls {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: clamp(0.75rem, calc(0.75rem + 0.25 * (100vw - 24.375rem) / 50.625), 1rem);
+  width: 100%;
+  max-width: 100%;
+  min-width: 0;
+}
+
+.islands__controls,
+.theme__controls {
+  margin-top: var(--fluid-ui-gap-xl);
+}
+
+.slider-nav-controls .swiper-pagination,
+.islands__controls .islands__pagination,
+.theme__controls .theme__pagination,
+.island-photos__controls .island-photos__pagination,
+.course-stack__controls .course-stack__pagination {
+  position: static;
+  display: flex;
+  flex: 0 1 auto;
+  align-items: center;
+  justify-content: center;
+  width: auto;
+  margin: 0;
+}
+
+/* Card overlay nav (원형) — 카드 위 플로팅 전용, 네모형 공통 스타일과 분리 */
+.card__swiper-nav {
+  position: absolute;
+  top: 50%;
+  z-index: 2;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: var(--fluid-nav-btn-size);
+  height: var(--fluid-nav-btn-size);
+  border: none;
+  border-radius: var(--radius-full);
+  background-color: var(--color-bg-default);
+  box-shadow: var(--shadow-md);
+  color: var(--color-neutral-800);
+  transform: translateY(-50%);
+  transition:
+    color 0.3s ease,
+    box-shadow 0.3s ease;
+}
+
+.card__swiper-nav:hover,
+.card__swiper-nav:focus-visible {
+  color: var(--color-primary-800);
+  box-shadow: var(--shadow-lg);
+}
+
+.card__swiper-nav-icon {
+  display: block;
+  width: var(--fluid-nav-btn-icon-size);
+  height: var(--fluid-nav-btn-icon-size);
+}

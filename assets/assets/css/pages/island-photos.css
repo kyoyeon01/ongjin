@@ -1,0 +1,250 @@
+/* ==========================================================================
+   Island Detail — 추천 포토스팟 Section
+   Desktop base (≥1280) grid
+   Tablet/Mobile: Swiper auto + min-width Peek (2장 페이지)
+   ========================================================================== */
+
+.island-photos {
+  width: 100%;
+  background-color: #f6f8fb;
+}
+
+.island-photos__container {
+  padding-block: 5rem 6.25rem;
+}
+
+.island-photos__header {
+  margin-bottom: 3.375rem;
+}
+
+.island-photos__title {
+  font-size: 3rem;
+  line-height: 1.154;
+  font-weight: var(--font-weight-bold);
+  color: var(--color-neutral-900);
+  text-align: left;
+}
+
+.island-photos__nav,
+.island-photos__pagination,
+.island-photos__controls {
+  display: none;
+}
+
+.island-photos__slider-wrap {
+  margin-top: 0;
+  width: 100%;
+  min-width: 0;
+}
+
+.island-photos__slider {
+  position: relative;
+  overflow: hidden;
+  width: 100%;
+}
+
+.island-photos__grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 1.5rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  width: 100%;
+}
+
+.island-photos-card {
+  min-width: 0;
+  width: 100%;
+}
+
+.island-photos-card__inner {
+  container-type: inline-size;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  height: auto;
+  aspect-ratio: 402 / 544;
+  overflow: hidden;
+  border-radius: var(--fluid-radius-card);
+  background-color: var(--color-bg-default);
+  box-shadow: 0 0.125rem 0.5rem rgba(18, 41, 72, 0.06);
+}
+
+.island-photos-card__media {
+  flex-shrink: 0;
+  width: 100%;
+  height: auto;
+  aspect-ratio: 402 / 343;
+  overflow: hidden;
+}
+
+.island-photos-card__img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transform: scale(1);
+  transform-origin: center center;
+  transition: transform 0.45s ease-out;
+}
+
+.island-photos-card:hover .island-photos-card__img,
+.island-photos-card:focus-within .island-photos-card__img {
+  transform: scale(1.1);
+}
+
+.island-photos-card__body {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  align-items: flex-start;
+  padding: calc(100cqw * 20 / 402) calc(100cqw * 24 / 402)
+    calc(100cqw * 24 / 402);
+  text-align: left;
+}
+
+.island-photos-card__title {
+  font-size: max(1rem, calc(100cqw * 28 / 402));
+  line-height: 1.4;
+  font-weight: var(--font-weight-semibold);
+  color: var(--color-neutral-900);
+}
+
+.island-photos-card__desc {
+  margin-top: calc(100cqw * 20 / 402);
+  font-size: max(0.875rem, calc(100cqw * 15 / 402));
+  line-height: 1.6;
+  font-weight: var(--font-weight-semibold);
+  color: var(--color-neutral-700);
+  word-break: keep-all;
+  overflow: visible;
+  text-overflow: unset;
+  white-space: normal;
+  -webkit-line-clamp: unset;
+  line-clamp: unset;
+}
+
+/* --------------------------------------------------------------------------
+   Tablet / Mobile (<1280) — Peek + ← pagination →
+   -------------------------------------------------------------------------- */
+
+@media (max-width: 79.9375rem) {
+  .island-photos__container {
+    padding-block: 4rem;
+  }
+
+  .island-photos__header {
+    display: block;
+    margin-bottom: 1.5rem;
+  }
+
+  .island-photos__title {
+    font-size: clamp(2.375rem, calc(2.375rem + (100vw - 48rem) * 0.125 / 32), 2.5rem);
+  }
+
+  .island-photos__nav {
+    display: none;
+  }
+
+  .island-photos__slider .swiper-wrapper {
+    align-items: stretch;
+  }
+
+  .island-photos__slider .swiper-wrapper,
+  .island-photos__slider .swiper-slide {
+    height: auto;
+  }
+
+  .island-photos__grid {
+    display: flex;
+    grid-template-columns: none;
+    gap: 0;
+  }
+
+  .island-photos__slider .swiper-slide {
+    width: 18.75rem;
+    height: auto;
+  }
+
+  .island-photos-card {
+    width: 100%;
+    min-width: 18.75rem;
+    height: auto;
+  }
+
+  .island-photos-card__inner {
+    aspect-ratio: auto;
+    height: auto;
+    min-height: 0;
+  }
+
+  .island-photos-card__body {
+    flex: 0 0 auto;
+    padding: 1.25rem 1.5rem 1.5rem;
+  }
+
+  .island-photos-card__title {
+    font-size: max(1.125rem, calc(100cqw * 28 / 402));
+  }
+
+  .island-photos-card__desc {
+    margin-top: 0.875rem;
+    font-size: max(0.875rem, calc(100cqw * 15 / 402));
+  }
+
+  .island-photos__controls {
+    display: flex;
+    margin-top: 1.5rem;
+  }
+
+  .island-photos__pagination {
+    position: static;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0;
+  }
+}
+
+/* --------------------------------------------------------------------------
+   Mobile (≤767)
+   -------------------------------------------------------------------------- */
+
+@media (max-width: 47.9375rem) {
+  .island-photos__container {
+    padding-block: 3rem;
+  }
+
+  .island-photos__header {
+    margin-bottom: 1.25rem;
+  }
+
+  .island-photos__title {
+    font-size: clamp(1.875rem, calc(1.875rem + (100vw - 24.375rem) * 0.25 / 23.625), 2.125rem);
+  }
+
+  .island-photos__slider .swiper-slide {
+    width: 16rem;
+  }
+
+  .island-photos-card {
+    min-width: 16rem;
+  }
+
+  .island-photos-card__body {
+    padding: 1rem 1.125rem 1.25rem;
+  }
+
+  .island-photos-card__title {
+    font-size: max(1rem, calc(100cqw * 28 / 402));
+  }
+
+  .island-photos-card__desc {
+    font-size: 0.875rem;
+  }
+
+  .island-photos__controls {
+    margin-top: 1.25rem;
+  }
+}

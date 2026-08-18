@@ -1,0 +1,382 @@
+/* ==========================================================================
+   Festival Page — 필터 / 카드 목록
+   Desktop (≥1024): 2×2 Grid, 4장/페이지 — 1200px 전후도 컨테이너에 맞춰 자연 축소
+   Tablet·Mobile (<1024): Swiper 1장 보기
+   ========================================================================== */
+
+.festival-page {
+  --festival-page-card-radius: 1rem;
+  --festival-page-gap: clamp(1.25rem, calc(1.25rem + 0.625 * (100vw - 48rem) / 42), 1.875rem);
+  --festival-page-padding: clamp(1.25rem, calc(1.25rem + 0.75 * (100vw - 48rem) / 42), 2rem);
+  --festival-page-filter-gap: clamp(0.75rem, calc(0.75rem + 0.625 * (100vw - 48rem) / 42), 1.375rem);
+
+  width: 100%;
+  overflow-x: clip;
+  padding-block: 3.5rem 5rem;
+  background-color: #f3f8fc;
+}
+
+.festival-page__inner {
+  display: flex;
+  flex-direction: column;
+  gap: 2.25rem;
+}
+
+/* --------------------------------------------------------------------------
+   Filters
+   -------------------------------------------------------------------------- */
+
+.festival-page__filters {
+  display: flex;
+  align-items: stretch;
+  width: 100%;
+  gap: var(--festival-page-filter-gap);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.festival-page__filters > li {
+  flex: 1 1 0;
+  min-width: 0;
+}
+
+.festival-page__filter {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 2.75rem;
+  padding: 0 0.75rem;
+  border: 0.0625rem solid var(--color-border-default);
+  border-radius: 0.5rem;
+  background-color: #ffffff;
+  font-size: 1rem;
+  line-height: 1.4;
+  font-weight: var(--font-weight-medium);
+  color: var(--color-neutral-800);
+  cursor: pointer;
+  transition:
+    background-color 0.3s ease,
+    border-color 0.3s ease,
+    color 0.3s ease;
+}
+
+.festival-page__filter:hover {
+  border-color: var(--color-primary-800);
+  color: var(--color-primary-800);
+}
+
+.festival-page__filter.is-active {
+  border-color: var(--color-primary-800);
+  background-color: var(--color-primary-800);
+  color: #ffffff;
+}
+
+.festival-page__filter.is-active:hover {
+  color: #ffffff;
+}
+
+/* --------------------------------------------------------------------------
+   Grid — Desktop 2×2
+   -------------------------------------------------------------------------- */
+
+.festival-page__viewport {
+  width: 100%;
+  min-width: 0;
+  touch-action: pan-y;
+}
+
+.festival-page__grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: var(--festival-page-gap);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.festival-page__item {
+  display: none;
+  min-width: 0;
+}
+
+.festival-page__item.is-visible {
+  display: flex;
+  animation: festival-page-fade-in 0.35s ease forwards;
+}
+
+.festival-page__item.is-animating-out {
+  display: flex;
+  opacity: 0;
+  transform: translateY(0.75rem);
+  pointer-events: none;
+  transition:
+    opacity 0.2s ease,
+    transform 0.2s ease;
+}
+
+@keyframes festival-page-fade-in {
+  from {
+    opacity: 0;
+    transform: translateY(0.75rem);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* --------------------------------------------------------------------------
+   Event Card
+   -------------------------------------------------------------------------- */
+
+.festival-event {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  min-width: 0;
+  height: 100%;
+  overflow: hidden;
+  border-radius: var(--festival-page-card-radius);
+  background-color: #ffffff;
+  box-shadow: 0 0.25rem 1.25rem rgba(18, 41, 72, 0.08);
+  cursor: default;
+  user-select: none;
+  transition:
+    transform 0.3s ease,
+    box-shadow 0.3s ease;
+}
+
+.festival-page__item.is-visible:hover .festival-event {
+  transform: translateY(-0.375rem);
+  box-shadow: 0 0.75rem 1.75rem rgba(18, 41, 72, 0.14);
+}
+
+.festival-event__media {
+  position: relative;
+  flex-shrink: 0;
+  overflow: hidden;
+  aspect-ratio: 16 / 9;
+  background-color: var(--color-neutral-200);
+}
+
+.festival-event__status {
+  position: absolute;
+  top: 1rem; /* 16px */
+  left: 1rem; /* 16px */
+  z-index: 1;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  min-height: 1.5rem;
+  padding: 0.25rem 0.625rem;
+  border-radius: 9999px;
+  background-color: var(--color-primary-800);
+  color: #ffffff;
+  font-size: 0.875rem;
+  font-weight: var(--font-weight-bold);
+  line-height: 1.2;
+  letter-spacing: -0.01em;
+  white-space: nowrap;
+  pointer-events: none;
+}
+
+.festival-event__status.is-visible {
+  display: inline-flex;
+}
+
+.festival-event__status[data-state="ongoing"],
+.festival-event__status[data-state="upcoming"],
+.festival-event__status[data-state="ended"] {
+  background-color: var(--color-primary-800);
+  color: #ffffff;
+}
+
+.festival-event__img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.festival-event__body {
+  display: flex;
+  flex: 1 1 auto;
+  flex-direction: column;
+  gap: 0.375rem;
+  min-width: 0;
+  padding: var(--festival-page-padding);
+}
+
+.festival-event__title {
+  margin: 0;
+  font-size: clamp(1rem, calc(1rem + 0.25 * (100vw - 64rem) / 26), 1.25rem);
+  line-height: 1.4;
+  font-weight: var(--font-weight-bold);
+  color: var(--color-neutral-900);
+  word-break: keep-all;
+}
+
+.festival-event__meta {
+  margin: 0;
+  font-size: 0.875rem;
+  line-height: 1.5;
+  font-weight: var(--font-weight-regular);
+  color: var(--color-neutral-700);
+}
+
+.festival-event__desc {
+  margin: 0.125rem 0 0;
+  font-size: 0.875rem;
+  line-height: 1.6;
+  font-weight: var(--font-weight-regular);
+  color: var(--color-neutral-700);
+  word-break: keep-all;
+  overflow: visible;
+  text-overflow: unset;
+  white-space: normal;
+  -webkit-line-clamp: unset;
+  line-clamp: unset;
+}
+
+/* --------------------------------------------------------------------------
+   Pagination — ← dots →
+   -------------------------------------------------------------------------- */
+
+.festival-page__controls {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+  margin-top: 0.25rem;
+}
+
+.festival-page__nav {
+  flex-shrink: 0;
+}
+
+.festival-page__pagination {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.festival-page__dot {
+  display: block;
+  flex-shrink: 0;
+  width: 0.5rem;
+  height: 0.5rem;
+  padding: 0;
+  border: none;
+  border-radius: var(--radius-full);
+  background-color: var(--color-neutral-400);
+  cursor: pointer;
+  transition:
+    background-color 0.3s ease,
+    transform 0.3s ease;
+}
+
+.festival-page__dot.is-active {
+  background-color: var(--color-primary-700);
+  transform: scale(1.15);
+}
+
+.festival-page__empty {
+  display: none;
+  margin: 0;
+  padding: 3rem 1rem;
+  text-align: center;
+  font-size: 1rem;
+  color: var(--color-neutral-700);
+}
+
+.festival-page__empty.is-visible {
+  display: block;
+}
+
+/* --------------------------------------------------------------------------
+   Tablet / Mobile — 1장 Swiper (1024px 미만)
+   -------------------------------------------------------------------------- */
+
+@media (max-width: 63.9375rem) {
+  .festival-page {
+    --festival-page-padding: 1.5rem;
+    --festival-page-filter-gap: 1.25rem;
+    padding-block: 3rem 4rem;
+  }
+
+  .festival-page__inner {
+    gap: 2rem;
+  }
+
+  .festival-page__viewport.swiper {
+    overflow: hidden;
+    width: 100%;
+    touch-action: pan-y pinch-zoom;
+  }
+
+  .festival-page__viewport.swiper .festival-page__grid {
+    display: flex;
+    align-items: stretch;
+    gap: 0;
+    width: auto;
+    min-width: 0;
+    box-sizing: content-box;
+  }
+
+  .festival-page__viewport.swiper .festival-page__item.is-visible,
+  .festival-page__viewport.swiper .festival-page__item.is-animating-out {
+    width: 100%;
+    height: auto;
+    flex-shrink: 0;
+  }
+
+  .festival-page__viewport.swiper .festival-event {
+    height: 100%;
+  }
+
+  .festival-event__title {
+    font-size: 1.125rem;
+  }
+
+  .festival-event__meta,
+  .festival-event__desc {
+    font-size: 0.875rem;
+  }
+}
+
+/* --------------------------------------------------------------------------
+   Mobile
+   -------------------------------------------------------------------------- */
+
+@media (max-width: 47.9375rem) {
+  .festival-page {
+    --festival-page-padding: 1.25rem;
+    --festival-page-filter-gap: 0.5rem;
+    padding-block: 2rem 3rem;
+  }
+
+  .festival-page__inner {
+    gap: 1.5rem;
+  }
+
+  .festival-page__filter {
+    height: 2.5rem;
+    font-size: 0.875rem;
+  }
+
+  .festival-event__title {
+    font-size: 1rem;
+  }
+
+  .festival-event__meta,
+  .festival-event__desc {
+    font-size: 0.875rem;
+  }
+}

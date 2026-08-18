@@ -31,14 +31,14 @@ window.TRANSPORT_ROUTES = [
     terminals: [
       {
         name: "인천항 연안여객터미널",
-        image: "assets/images/ship-bg.webp",
+        image: "assets/images/transport/terminal-incheon.webp",
         address: "인천광역시 중구 연안부두로 94",
         phone: "032-880-3100",
         parking: "연안여객터미널 주차장 이용 가능",
       },
       {
         name: "용기포항 여객터미널",
-        image: "assets/images/course/overnight-baengnyeongdo.webp",
+        image: "assets/images/transport/terminal-baengnyeong-yonggi.webp",
         address: "인천광역시 옹진군 백령면 용기포로 123",
         phone: "032-836-2501",
         parking: "터미널 인근 공영주차장 이용",
@@ -71,7 +71,7 @@ window.TRANSPORT_ROUTES = [
     terminals: [
       {
         name: "인천항 연안여객터미널",
-        image: "assets/images/ship-bg.webp",
+        image: "assets/images/transport/terminal-incheon.webp",
         address: "인천광역시 중구 연안부두로 94",
         phone: "032-880-3100",
         parking: "연안여객터미널 주차장 이용 가능",
@@ -111,7 +111,7 @@ window.TRANSPORT_ROUTES = [
     terminals: [
       {
         name: "인천항 연안여객터미널",
-        image: "assets/images/ship-bg.webp",
+        image: "assets/images/transport/terminal-incheon.webp",
         address: "인천광역시 중구 연안부두로 94",
         phone: "032-880-3100",
         parking: "연안여객터미널 주차장 이용 가능",
@@ -153,7 +153,7 @@ window.TRANSPORT_ROUTES = [
     terminals: [
       {
         name: "인천항 연안여객터미널",
-        image: "assets/images/ship-bg.webp",
+        image: "assets/images/transport/terminal-incheon.webp",
         address: "인천광역시 중구 연안부두로 94",
         phone: "032-880-3100",
         parking: "연안여객터미널 주차장 이용 가능",
@@ -195,7 +195,7 @@ window.TRANSPORT_ROUTES = [
     terminals: [
       {
         name: "인천항 연안여객터미널",
-        image: "assets/images/ship-bg.webp",
+        image: "assets/images/transport/terminal-incheon.webp",
         address: "인천광역시 중구 연안부두로 94",
         phone: "032-880-3100",
         parking: "연안여객터미널 주차장 이용 가능",
@@ -235,7 +235,7 @@ window.TRANSPORT_ROUTES = [
     terminals: [
       {
         name: "인천항 연안여객터미널",
-        image: "assets/images/ship-bg.webp",
+        image: "assets/images/transport/terminal-incheon.webp",
         address: "인천광역시 중구 연안부두로 94",
         phone: "032-880-3100",
         parking: "연안여객터미널 주차장 이용 가능",
@@ -275,7 +275,7 @@ window.TRANSPORT_ROUTES = [
     terminals: [
       {
         name: "인천항 연안여객터미널",
-        image: "assets/images/ship-bg.webp",
+        image: "assets/images/transport/terminal-incheon.webp",
         address: "인천광역시 중구 연안부두로 94",
         phone: "032-880-3100",
         parking: "연안여객터미널 주차장 이용 가능",

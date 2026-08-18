@@ -1,0 +1,75 @@
+/* ==========================================================================
+   Theme Travel — Hero Section
+   1박2일 course-hero 레이아웃 재사용 (캐릭터 없음)
+   배경 교체: --theme-hero-bg-image 한 줄만 수정
+   예) --theme-hero-bg-image: url("../../images/theme/hero-theme.webp");
+   ========================================================================== */
+
+.course-hero--theme {
+  --course-hero-title-size: 3.5rem;
+  --course-hero-desc-size: 1.5rem;
+  --theme-hero-bg-image: url("../../images/theme/hero-theme.webp");
+  --theme-hero-bg-color: #d9d9d9;
+
+  background-color: var(--theme-hero-bg-color);
+  background-image: var(--theme-hero-bg-image);
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+}
+
+.course-hero--theme .course-hero__bg {
+  display: none;
+}
+
+.course-hero--theme .course-hero__overlay {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  background-color: rgba(0, 0, 0, 0.3);
+  pointer-events: none;
+}
+
+.course-hero--theme .course-hero__inner {
+  z-index: 1;
+}
+
+.course-hero--theme .course-hero__desc {
+  color: rgba(255, 255, 255, 0.9);
+}
+
+.course-hero--theme .course-hero__character {
+  display: none;
+}
+
+@media (max-width: 79.9375rem) and (min-width: 48rem) {
+  .course-hero--theme {
+    /* Tablet 38~44px — PC(56px)까지 올리지 않음 */
+    --course-hero-title-size: clamp(
+      2.375rem,
+      calc(2.375rem + (100vw - 48rem) * 0.375 / 32),
+      2.75rem
+    );
+    --course-hero-desc-size: clamp(
+      1.0625rem,
+      calc(1.0625rem + (100vw - 48rem) * 0.125 / 32),
+      1.1875rem
+    );
+  }
+}
+
+@media (max-width: 47.9375rem) {
+  .course-hero--theme {
+    /* Mobile 30~36px */
+    --course-hero-title-size: clamp(
+      1.875rem,
+      calc(1.875rem + (100vw - 24.375rem) * 0.375 / 23.625),
+      2.25rem
+    );
+    --course-hero-desc-size: clamp(
+      0.9375rem,
+      calc(0.9375rem + (100vw - 24.375rem) * 0.125 / 23.625),
+      1.0625rem
+    );
+  }
+}

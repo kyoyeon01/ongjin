@@ -1,0 +1,17 @@
+/* ==========================================================================
+   Card Hover ??Islands, Theme ???�터?�티�?카드 공통
+   ========================================================================== */
+
+.islands-card__img,
+.theme-card__img {
+  transform: scale(1);
+  transform-origin: center center;
+  transition: transform 0.45s ease;
+}
+
+.islands-card:hover .islands-card__img,
+.islands-card:focus-visible .islands-card__img,
+.theme-card:hover .theme-card__img,
+.theme-card:focus-within .theme-card__img {
+  transform: scale(1.06);
+}

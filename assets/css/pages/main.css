@@ -366,7 +366,7 @@
   object-fit: contain;
 }
 
-/* Tablet / Mobile — keep map near PC size; scroll inside map area only */
+/* Tablet / Mobile — map scroll area; slightly below full SVG width */
 @media (max-width: 74.9375rem) {
   .about__map {
     overflow-x: auto;
@@ -376,9 +376,9 @@
   }
 
   .about__map-img {
-    width: 59.5rem; /* Pc-map.svg intrinsic 952px — no forced shrink */
+    width: 50rem;
     max-width: none;
-    min-width: 59.5rem;
+    min-width: 50rem;
     height: auto;
   }
 }
@@ -391,23 +391,24 @@
   }
 
   .about__text {
-    flex: 0 0 40%;
-    max-width: 40%;
+    flex: 0 0 42%;
+    max-width: 42%;
   }
 
   .about__map {
-    flex: 0 0 60%;
-    max-width: 60%;
+    flex: 0 0 58%;
+    max-width: 58%;
     align-self: flex-start;
     margin-top: calc(var(--fluid-subtitle-01-lh) + var(--fluid-ui-gap-sm));
     overflow: visible;
   }
 
   .about__map-img {
-    width: 100%;
+    width: 92%;
     min-width: 0;
     max-width: 100%;
     height: auto;
+    margin-inline: auto;
   }
 
   .about__character {

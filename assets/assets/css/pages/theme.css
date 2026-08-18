@@ -1,0 +1,152 @@
+/* ==========================================================================
+   Theme ???�마�??�행
+   ========================================================================== */
+
+.theme {
+  overflow: hidden;
+  background-color: var(--color-bg-default);
+}
+
+.theme__pagination {
+  position: static;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* --------------------------------------------------------------------------
+   Theme Card
+   -------------------------------------------------------------------------- */
+
+.theme-card {
+  display: block;
+  width: 100%;
+  height: 100%;
+  cursor: pointer;
+  text-decoration: none;
+  color: inherit;
+}
+
+.theme-card__surface {
+  container-type: inline-size;
+  /* Desktop reference: 402px card ??all sizes scale from icon (68px) via cqi */
+  --theme-icon-size: clamp(2.2885rem, calc(2.2885rem + 1.9615 * (100vw - 24.375rem) / 50.625), 4.25rem);
+  --theme-icon-inner: min(
+    calc(var(--theme-icon-size) * 0.713),
+    calc(var(--theme-icon-size) * 0.74)
+  );
+  --theme-title-size: calc(var(--theme-icon-size) * 0.4412);
+  --theme-body-padding-x: calc(var(--theme-icon-size) * 0.4265);
+  --theme-body-padding-bottom: calc(var(--theme-icon-size) * 0.2353);
+  --theme-title-gap: calc(var(--theme-icon-size) * 0.25);
+  --theme-title-shift: calc(var(--theme-icon-size) * -0.1176);
+  --theme-icon-shadow-y: calc(var(--theme-icon-size) * 0.0368);
+  --theme-icon-shadow-blur: calc(var(--theme-icon-size) * 0.1103);
+
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  height: 100%;
+  aspect-ratio: var(--fluid-theme-card-ratio);
+  overflow: hidden;
+  border-radius: var(--theme-card-radius);
+  background-color: var(--color-bg-default);
+  box-shadow:
+    var(--card-hover-shadow-default),
+    inset 0 0 0 0.0625rem var(--color-border-light);
+}
+
+@supports (width: 1cqi) {
+  .theme-card__surface {
+    --theme-icon-size: 16.9164cqi;
+  }
+}
+
+.theme-card__media {
+  position: relative;
+  flex-shrink: 0;
+  overflow: hidden;
+  aspect-ratio: var(--fluid-theme-media-ratio);
+  border-radius: var(--theme-card-radius) var(--theme-card-radius) 0 0;
+}
+
+.theme-card__img {
+  position: absolute;
+  inset: 0;
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.theme-card__body {
+  position: relative;
+  display: flex;
+  flex: 1 1 auto;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+  min-height: 0;
+  padding:
+    calc(var(--theme-icon-size) * 0.5 + var(--theme-title-gap))
+    var(--theme-body-padding-x)
+    var(--theme-body-padding-bottom);
+}
+
+.theme-card__icon {
+  position: absolute;
+  top: calc(var(--theme-icon-size) * -0.5);
+  left: var(--theme-body-padding-x);
+  z-index: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: var(--theme-icon-size);
+  height: var(--theme-icon-size);
+  border-radius: var(--radius-full);
+  background-color: var(--color-primary-800);
+  box-shadow:
+    0 var(--theme-icon-shadow-y) var(--theme-icon-shadow-blur)
+    rgba(0, 49, 91, 0.18);
+}
+
+.theme-card__icon-img {
+  display: block;
+  width: var(--theme-icon-inner);
+  height: var(--theme-icon-inner);
+  max-width: none;
+  object-fit: contain;
+}
+
+.theme-card__title {
+  width: 100%;
+  margin: 0;
+  margin-top: var(--theme-title-shift);
+  font-size: max(0.875rem, var(--theme-title-size));
+  line-height: var(--fluid-theme-title-lh);
+  letter-spacing: -0.01em;
+  font-weight: var(--font-weight-semibold);
+  color: var(--color-neutral-900);
+  word-break: keep-all;
+}
+
+/* Tablet/Mobile — 카드 min-width 유지 + Peek */
+@media (max-width: 74.9375rem) {
+  .theme__slider .swiper-slide {
+    width: 18.75rem;
+  }
+
+  .theme-card {
+    min-width: 18.75rem;
+  }
+}
+
+@media (max-width: 47.9375rem) {
+  .theme__slider .swiper-slide {
+    width: 16rem;
+  }
+
+  .theme-card {
+    min-width: 16rem;
+  }
+}
