@@ -23,8 +23,6 @@
     slidesPerGroup: 2,
     spaceBetween: 16,
     watchOverflow: true,
-    observer: true,
-    observeParents: true,
     pagination: {
       el: ".theme__pagination",
       clickable: true,
@@ -46,19 +44,6 @@
         spaceBetween: 24,
       },
     },
-  });
-
-  function refreshThemeSwiper() {
-    if (themeSwiper && themeSwiper.update) {
-      themeSwiper.update();
-    }
-  }
-
-  window.addEventListener("load", refreshThemeSwiper);
-  window.addEventListener("pageshow", refreshThemeSwiper);
-
-  requestAnimationFrame(function () {
-    requestAnimationFrame(refreshThemeSwiper);
   });
 
   var resizeTimer;
