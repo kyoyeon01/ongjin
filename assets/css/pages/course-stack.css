@@ -253,7 +253,7 @@
       2.25rem
     );
     --course-stack-text-size: max(0.875rem, clamp(0.875rem, 3.5vw, 1rem));
-    --course-stack-nav-size: 2.5rem;
+    --course-stack-nav-size: 1.75rem;
     --course-stack-card-min: 16rem;
     padding-block: 3rem 2.5rem;
   }
