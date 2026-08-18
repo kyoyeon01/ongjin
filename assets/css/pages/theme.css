@@ -58,7 +58,7 @@
 
 @supports (width: 1cqi) {
   .theme-card__surface {
-    --theme-icon-size: clamp(2.2885rem, 16.9164cqi, 4.25rem);
+    --theme-icon-size: 16.9164cqi;
   }
 }
 
@@ -66,7 +66,6 @@
   position: relative;
   flex-shrink: 0;
   overflow: hidden;
-  width: 100%;
   aspect-ratio: var(--fluid-theme-media-ratio);
   border-radius: var(--theme-card-radius) var(--theme-card-radius) 0 0;
 }
@@ -135,8 +134,6 @@
 @media (max-width: 74.9375rem) {
   .theme__slider .swiper-slide {
     width: 18.75rem;
-    height: auto;
-    align-self: stretch;
   }
 
   .theme-card {
@@ -147,8 +144,6 @@
 @media (max-width: 47.9375rem) {
   .theme__slider .swiper-slide {
     width: 16rem;
-    height: auto;
-    align-self: stretch;
   }
 
   .theme-card {
