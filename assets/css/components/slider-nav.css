@@ -148,3 +148,71 @@
   width: var(--fluid-nav-btn-icon-size);
   height: var(--fluid-nav-btn-icon-size);
 }
+
+/* --------------------------------------------------------------------------
+   Mobile (≤767) — 화살표 크기 · 컨트롤 여백 · 수평 정렬
+   -------------------------------------------------------------------------- */
+
+@media (max-width: 47.9375rem) {
+  :root {
+    --fluid-nav-btn-size: 2.375rem;
+    --fluid-nav-btn-icon-size: 0.9375rem;
+  }
+
+  .slider-nav-btn,
+  .islands__nav-btn,
+  .theme__nav-btn,
+  .island-photos__nav-btn,
+  .course-stack__nav,
+  .transport-routes__nav-btn,
+  .festival-page__nav,
+  .festival__nav {
+    width: 2.375rem;
+    height: 2.375rem;
+  }
+
+  .slider-nav-btn__icon,
+  .islands__nav-icon,
+  .theme__nav-icon,
+  .island-photos__nav-icon,
+  .course-stack__nav-icon,
+  .transport-routes__nav-icon,
+  .festival-page__nav-icon,
+  .festival__nav-icon {
+    width: 0.9375rem;
+    height: 0.9375rem;
+  }
+
+  .slider-nav-controls,
+  .islands__controls,
+  .theme__controls,
+  .island-photos__controls,
+  .course-stack__controls,
+  .festival-page__controls {
+    align-items: center;
+    justify-content: center;
+    gap: 0.75rem;
+    margin-top: var(--mobile-slider-card-pagination-gap, 2.5rem);
+    margin-bottom: 0;
+  }
+
+  .slider-nav-controls .swiper-pagination,
+  .islands__controls .islands__pagination,
+  .theme__controls .theme__pagination,
+  .island-photos__controls .island-photos__pagination,
+  .course-stack__controls .course-stack__pagination,
+  .festival-page__controls .festival-page__pagination {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0;
+  }
+
+  .course-stack {
+    --course-stack-nav-size: 2.375rem;
+  }
+
+  .course-stack__controls .course-stack__pagination {
+    margin-top: 0;
+  }
+}

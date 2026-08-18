@@ -11,8 +11,6 @@
 @import url("./layout/header.css");
 @import url("./layout/footer.css");
 @import url("./components/button.css");
-@import url("./components/pagination.css");
-@import url("./components/slider-nav.css");
 @import url("./components/card-hover.css");
 @import url("./components/card.css");
 @import url("./pages/main.css");
@@ -21,3 +19,5 @@
 @import url("./pages/festival.css");
 @import url("./pages/transport.css");
 @import url("./pages/course-hero.css");
+@import url("./components/pagination.css");
+@import url("./components/slider-nav.css");
