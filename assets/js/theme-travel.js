@@ -171,14 +171,27 @@
       });
       swipers.push(instance);
     });
+
+    requestAnimationFrame(function () {
+      requestAnimationFrame(function () {
+        swipers.forEach(function (instance) {
+          if (instance && instance.update) {
+            instance.update();
+          }
+        });
+      });
+    });
+  }
+
+  function revealCard(card) {
+    card.classList.add("is-visible");
   }
 
   function observeCards(panel) {
     var cards = panel.querySelectorAll(".theme-travel-card");
+
     if (!("IntersectionObserver" in window)) {
-      cards.forEach(function (card) {
-        card.classList.add("is-visible");
-      });
+      cards.forEach(revealCard);
       return;
     }
 
@@ -186,18 +199,45 @@
       function (entries) {
         entries.forEach(function (entry) {
           if (entry.isIntersecting) {
-            entry.target.classList.add("is-visible");
+            revealCard(entry.target);
             observer.unobserve(entry.target);
           }
         });
       },
-      { threshold: 0.18, rootMargin: "0px 0px -8% 0px" }
+      { threshold: 0, rootMargin: "0px 0px 0px 0px" }
     );
 
     cards.forEach(function (card, index) {
       card.style.transitionDelay = index * 80 + "ms";
       observer.observe(card);
     });
+
+    function revealCardsInView() {
+      cards.forEach(function (card) {
+        if (card.classList.contains("is-visible")) {
+          return;
+        }
+
+        var rect = card.getBoundingClientRect();
+        if (rect.width > 0 && rect.height > 0 && rect.top < window.innerHeight && rect.bottom > 0) {
+          revealCard(card);
+          observer.unobserve(card);
+        }
+      });
+    }
+
+    requestAnimationFrame(function () {
+      requestAnimationFrame(revealCardsInView);
+    });
+
+    window.setTimeout(function () {
+      cards.forEach(function (card) {
+        if (!card.classList.contains("is-visible")) {
+          revealCard(card);
+          observer.unobserve(card);
+        }
+      });
+    }, 700);
   }
 
   function updateIndicator() {
@@ -239,8 +279,10 @@
         panel.querySelectorAll(".theme-travel-card").forEach(function (card) {
           card.classList.remove("is-visible");
         });
-        initSwipers(panel);
-        observeCards(panel);
+        requestAnimationFrame(function () {
+          initSwipers(panel);
+          observeCards(panel);
+        });
       }
     });
 
