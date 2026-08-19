@@ -40,14 +40,13 @@
 }
 
 /* --------------------------------------------------------------------------
-   Mobile (≤767) — 도트 크기 · 간격 (터치 가독성)
+   Tablet (≤1199) — 도트 크기 · 간격
    -------------------------------------------------------------------------- */
 
-@media (max-width: 47.9375rem) {
+@media (max-width: 74.9375rem) {
   :root {
-    --mobile-slider-card-pagination-gap: 2.5rem;
-    --fluid-pagination-size: 0.5rem;
-    --fluid-pagination-gap: 0.5rem;
+    --fluid-pagination-size: 0.4375rem;
+    --fluid-pagination-gap: 0.375rem;
   }
 
   .swiper-pagination-bullet,
@@ -62,8 +61,8 @@
   .festival__pagination .swiper-pagination-bullet,
   .theme-travel-card__pagination .swiper-pagination-bullet,
   .course-modal__pagination .swiper-pagination-bullet {
-    width: 0.5rem;
-    height: 0.5rem;
+    width: 0.4375rem;
+    height: 0.4375rem;
   }
 
   .swiper-pagination-bullet-active,
@@ -78,8 +77,8 @@
   .festival__pagination .swiper-pagination-bullet-active,
   .theme-travel-card__pagination .swiper-pagination-bullet-active,
   .course-modal__pagination .swiper-pagination-bullet-active {
-    width: 0.625rem;
-    height: 0.625rem;
+    width: 0.5rem;
+    height: 0.5rem;
     transform: none;
   }
 
@@ -93,7 +92,65 @@
   .festival__pagination,
   .theme-travel-card__pagination,
   .course-modal__pagination {
-    gap: 0.5rem;
+    gap: 0.375rem;
+  }
+}
+
+/* --------------------------------------------------------------------------
+   Mobile (≤767) — 도트 크기 · 간격 (터치 가독성)
+   -------------------------------------------------------------------------- */
+
+@media (max-width: 47.9375rem) {
+  :root {
+    --mobile-slider-card-pagination-gap: 2.5rem;
+    --fluid-pagination-size: 0.375rem;
+    --fluid-pagination-gap: 0.375rem;
+  }
+
+  .swiper-pagination-bullet,
+  .islands__pagination .swiper-pagination-bullet,
+  .travel__pagination .swiper-pagination-bullet,
+  .theme__pagination .swiper-pagination-bullet,
+  .island-photos__pagination .swiper-pagination-bullet,
+  .card__swiper-pagination .swiper-pagination-bullet,
+  .course-stack__pagination .swiper-pagination-bullet,
+  .course-stack__dot,
+  .festival-page__dot,
+  .festival__pagination .swiper-pagination-bullet,
+  .theme-travel-card__pagination .swiper-pagination-bullet,
+  .course-modal__pagination .swiper-pagination-bullet {
+    width: 0.375rem;
+    height: 0.375rem;
+  }
+
+  .swiper-pagination-bullet-active,
+  .islands__pagination .swiper-pagination-bullet-active,
+  .travel__pagination .swiper-pagination-bullet-active,
+  .theme__pagination .swiper-pagination-bullet-active,
+  .island-photos__pagination .swiper-pagination-bullet-active,
+  .card__swiper-pagination .swiper-pagination-bullet-active,
+  .course-stack__pagination .swiper-pagination-bullet-active,
+  .course-stack__dot.is-active,
+  .festival-page__dot.is-active,
+  .festival__pagination .swiper-pagination-bullet-active,
+  .theme-travel-card__pagination .swiper-pagination-bullet-active,
+  .course-modal__pagination .swiper-pagination-bullet-active {
+    width: 0.4375rem;
+    height: 0.4375rem;
+    transform: none;
+  }
+
+  .islands__pagination,
+  .travel__pagination,
+  .theme__pagination,
+  .island-photos__pagination,
+  .card__swiper-pagination,
+  .course-stack__pagination,
+  .festival-page__pagination,
+  .festival__pagination,
+  .theme-travel-card__pagination,
+  .course-modal__pagination {
+    gap: 0.375rem;
   }
 
   /* 도트만 있는 슬라이더 — 카드 하단과 페이지네이션 사이 간격만 확대 */
